@@ -1,4 +1,8 @@
 function [rmse_mat, forecast_mat] = calc_rmse_multivariate_conditional(yobs, other_obs, out_of_sample_start_pos, end_sample_pos, forecast_horizon, reglag)
+
+% FOR NOW -- reglag does not affect anything. The regression is run with
+% only one lag of other_obs
+
 %This function computes rmse for a VAR forecast and also returns
 %forecast history over a pseudo-out of sample portion of the sample.
 %
