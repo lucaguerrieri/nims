@@ -52,11 +52,26 @@ end
 end
 %
 load this_out_of_sample
+
+% get the smoothed estimates of the factors
 [yobs, dates, yields, nims, nfactors, nothers, tau, factors,  shadow_bank_share_assets] = load_data_ml;
 forecast_horizon = 10;
 
-%[rmse_mlmat rmse_varmat rmse_nochangemat ml_forecasts nochange_forecasts] = calc_rmse_conditional(opt_param_mat, out_of_sample_start_pos, end_sample_pos, yobs, factors, xi10_demeaned, p10, ntrain, tau, nfactors, nothers, forecast_horizon, dates);
+[f, q, r, x, a, lambda, h, xi_means, error] = kalmanFilterSetup(param_vec,tau,nfactors,nothers);
+
+[logLikel,errcode,xi1tHistory]= ...
+    kalmanFilterSmoother_v2(f, h, yobs, a, x, xi10_demeaned, p10, q, r, ntrain);  
+
+smoothed_factors = xi1tHistory(1:3,:);
+
+lag = 1;
+[rmse_multivariate_mat, forecast_multivariate_mat] = calc_rmse_multivariate_conditional(nims, [smoothed_factors], out_of_sample_start_pos, end_sample_pos, forecast_horizon, lag);
+
+[rmse_forecast_combination_mat, forecast_multivariate_mat] = calc_rmse_forecast_combination_conditional(nims, [smoothed_factors], out_of_sample_start_pos, end_sample_pos, forecast_horizon, 1,4);
+
+
 [rmse_nochangemat, forecast_nochange_mat] = calc_rmse_nochange(nims, out_of_sample_start_pos, end_sample_pos, forecast_horizon);
+
 varlag=4;
 [rmse_varmat, forecast_var_mat] = calc_rmse_var_conditional(nims, factors, out_of_sample_start_pos, end_sample_pos, forecast_horizon, varlag);
 
@@ -68,23 +83,23 @@ plotbool = 0;
 
 
 %%
-for i = 1:forecast_horizon
-   figure
-   plot(dates,yobs(end,:),'k','lineWidth',2)
-   hold on
-   plot(dates(out_of_sample_start_pos+i-1:end),forecast_ml_mat(1:end-i+1,i),'b--','lineWidth',2)
-   plot(dates(out_of_sample_start_pos+i-1:end),forecast_nochange_mat(1:end-i+1,i),'r:','lineWidth',2)
-   
-   for j = out_of_sample_start_pos+i-1:end_sample_pos
-       if abs(forecast_ml_mat(j-out_of_sample_start_pos-i+2,i)-yobs(end,j))<=abs(forecast_nochange_mat(j-out_of_sample_start_pos-i+2,i)-yobs(end,j))
-           plot(dates(j),yobs(end,j),'bo','lineWidth',2)
-       else
-           plot(dates(j),yobs(end,j),'rx','lineWidth',2)
-       end
-   end
-   legend('Data','Forecast from DFM','No-change forecast')
-   title(['Assessing the ',num2str(i),'-step-ahead forecast'])
-   
-   xlim([dates(1) dates(end)])
-end
-
+% for i = 1:forecast_horizon
+%    figure
+%    plot(dates,yobs(end,:),'k','lineWidth',2)
+%    hold on
+%    plot(dates(out_of_sample_start_pos+i-1:end),forecast_ml_mat(1:end-i+1,i),'b--','lineWidth',2)
+%    plot(dates(out_of_sample_start_pos+i-1:end),forecast_nochange_mat(1:end-i+1,i),'r:','lineWidth',2)
+%    
+%    for j = out_of_sample_start_pos+i-1:end_sample_pos
+%        if abs(forecast_ml_mat(j-out_of_sample_start_pos-i+2,i)-yobs(end,j))<=abs(forecast_nochange_mat(j-out_of_sample_start_pos-i+2,i)-yobs(end,j))
+%            plot(dates(j),yobs(end,j),'bo','lineWidth',2)
+%        else
+%            plot(dates(j),yobs(end,j),'rx','lineWidth',2)
+%        end
+%    end
+%    legend('Data','Forecast from DFM','No-change forecast')
+%    title(['Assessing the ',num2str(i),'-step-ahead forecast'])
+%    
+%    xlim([dates(1) dates(end)])
+% end
+% 
