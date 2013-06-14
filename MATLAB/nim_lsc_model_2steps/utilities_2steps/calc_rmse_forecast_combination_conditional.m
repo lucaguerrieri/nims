@@ -13,6 +13,9 @@ function [rmse_mat, forecast_mat] = calc_rmse_forecast_combination_conditional(y
 %end_sample_pos is the position of the last pseudo-out of sample
 %observation.
 %varlag is the number of lags used in the VAR.
+%firstlag, lastlag -- add lags from firstlag to lastlag in the second-step forecasting
+%equations for NIMS. NB: firstlag and lastlag can be 0, in which case the
+%variables in other_obs enter the second-step regression contemporaneously.
 %
 %Outputs:
 % rmse_mat is a row vector containing RMSEs for each forecast step.
@@ -49,37 +52,30 @@ for pos_index = out_of_sample_start_pos:end_sample_pos
     this_forecast_horizon = min(end_sample_pos-pos_index+1,10);
     forecast = zeros(n_other_obs,this_forecast_horizon);
     
-    for this_macro_factor = 1:n_other_obs;
-    %yreg = this_yobs(2:end);
-    %xreg = [ones(1,length(yreg)); this_yobs(1:end-1); this_other_obs(this_macro_factor,1:end-1)];
-
-    
-% this is the start of the code that allows for multiple lags
-% it still needs to be debugged and the forecast code below needs to be 
-% made compatible with it
-
-    yreg = this_yobs(1+max(lastlag,1):end);
-    xreg = [];
-    for this_lag=firstlag:lastlag
-        xreg = [xreg; this_other_obs(this_macro_factor,1+max(lastlag,1)-this_lag:end-this_lag)];
-    end
-    xreg = [ones(1,length(yreg)); this_yobs(1+lastlag-firstlag:end-max(firstlag,1)); xreg];
-    
-    ols_coef = estimate_ols(yreg,xreg);
-    
-    
-    
-    
-    
-    previous_forecast = this_yobs(1,end);
-    for this_step = 1:this_forecast_horizon
-        % figure out dimensions
-        pos_vec =  (lastlag:-1:firstlag)-firstlag+this_step;
-        forecast(this_macro_factor,this_step) = [1, previous_forecast, other_obs_out_of_sample(this_macro_factor,pos_vec) ]*...
-                              ols_coef;
-        previous_forecast = forecast(this_macro_factor,this_step);
-    end
-    
+    for this_macro_factor = 1:n_other_obs
+        
+        yreg = this_yobs(1+max(lastlag,1):end);
+        xreg = [];
+        for this_lag=firstlag:lastlag
+            xreg = [xreg; this_other_obs(this_macro_factor,1+max(lastlag,1)-this_lag:end-this_lag)];
+        end
+        xreg = [ones(1,length(yreg)); this_yobs(1+lastlag-firstlag:end-max(firstlag,1)); xreg];
+        
+        ols_coef = estimate_ols(yreg,xreg);
+        
+        
+        
+        
+        
+        previous_forecast = this_yobs(1,end);
+        for this_step = 1:this_forecast_horizon
+            % figure out dimensions
+            pos_vec =  (lastlag:-1:firstlag)-firstlag+this_step;
+            forecast(this_macro_factor,this_step) = [1, previous_forecast, other_obs_out_of_sample(this_macro_factor,pos_vec) ]*...
+                ols_coef;
+            previous_forecast = forecast(this_macro_factor,this_step);
+        end
+        
     end
     
     
