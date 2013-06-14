@@ -6,9 +6,9 @@ dates = start_yobs:.25:end_yobs;
 %SVENY yields can be found in the 'yields' FAME db under the mnemonics in
 %yields_varlist.
 if isunix
-yields = csvread('./yields_sveny_only_1985quarterly.csv', 1, 2);
+yields = csvread('../data/yields_sveny_only_1985quarterly.csv', 1, 2);
 else
-yields = csvread('.\yields_sveny_only_1985quarterly.csv', 1, 2); 
+yields = csvread('..\data\yields_sveny_only_1985quarterly.csv', 1, 2); 
 end
 dates_yields = 1985.75:.25:2013.0;
 start_pos = find(dates==start_yobs);
@@ -21,9 +21,9 @@ yields_varlist = char('SVENY0025','SVENY0050','SVENY0075','SVENY0100','SVENY0200
 %is calculated at each quarter based on the top 25 firms, by assets
 
 if isunix
-nims = csvread('./tiny_nims.csv', 1, 1);
+nims = csvread('../data/tiny_nims.csv', 1, 1);
 else
-nims = csvread('.\tiny_nims.csv', 1, 1);
+nims = csvread('..\data\tiny_nims.csv', 1, 1);
 end    
 
 dates_nim = 1985.0:.25:2013.0;
@@ -39,9 +39,9 @@ nims_varlist = char('nim_top25');
 %Data comes from Flow of Funds FAME db fof.
 
 if isunix
-shadow_bank_share_assets_file = csvread('./shadow_banking_share_assets.csv', 1, 1);
+shadow_bank_share_assets_file = csvread('../data/shadow_banking_share_assets.csv', 1, 1);
 else
-shadow_bank_share_assets_file = csvread('.\shadow_banking_share_assets.csv', 1, 1);
+shadow_bank_share_assets_file = csvread('..\data\shadow_banking_share_assets.csv', 1, 1);
 end
 
 %This data has same dates as yields
