@@ -5,11 +5,7 @@ end_yobs = 2008.25;
 dates = start_yobs:.25:end_yobs;
 %SVENY yields can be found in the 'yields' FAME db under the mnemonics in
 %yields_varlist.
-if isunix
-yields = csvread('./yields_sveny_only_1985quarterly.csv', 1, 2);
-else
-yields = csvread('.\yields_sveny_only_1985quarterly.csv', 1, 2); 
-end
+yields = csvread('..\data\yields_sveny_only_1985quarterly.csv', 1, 2);
 dates_yields = 1985.75:.25:2013.0;
 start_pos = find(dates==start_yobs);
 end_pos = find(dates==end_yobs);
@@ -18,14 +14,8 @@ yields_varlist = char('SVENY0025','SVENY0050','SVENY0075','SVENY0100','SVENY0200
 
 %Bring in Net Interest Margins from Call Report (TINY); calculated as nim_top25 =
 %100*netintinc/interest earning assets (where each component in the ratio
-%is calculated at each quarter based on the top 25 firms, by assets
-
-if isunix
-nims = csvread('./tiny_nims.csv', 1, 1);
-else
-nims = csvread('.\tiny_nims.csv', 1, 1);
-end    
-
+%is calculated at each quarter based on the top 25 firms, by assets).
+nims = csvread('..\data\tiny_nims.csv', 1, 1);
 dates_nim = 1985.0:.25:2013.0;
 start_pos_nim = find(dates_nim==start_yobs);
 end_pos_nim = find(dates_nim==end_yobs);
@@ -39,18 +29,17 @@ nims_varlist = char('nim_top25');
 %Data comes from Flow of Funds FAME db fof.
 
 if isunix
-shadow_bank_share_assets_file = csvread('./shadow_banking_share_assets.csv', 1, 1);
+shadow_bank_share_assets_file = csvread('/ofs/research2/Guerrieri/valentin/data/measures_of_competitiveness/shadow_banking_share_assets.csv', 1, 1);
 else
-shadow_bank_share_assets_file = csvread('.\shadow_banking_share_assets.csv', 1, 1);
+shadow_bank_share_assets_file = csvread('..\data\shadow_banking_share_assets.csv', 1, 1);
 end
 
 %This data has same dates as yields
 shadow_bank_share_assets = shadow_bank_share_assets_file(start_pos:end_pos,1)';
 
-
-yobs = [yields; nims];
+yobs = yields; %before also had nims
 nfactors = 3;
-nothers = 1;
+nothers = 0;
 tau = [3 6 9 12 24 36 60 84 120 180 240 360];
 
 factor1 = (yields(find(tau == 3),:)... 
