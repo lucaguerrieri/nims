@@ -1,3 +1,9 @@
-function beta = estimate_ols(yreg,xreg)
+function beta = estimate_ols(yobs,xobs)
 
-beta = mldivide((xreg*xreg'),xreg'*yreg);
+yreg = yobs';
+xreg = xobs';
+
+
+
+beta  = mldivide(xreg'*xreg,xreg'*yreg);
+
