@@ -18,7 +18,7 @@
 % ! ntrains         => ntrain
 
 % Note:  Not Checking Input
-function [logLikel,errcode,xi10History,xi1tHistory,errHistory]= kalmanFilterSmoother(f, h, y, xi10, q, bmatsmall, ntrain)
+function [logLikel,errcode,xi10History,xi1tHistory,errHistory,xi11History]= kalmanFilterSmoother(f, h, y, xi10, q, bmatsmall, ntrain)
 errcode = 0;
 likel = 0;
 logLikel = 0;
