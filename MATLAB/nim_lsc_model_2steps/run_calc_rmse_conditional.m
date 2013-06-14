@@ -76,6 +76,15 @@ lag = 1;
 
 [rmse_forecast_combination_mat, forecast_multivariate_mat] = calc_rmse_forecast_combination_conditional(nims, [smoothed_factors], out_of_sample_start_pos, end_sample_pos, forecast_horizon, 1,4);
 
+%[rmse_forecast_combination_mat2, forecast_multivariate_mat2] = calc_rmse_forecast_combination_conditional(nims,[yields; shadow_bank_share_assets], out_of_sample_start_pos, end_sample_pos, forecast_horizon, 1,4);
+[rmse_forecast_combination_mat2, forecast_multivariate_mat2] = calc_rmse_forecast_combination_conditional(nims,[yields], out_of_sample_start_pos, end_sample_pos, forecast_horizon, 1,4);
+
+[rmse_forecast_combination_mat3, forecast_multivariate_mat3] = calc_rmse_forecast_combination_conditional(nims(:,15:end),yields(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, 1,4);
+
+
+%[rmse_forecast_combination_mat3, forecast_multivariate_mat3] = calc_rmse_forecast_combination_conditional(nims,[1:size(yields,2); yields], out_of_sample_start_pos, end_sample_pos, forecast_horizon, 0,0);
+
+
 [rmse_nochangemat, forecast_nochange_mat] = calc_rmse_nochange(nims, out_of_sample_start_pos, end_sample_pos, forecast_horizon);
 
 varlag=4;
