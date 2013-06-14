@@ -1,3 +1,4 @@
+
 clear;
 
 setpath;
@@ -52,8 +53,11 @@ end
 end
 %
 load this_out_of_sample
+[yobs, dates, yields, nims, nfactors, nothers, tau, factors] = load_data_ml;
+forecast_horizon = 10;
 
-% get the smoothed estimates of the factors
+
+%% extract smoothed estimates of the yield curve factors
 [yobs, dates, yields, nims, nfactors, nothers, tau, factors,  shadow_bank_share_assets] = load_data_ml;
 forecast_horizon = 10;
 
@@ -62,36 +66,32 @@ forecast_horizon = 10;
 [logLikel,errcode,xi1tHistory]= ...
     kalmanFilterSmoother_v2(f, h, yobs, a, x, xi10_demeaned, p10, q, r, ntrain);  
 
+
 smoothed_factors = xi1tHistory(1:3,:);
 
+
+%% get RMSEs
 lag = 1;
 [rmse_multivariate_mat, forecast_multivariate_mat] = calc_rmse_multivariate_conditional(nims, [smoothed_factors], out_of_sample_start_pos, end_sample_pos, forecast_horizon, lag);
 
 [rmse_forecast_combination_mat, forecast_multivariate_mat] = calc_rmse_forecast_combination_conditional(nims, [smoothed_factors], out_of_sample_start_pos, end_sample_pos, forecast_horizon, 1,4);
 
-
 [rmse_nochangemat, forecast_nochange_mat] = calc_rmse_nochange(nims, out_of_sample_start_pos, end_sample_pos, forecast_horizon);
 
 varlag=4;
 [rmse_varmat, forecast_var_mat] = calc_rmse_var_conditional(nims, factors, out_of_sample_start_pos, end_sample_pos, forecast_horizon, varlag);
-
 [rmse_varmat2, forecast_var_mat2] = calc_rmse_var_conditional([nims; shadow_bank_share_assets], [factors] , out_of_sample_start_pos, end_sample_pos, forecast_horizon, varlag);
 
-plotbool = 0;
-                                   
-[rmse_mlmat, forecast_ml_mat] = calc_rmse_ml_conditional(opt_param_mat, out_of_sample_start_pos, end_sample_pos, yobs, xi10_demeaned, p10, ntrain, tau, nfactors, nothers, forecast_horizon, dates,plotbool);
 
-
-%%
 % for i = 1:forecast_horizon
 %    figure
 %    plot(dates,yobs(end,:),'k','lineWidth',2)
 %    hold on
-%    plot(dates(out_of_sample_start_pos+i-1:end),forecast_ml_mat(1:end-i+1,i),'b--','lineWidth',2)
-%    plot(dates(out_of_sample_start_pos+i-1:end),forecast_nochange_mat(1:end-i+1,i),'r:','lineWidth',2)
+%    plot(dates(out_of_sample_start_pos+i-1:end),ml_forecasts(i,1:end-i+1),'b--','lineWidth',2)
+%    plot(dates(out_of_sample_start_pos+i-1:end),nochange_forecasts(i,1:end-i+1),'r:','lineWidth',2)
 %    
 %    for j = out_of_sample_start_pos+i-1:end_sample_pos
-%        if abs(forecast_ml_mat(j-out_of_sample_start_pos-i+2,i)-yobs(end,j))<=abs(forecast_nochange_mat(j-out_of_sample_start_pos-i+2,i)-yobs(end,j))
+%        if abs(ml_forecasts(i,j-out_of_sample_start_pos-i+2)-yobs(end,j))<=abs(nochange_forecasts(i,j-out_of_sample_start_pos-i+2)-yobs(end,j))
 %            plot(dates(j),yobs(end,j),'bo','lineWidth',2)
 %        else
 %            plot(dates(j),yobs(end,j),'rx','lineWidth',2)
@@ -103,3 +103,5 @@ plotbool = 0;
 %    xlim([dates(1) dates(end)])
 % end
 % 
+
+
