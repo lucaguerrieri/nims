@@ -72,45 +72,79 @@ smoothed_factors = xi1tHistory(1:3,:);
 
 %% get RMSEs
 lag = 1;
-[rmse_multivariate_mat, forecast_multivariate_mat] = calc_rmse_multivariate_conditional(nims, [smoothed_factors], out_of_sample_start_pos, end_sample_pos, forecast_horizon, lag);
 
-[rmse_forecast_combination_mat, forecast_multivariate_mat] = calc_rmse_forecast_combination_conditional(nims, [smoothed_factors], out_of_sample_start_pos, end_sample_pos, forecast_horizon, 1,4);
+% Table 1 -- Shortened sample:
+[rmse_forecast_combination_mat1, forecast_combination_mat1] = calc_rmse_forecast_combination_conditional(nims(:,15:end),yields(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, 1,4);
 
-%[rmse_forecast_combination_mat2, forecast_multivariate_mat2] = calc_rmse_forecast_combination_conditional(nims,[yields; shadow_bank_share_assets], out_of_sample_start_pos, end_sample_pos, forecast_horizon, 1,4);
-[rmse_forecast_combination_mat2, forecast_multivariate_mat2] = calc_rmse_forecast_combination_conditional(nims,[yields], out_of_sample_start_pos, end_sample_pos, forecast_horizon, 1,4);
+[rmse_multivariate_mat1, forecast_multivariate_mat1] = calc_rmse_multivariate_conditional(nims(:,15:end), smoothed_factors(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, lag);
+[rmse_forecast_combination_mat2, forecast_combination_mat2] = calc_rmse_forecast_combination_conditional(nims(:,15:end),smoothed_factors(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, 1,4);
 
-[rmse_forecast_combination_mat3, forecast_multivariate_mat3] = calc_rmse_forecast_combination_conditional(nims(:,15:end),yields(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, 1,4);
-
-
-%[rmse_forecast_combination_mat3, forecast_multivariate_mat3] = calc_rmse_forecast_combination_conditional(nims,[1:size(yields,2); yields], out_of_sample_start_pos, end_sample_pos, forecast_horizon, 0,0);
-
-
-[rmse_nochangemat, forecast_nochange_mat] = calc_rmse_nochange(nims, out_of_sample_start_pos, end_sample_pos, forecast_horizon);
+[rmse_forecast_combination_mat3, forecast_combination_mat3] = calc_rmse_forecast_combination_conditional(nims(:,15:end),factors(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, 1,4);
 
 varlag=4;
-[rmse_varmat, forecast_var_mat] = calc_rmse_var_conditional(nims, factors, out_of_sample_start_pos, end_sample_pos, forecast_horizon, varlag);
-[rmse_varmat2, forecast_var_mat2] = calc_rmse_var_conditional([nims; shadow_bank_share_assets], [factors] , out_of_sample_start_pos, end_sample_pos, forecast_horizon, varlag);
+[rmse_varmat1, forecast_var_mat1] = calc_rmse_var_conditional(nims(:,15:end), factors(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, varlag);
+[rmse_varmat2, forecast_var_mat2] = calc_rmse_var_conditional(nims(:,15:end), smoothed_factors(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, varlag);
+[rmse_nochangemat1, forecast_nochange_mat1] = calc_rmse_nochange(nims(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon);
 
 
-% for i = 1:forecast_horizon
-%    figure
-%    plot(dates,yobs(end,:),'k','lineWidth',2)
-%    hold on
-%    plot(dates(out_of_sample_start_pos+i-1:end),ml_forecasts(i,1:end-i+1),'b--','lineWidth',2)
-%    plot(dates(out_of_sample_start_pos+i-1:end),nochange_forecasts(i,1:end-i+1),'r:','lineWidth',2)
-%    
-%    for j = out_of_sample_start_pos+i-1:end_sample_pos
-%        if abs(ml_forecasts(i,j-out_of_sample_start_pos-i+2)-yobs(end,j))<=abs(nochange_forecasts(i,j-out_of_sample_start_pos-i+2)-yobs(end,j))
-%            plot(dates(j),yobs(end,j),'bo','lineWidth',2)
-%        else
-%            plot(dates(j),yobs(end,j),'rx','lineWidth',2)
-%        end
-%    end
-%    legend('Data','Forecast from DFM','No-change forecast')
-%    title(['Assessing the ',num2str(i),'-step-ahead forecast'])
-%    
-%    xlim([dates(1) dates(end)])
-% end
+
+table1 = [
+rmse_forecast_combination_mat1
+rmse_multivariate_mat1
+rmse_forecast_combination_mat2
+rmse_forecast_combination_mat3
+rmse_varmat1
+rmse_varmat2
+rmse_nochangemat1]
+
+
+
+for i = 1:forecast_horizon
+   figure
+   plot(dates(15:end),nims(end,15:end),'k','lineWidth',2)
+   hold on
+   plot(dates(out_of_sample_start_pos+i-1:end),forecast_combination_mat1(1:end-i+1,i)','b--','lineWidth',2)
+   plot(dates(out_of_sample_start_pos+i-1:end),forecast_nochange_mat1(1:end-i+1,i)','r:','lineWidth',2)
+   
+   for j = out_of_sample_start_pos+i-1:end_sample_pos
+       if abs(forecast_combination_mat1(j-out_of_sample_start_pos-i+2,i)'-yobs(end,j))<=abs(forecast_nochange_mat1(j-out_of_sample_start_pos-i+2,i)'-nims(j))
+           plot(dates(j),nims(j),'bo','lineWidth',2)
+       else
+           plot(dates(j),nims(j),'rx','lineWidth',2)
+       end
+   end
+   legend('Data','Forecast Combination','No-change forecast')
+   title(['Assessing the ',num2str(i),'-step-ahead forecast'])
+   
+   xlim([dates(15) dates(end)])
+end
+
+
 % 
+
+% Table 2 -- full sample
+[rmse_forecast_combination_mat1, forecast_multivariate_mat1] = calc_rmse_forecast_combination_conditional(nims,yields, out_of_sample_start_pos, end_sample_pos, forecast_horizon, 1,4);
+
+[rmse_multivariate_mat1, forecast_multivariate_mat1] = calc_rmse_multivariate_conditional(nims, smoothed_factors, out_of_sample_start_pos, end_sample_pos, forecast_horizon, lag);
+[rmse_forecast_combination_mat2, forecast_multivariate_mat2] = calc_rmse_forecast_combination_conditional(nims,smoothed_factors, out_of_sample_start_pos, end_sample_pos, forecast_horizon, 1,4);
+
+[rmse_forecast_combination_mat3, forecast_multivariate_mat3] = calc_rmse_forecast_combination_conditional(nims,factors, out_of_sample_start_pos, end_sample_pos, forecast_horizon, 1,4);
+
+varlag=4;
+[rmse_varmat1, forecast_var_mat1] = calc_rmse_var_conditional(nims, factors, out_of_sample_start_pos, end_sample_pos, forecast_horizon, varlag);
+[rmse_varmat2, forecast_var_mat2] = calc_rmse_var_conditional(nims, smoothed_factors, out_of_sample_start_pos, end_sample_pos, forecast_horizon, varlag);
+[rmse_nochangemat1, forecast_nochange_mat1] = calc_rmse_nochange(nims, out_of_sample_start_pos, end_sample_pos, forecast_horizon);
+
+table2 = [
+rmse_forecast_combination_mat1
+rmse_multivariate_mat1
+rmse_forecast_combination_mat2
+rmse_forecast_combination_mat3
+rmse_varmat1
+rmse_varmat2
+rmse_nochangemat1]
+
+
+
 
 
