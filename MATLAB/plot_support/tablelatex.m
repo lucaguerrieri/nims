@@ -8,7 +8,7 @@ ncols = size(resultmat,2);
 header = char('\begin{table}','\center');
 header = cellstr(header);
 
-tabular = ['\begin{tabular}{|l|']
+tabular = ['\begin{tabular}{|l|'];
 
 for i=1:ncols
     tabular = [tabular,'c|'];
@@ -37,8 +37,8 @@ for i=1:nrows
     line = [line,'\\'];
     table = [table;cellstr(line)];
 end
-table = [table;cellstr('\hline')]
-footer = char('\end{tabular}','\end{table}')
+table = [table;cellstr('\hline')];
+footer = char('\end{tabular}','\end{table}');
 
 table = [table;cellstr(footer)];
 
