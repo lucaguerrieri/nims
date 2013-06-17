@@ -65,41 +65,35 @@ forecast_horizon = 10;
 smoothed_factors = xi1tHistory(1:3,:);
 
 lag = 1;
-[rmse_multivariate_mat, forecast_multivariate_mat] = calc_rmse_multivariate_conditional(nims, [smoothed_factors], out_of_sample_start_pos, end_sample_pos, forecast_horizon, lag);
-
-[rmse_forecast_combination_mat, forecast_multivariate_mat] = calc_rmse_forecast_combination_conditional(nims, [smoothed_factors], out_of_sample_start_pos, end_sample_pos, forecast_horizon, 1,4);
 
 
-[rmse_nochangemat, forecast_nochange_mat] = calc_rmse_nochange(nims, out_of_sample_start_pos, end_sample_pos, forecast_horizon);
-
-varlag=4;
-[rmse_varmat, forecast_var_mat] = calc_rmse_var_conditional(nims, factors, out_of_sample_start_pos, end_sample_pos, forecast_horizon, varlag);
-
-[rmse_varmat2, forecast_var_mat2] = calc_rmse_var_conditional([nims; shadow_bank_share_assets], [factors] , out_of_sample_start_pos, end_sample_pos, forecast_horizon, varlag);
-
-plotbool = 0;
-                                   
-[rmse_mlmat, forecast_ml_mat] = calc_rmse_ml_conditional(opt_param_mat, out_of_sample_start_pos, end_sample_pos, yobs, xi10_demeaned, p10, ntrain, tau, nfactors, nothers, forecast_horizon, dates,plotbool);
+[rmse_nochangemat, forecast_nochange_mat1] = calc_rmse_nochange(nims, out_of_sample_start_pos, end_sample_pos, forecast_horizon);
+columnlabels = char('Step 1','Step 2','Step 3','Step 4','Step 5','Step 6','Step 7','Step 8','Step 9','Step 10');
+rowlabels = char('DFM')
+table1_tex = tablelatex(rmse_nochangemat,columnlabels,rowlabels)
 
 
-%%
-% for i = 1:forecast_horizon
-%    figure
-%    plot(dates,yobs(end,:),'k','lineWidth',2)
-%    hold on
-%    plot(dates(out_of_sample_start_pos+i-1:end),forecast_ml_mat(1:end-i+1,i),'b--','lineWidth',2)
-%    plot(dates(out_of_sample_start_pos+i-1:end),forecast_nochange_mat(1:end-i+1,i),'r:','lineWidth',2)
-%    
-%    for j = out_of_sample_start_pos+i-1:end_sample_pos
-%        if abs(forecast_ml_mat(j-out_of_sample_start_pos-i+2,i)-yobs(end,j))<=abs(forecast_nochange_mat(j-out_of_sample_start_pos-i+2,i)-yobs(end,j))
-%            plot(dates(j),yobs(end,j),'bo','lineWidth',2)
-%        else
-%            plot(dates(j),yobs(end,j),'rx','lineWidth',2)
-%        end
-%    end
-%    legend('Data','Forecast from DFM','No-change forecast')
-%    title(['Assessing the ',num2str(i),'-step-ahead forecast'])
-%    
-%    xlim([dates(1) dates(end)])
-% end
-% 
+plotbool = 0;                                   
+[rmse_mlmat, forecast_ml_mat1] = calc_rmse_ml_conditional(opt_param_mat, out_of_sample_start_pos, end_sample_pos, yobs, xi10_demeaned, p10, ntrain, tau, nfactors, nothers, forecast_horizon, dates,plotbool);
+
+
+
+for i = 1:forecast_horizon
+   figure
+   plot(dates(15:end),nims(end,15:end),'k','lineWidth',2)
+   hold on
+   plot(dates(out_of_sample_start_pos+i-1:end),forecast_ml_mat1(1:end-i+1,i)','b--','lineWidth',2)
+   plot(dates(out_of_sample_start_pos+i-1:end),forecast_nochange_mat1(1:end-i+1,i)','r:','lineWidth',2)
+   
+   for j = out_of_sample_start_pos+i-1:end_sample_pos
+       if abs(forecast_ml_mat1(j-out_of_sample_start_pos-i+2,i)'-yobs(end,j))<=abs(forecast_nochange_mat1(j-out_of_sample_start_pos-i+2,i)'-nims(j))
+           plot(dates(j),nims(j),'bo','lineWidth',2)
+       else
+           plot(dates(j),nims(j),'rx','lineWidth',2)
+       end
+   end
+   legend('Data','Dynamic Factor Model','No-change forecast','Location','SouthWest')
+   title(['Assessing the ',num2str(i),'-step-ahead forecast'])
+   
+   xlim([dates(15) dates(end)])
+end
