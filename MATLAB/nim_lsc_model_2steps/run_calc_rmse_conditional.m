@@ -106,29 +106,29 @@ rowlabels = char('Forecast Combination of Yields',...
                  'VAR on DF',...
                  'VAR on Simple Factors',...
                  'No-Change Forecast');
-table1_tex = tablelatex(table1,columnlabels,rowlabels)
+table1_tex = tablelatex(table1,columnlabels,rowlabels);
+char(table1_tex)
 
 
-
-for i = 1:forecast_horizon
-   figure
-   plot(dates(15:end),nims(end,15:end),'k','lineWidth',2)
-   hold on
-   plot(dates(out_of_sample_start_pos+i-1:end),forecast_combination_mat1(1:end-i+1,i)','b--','lineWidth',2)
-   plot(dates(out_of_sample_start_pos+i-1:end),forecast_nochange_mat1(1:end-i+1,i)','r:','lineWidth',2)
-   
-   for j = out_of_sample_start_pos+i-1:end_sample_pos
-       if abs(forecast_combination_mat1(j-out_of_sample_start_pos-i+2,i)'-yobs(end,j))<=abs(forecast_nochange_mat1(j-out_of_sample_start_pos-i+2,i)'-nims(j))
-           plot(dates(j),nims(j),'bo','lineWidth',2)
-       else
-           plot(dates(j),nims(j),'rx','lineWidth',2)
-       end
-   end
-   legend('Data','Forecast Combination','No-change forecast')
-   title(['Assessing the ',num2str(i),'-step-ahead forecast'])
-   
-   xlim([dates(15) dates(end)])
-end
+% for i = [2, 4, 10]
+%    figure
+%    plot(dates(15:end),nims(end,15:end),'k','lineWidth',2)
+%    hold on
+%    plot(dates(out_of_sample_start_pos+i-1:end),forecast_combination_mat1(1:end-i+1,i)','b--','lineWidth',2)
+%    plot(dates(out_of_sample_start_pos+i-1:end),forecast_nochange_mat1(1:end-i+1,i)','r:','lineWidth',2)
+%    
+%    for j = out_of_sample_start_pos+i-1:end_sample_pos
+%        if abs(forecast_combination_mat1(j-out_of_sample_start_pos-i+2,i)'-yobs(end,j))<=abs(forecast_nochange_mat1(j-out_of_sample_start_pos-i+2,i)'-nims(j))
+%            plot(dates(j),nims(j),'bo','lineWidth',2)
+%        else
+%            plot(dates(j),nims(j),'rx','lineWidth',2)
+%        end
+%    end
+%    legend('Data','Forecast Combination','No-change forecast')
+%    title(['Assessing the ',num2str(i),'-step-ahead forecast'])
+%    
+%    xlim([dates(15) dates(end)])
+% end
 
 
 % 
@@ -165,7 +165,8 @@ rowlabels = char('Forecast Combination of Yields',...
                  'VAR on DF',...
                  'VAR on Simple Factors',...
                  'No-Change Forecast');
-table2_tex = tablelatex(table2,columnlabels,rowlabels)
+table2_tex = tablelatex(table2,columnlabels,rowlabels);
+char(table2_tex)
 
 
 
@@ -203,5 +204,10 @@ rowlabels = char('Forecast Combination of Yields',...
                  'VAR on DF',...
                  'VAR on Simple Factors',...
                  'No-Change Forecast');
-table3_tex = tablelatex(table3,columnlabels,rowlabels)
+table3_tex = tablelatex(table3,columnlabels,rowlabels);
+char(table3_tex)
 
+
+figure
+plot(dates,nims); hold on
+plot(dates,yields(1,:),'r--')
