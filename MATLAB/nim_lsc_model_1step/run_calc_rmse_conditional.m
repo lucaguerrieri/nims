@@ -68,14 +68,15 @@ lag = 1;
 
 
 [rmse_nochangemat, forecast_nochange_mat1] = calc_rmse_nochange(nims, out_of_sample_start_pos, end_sample_pos, forecast_horizon);
-columnlabels = char('Step 1','Step 2','Step 3','Step 4','Step 5','Step 6','Step 7','Step 8','Step 9','Step 10');
-rowlabels = char('DFM')
-table1_tex = tablelatex(rmse_nochangemat,columnlabels,rowlabels)
 
 
 plotbool = 0;                                   
 [rmse_mlmat, forecast_ml_mat1] = calc_rmse_ml_conditional(opt_param_mat, out_of_sample_start_pos, end_sample_pos, yobs, xi10_demeaned, p10, ntrain, tau, nfactors, nothers, forecast_horizon, dates,plotbool);
 
+columnlabels = char('Step 1','Step 2','Step 3','Step 4','Step 5','Step 6','Step 7','Step 8','Step 9','Step 10');
+rowlabels = char('DFM');
+table1_tex = tablelatex(rmse_mlmat,columnlabels,rowlabels);
+char(table1_tex)
 
 
 for i = 1:forecast_horizon
