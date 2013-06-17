@@ -82,8 +82,8 @@ lag = 1;
 [rmse_forecast_combination_mat3, forecast_combination_mat3] = calc_rmse_forecast_combination_conditional(nims(:,15:end),factors(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, 1,4);
 
 varlag=4;
-[rmse_varmat1, forecast_var_mat1] = calc_rmse_var_conditional(nims(:,15:end), factors(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, varlag);
-[rmse_varmat2, forecast_var_mat2] = calc_rmse_var_conditional(nims(:,15:end), smoothed_factors(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, varlag);
+[rmse_varmat1, forecast_var_mat1] = calc_rmse_var_conditional(nims(:,15:end), smoothed_factors(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, varlag);
+[rmse_varmat2, forecast_var_mat2] = calc_rmse_var_conditional(nims(:,15:end), factors(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, varlag);
 [rmse_nochangemat1, forecast_nochange_mat1] = calc_rmse_nochange(nims(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon);
 
 
@@ -95,7 +95,18 @@ rmse_forecast_combination_mat2
 rmse_forecast_combination_mat3
 rmse_varmat1
 rmse_varmat2
-rmse_nochangemat1]
+rmse_nochangemat1];
+
+
+columnlabels = char('Step 1','Step 2','Step 3','Step 4','Step 5','Step 6','Step 7','Step 8','Step 9','Step 10');
+rowlabels = char('Forecast Combination of Yields',...
+                 'DFM + 2nd Step Regression',...
+                 'DFM + Forecast Combination',...
+                 'Forecast Combination of Simple Factors',...
+                 'VAR on DF',...
+                 'VAR on Simple Factors',...
+                 'No-Change Forecast');
+table1_tex = tablelatex(table1,columnlabels,rowlabels)
 
 
 
@@ -131,8 +142,8 @@ end
 [rmse_forecast_combination_mat3, forecast_multivariate_mat3] = calc_rmse_forecast_combination_conditional(nims,factors, out_of_sample_start_pos, end_sample_pos, forecast_horizon, 1,4);
 
 varlag=4;
-[rmse_varmat1, forecast_var_mat1] = calc_rmse_var_conditional(nims, factors, out_of_sample_start_pos, end_sample_pos, forecast_horizon, varlag);
-[rmse_varmat2, forecast_var_mat2] = calc_rmse_var_conditional(nims, smoothed_factors, out_of_sample_start_pos, end_sample_pos, forecast_horizon, varlag);
+[rmse_varmat1, forecast_var_mat1] = calc_rmse_var_conditional(nims, smoothed_factors, out_of_sample_start_pos, end_sample_pos, forecast_horizon, varlag);
+[rmse_varmat2, forecast_var_mat2] = calc_rmse_var_conditional(nims, factors, out_of_sample_start_pos, end_sample_pos, forecast_horizon, varlag);
 [rmse_nochangemat1, forecast_nochange_mat1] = calc_rmse_nochange(nims, out_of_sample_start_pos, end_sample_pos, forecast_horizon);
 
 table2 = [
@@ -142,9 +153,55 @@ rmse_forecast_combination_mat2
 rmse_forecast_combination_mat3
 rmse_varmat1
 rmse_varmat2
-rmse_nochangemat1]
+rmse_nochangemat1];
 
 
 
+columnlabels = char('Step 1','Step 2','Step 3','Step 4','Step 5','Step 6','Step 7','Step 8','Step 9','Step 10');
+rowlabels = char('Forecast Combination of Yields',...
+                 'DFM + 2nd Step Regression',...
+                 'DFM + Forecast Combination',...
+                 'Forecast Combination of Simple Factors',...
+                 'VAR on DF',...
+                 'VAR on Simple Factors',...
+                 'No-Change Forecast');
+table2_tex = tablelatex(table2,columnlabels,rowlabels)
 
+
+
+% Table 3 -- Short sample + measures of competition
+[rmse_forecast_combination_mat1, forecast_combination_mat1] = calc_rmse_forecast_combination_conditional(nims(:,15:end),[yields(:,15:end);shadow_bank_share_assets(:,15:end)], out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, 1,4);
+
+[rmse_multivariate_mat1, forecast_multivariate_mat1] = calc_rmse_multivariate_conditional(nims(:,15:end), [smoothed_factors(:,15:end);shadow_bank_share_assets(:,15:end)], out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, lag);
+[rmse_forecast_combination_mat2, forecast_combination_mat2] = calc_rmse_forecast_combination_conditional(nims(:,15:end),[smoothed_factors(:,15:end);shadow_bank_share_assets(:,15:end)], out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, 1,4);
+
+[rmse_forecast_combination_mat3, forecast_combination_mat3] = calc_rmse_forecast_combination_conditional(nims(:,15:end),[factors(:,15:end) ;shadow_bank_share_assets(:,15:end)], out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, 1,4);
+
+varlag=3;
+[rmse_varmat1, forecast_var_mat1] = calc_rmse_var_conditional(nims(:,15:end), [smoothed_factors(:,15:end);shadow_bank_share_assets(:,15:end)], out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, varlag);
+[rmse_varmat2, forecast_var_mat2] = calc_rmse_var_conditional(nims(:,15:end), [factors(:,15:end);shadow_bank_share_assets(:,15:end)], out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, varlag);
+[rmse_nochangemat1, forecast_nochange_mat1] = calc_rmse_nochange(nims(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon);
+
+
+
+table3 = [
+rmse_forecast_combination_mat1
+rmse_multivariate_mat1
+rmse_forecast_combination_mat2
+rmse_forecast_combination_mat3
+rmse_varmat1
+rmse_varmat2
+rmse_nochangemat1];
+
+
+
+columnlabels = char('Step 1','Step 2','Step 3','Step 4','Step 5','Step 6','Step 7','Step 8','Step 9','Step 10');
+rowlabels = char('Forecast Combination of Yields',...
+                 'DFM + 2nd Step Regression',...
+                 'DFM + Forecast Combination',...
+                 'Forecast Combination of Simple Factors',...
+                 'VAR on DF',...
+                 'VAR on Simple Factors',...
+                 'No-Change Forecast');
+table3_tex = tablelatex(table3,columnlabels,rowlabels)
 
