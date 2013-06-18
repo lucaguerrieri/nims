@@ -93,19 +93,17 @@ rmse_forecast_combination_mat1
 rmse_multivariate_mat1
 rmse_forecast_combination_mat2
 rmse_forecast_combination_mat3
-rmse_varmat1
 rmse_varmat2
 rmse_nochangemat1];
 
 
 columnlabels = char('Step 1','Step 2','Step 3','Step 4','Step 5','Step 6','Step 7','Step 8','Step 9','Step 10');
-rowlabels = char('Forecast Combination of Yields',...
-                 'DFM + 2nd Step Regression',...
-                 'DFM + Forecast Combination',...
-                 'Forecast Combination of Simple Factors',...
-                 'VAR on DF',...
-                 'VAR on Simple Factors',...
-                 'No-Change Forecast');
+rowlabels = char('1. Simple Forecast Combination',...
+                 '3a. DFM with 2nd Step Regression',...
+                 '3b. DFM with Forecast Combination',...
+                 '4. Forecast Combination of Observed Factors',...
+                 '5. VAR on Observed Factors',...
+                 '6. No-Change Forecast');
 table1_tex = tablelatex(table1,columnlabels,rowlabels);
 char(table1_tex)
 
@@ -151,20 +149,11 @@ rmse_forecast_combination_mat1
 rmse_multivariate_mat1
 rmse_forecast_combination_mat2
 rmse_forecast_combination_mat3
-rmse_varmat1
 rmse_varmat2
 rmse_nochangemat1];
 
 
 
-columnlabels = char('Step 1','Step 2','Step 3','Step 4','Step 5','Step 6','Step 7','Step 8','Step 9','Step 10');
-rowlabels = char('Forecast Combination of Yields',...
-                 'DFM + 2nd Step Regression',...
-                 'DFM + Forecast Combination',...
-                 'Forecast Combination of Simple Factors',...
-                 'VAR on DF',...
-                 'VAR on Simple Factors',...
-                 'No-Change Forecast');
 table2_tex = tablelatex(table2,columnlabels,rowlabels);
 char(table2_tex)
 
@@ -190,24 +179,26 @@ rmse_forecast_combination_mat1
 rmse_multivariate_mat1
 rmse_forecast_combination_mat2
 rmse_forecast_combination_mat3
-rmse_varmat1
 rmse_varmat2
 rmse_nochangemat1];
 
 
-
-columnlabels = char('Step 1','Step 2','Step 3','Step 4','Step 5','Step 6','Step 7','Step 8','Step 9','Step 10');
-rowlabels = char('Forecast Combination of Yields',...
-                 'DFM + 2nd Step Regression',...
-                 'DFM + Forecast Combination',...
-                 'Forecast Combination of Simple Factors',...
-                 'VAR on DF',...
-                 'VAR on Simple Factors',...
-                 'No-Change Forecast');
 table3_tex = tablelatex(table3,columnlabels,rowlabels);
 char(table3_tex)
 
 
 figure
-plot(dates,nims); hold on
-plot(dates,yields(1,:),'r--')
+subplot(2,1,1)
+thistitle='Nims (solid) and 3-Month Yields (dashed)';
+doubleplot(nims,yields(1,:),dates,thistitle)
+
+subplot(2,1,2)
+thistitle='Nims (solid) and 10-Year Yields (dashed)';
+doubleplot(nims,yields(9,:),dates,thistitle)
+
+
+figure
+doubleplot(nims(15:end),shadow_bank_share_assets(15:end),dates(15:end),thistitle)
+thistitle='Nims (solid) and Asset Share of Shadow Banking Sector (dashed)';
+
+
