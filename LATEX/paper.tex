@@ -6,6 +6,11 @@
 \usepackage{graphicx}
 \usepackage{chicago}
 \usepackage{rotating}
+\usepackage{hyperref}
+\usepackage{sectsty}
+
+
+
 
 \setcounter{MaxMatrixCols}{10}
 %TCIDATA{OutputFilter=Latex.dll}
@@ -410,6 +415,12 @@ NIM_{t+s/t}=\sum_{i}\frac{NIM_{i,t+s/t}}{3},
 6. \textbf{No-Change Forecast. \ }{\normalsize According to this model }$%
 NIM_{t+s/t}=NIM_{t}${\normalsize . }
 
+\section{Data}
+The data on bank net interest margins (NIMs) that we use is from the quarterly Consolidated Reports of Condition and Income (Call Report) that every national, state member, and insured nonmember bank is required to file on the last day of each quarter by the Federal Financial Institutions Examination Council (FFIEC). The Federal Deposit Insurance Corporation is tasked as the overseer, collecting and reviewing all submissions. Call Report data used in this analysis are cleaned and adjusted for bank mergers and acquisitions, using structure data from the National Information Clearinghouse (NIC) on mergers and acquisitions. Foreign entities are excluded and domestic subsidiaries are aggregated up to the parent, bank-holding-company (BHC), level. \footnote{NIM data are adjusted for mergers between commercial banks by comparing balance sheet values of interest income, interest expenses, and interest-earning assets at the end of the quarter with those at the beginning of the quarter, accounting for amounts acquired or lost during the period because of mergers. For information on the merger-adjustment procedure for income, see the appendix in English and Nelson (1998).} \newline \newline
+NIMs in our models are expressed as the annualized percentage of net interest income over interest-earning assets. To get an aggregate banking sector measure of NIMs, we aggregate NIMs for the top 25 BHCs, as ranked by total assets, which is assessed quarterly. \newline \newline
+The yields data are derived using a smoothing technique from Gurkaynak, et al. (2007), based on Nelson and Siegel (1987) and Svensson (1994), which allows for daily measures of an off-the-run Treasury yield curve. We use yields for twelve maturities in our models: 3 month, 6 month, 9 month, 1 year, 2 year, 3 year, 5 year, 7 year, 10 year, 15 year, 20 year, and 30 year.\footnote{Daily yields are published with a two-day lag under the base mnemonic SVENY here: \url{www.federalreserve.gov/econresdata/researchdata/feds200628_1.html}.} The yields included are quarterly averages of daily yields.  \newline \newline
+The data on NIMs and yields start in 1985Q4 and end in 2008Q2, a period that stops short of the interest rate regime shift to the zero lower bound.
+
 
 
 
@@ -434,7 +445,7 @@ NIM_{t+s/t}=NIM_{t}${\normalsize . }
 5. VAR on Observed Factors                 &0.166&0.209&0.263&0.302&0.342&0.375&0.380&0.430&0.451&0.499\\
 6. No-Change Forecast                      &0.107&0.138&0.154&0.181&0.206&0.228&0.244&0.248&0.271&0.293\\
 \hline
-\end{tabular}     
+\end{tabular}
 \end{sidewaystable}
 }
 
@@ -454,7 +465,7 @@ NIM_{t+s/t}=NIM_{t}${\normalsize . }
 5. VAR on Observed Factors                 &0.148&0.196&0.243&0.275&0.283&0.296&0.319&0.377&0.456&0.530\\
 6. No-Change Forecast                      &0.107&0.138&0.154&0.181&0.206&0.228&0.244&0.248&0.271&0.293\\
 \hline
-\end{tabular}   
+\end{tabular}
 \end{sidewaystable}
 }
 
