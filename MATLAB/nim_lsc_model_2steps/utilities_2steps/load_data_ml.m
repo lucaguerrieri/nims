@@ -37,8 +37,9 @@ end
 %This data has same dates as yields
 shadow_bank_share_assets = shadow_bank_share_assets_file(start_pos:end_pos,1)';
 
-%Bring in NIMs and subcategories of interest-earning assets. Eight (8) variants
-%of NIM are possible:
+%Bring in NIMs and subcategories of interest-earning assets. SEE pulltiny_nims.sas FILE TO SEE EXACTLY 
+%WHICH CALL REPORT SERIES WERE USED TO CONSTRUCT THESE DIFFERENT SERIES. 
+%Eight (8) variants of NIM are possible:
 % 1. With trading assets and based on end-of-period total assets rankings
 % 2. Without trading assets and based on end-of-period total assets rankings
 % 3. With trading assets and based on quarterly average of total assets
