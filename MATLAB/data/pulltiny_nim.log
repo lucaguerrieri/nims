@@ -1,4 +1,4 @@
-1                                The SAS System    19:35 Thursday, June 20, 2013
+1                                The SAS System      21:31 Monday, June 24, 2013
 
 NOTE: Copyright (c) 2002-2010 by SAS Institute Inc., Cary, NC, USA. 
 NOTE: SAS (r) Proprietary Software 9.3 (TS1M1) 
@@ -29,7 +29,7 @@ SAS Consulting Group FedWeb home page:
 
 
 NOTE: SAS initialization used:
-      real time           0.14 seconds
+      real time           0.17 seconds
       cpu time            0.05 seconds
       
 
@@ -50,15 +50,16 @@ NOTE: AUTOEXEC processing completed.
 5          Output: tiny_matchange.sas7bdat
 6          To run: in a command line, type sas pulltiny.sas
 7          ********************************************************************/
+7        ! 
 8          
 9          /*
 10         %include './Include/library';
 11         %include './Include/bcrmacros.sas';
 12         %include './Include/PDMACRO.sas';
 13         %include './Include/setmay9.sas';
-14         %include './Include/settiny.sas';
-2                                The SAS System    19:35 Thursday, June 20, 2013
+2                                The SAS System      21:31 Monday, June 24, 2013
 
+14         %include './Include/settiny.sas';
 15         */
 16         
 17         /* Keep these "include" statements and all libname statements below
@@ -73,23 +74,28 @@ NOTE: AUTOEXEC processing completed.
 NOTE: Libref NIC was successfully assigned as follows: 
       Engine:        V9 
       Physical Name: /rsma/microdata/nicua
+6555     !                                                
 6556       libname tiny          '/bks/proj/cbp/sas/data/tiny';
 NOTE: Libref TINY was successfully assigned as follows: 
       Engine:        V9 
       Physical Name: /bks/proj/cbp/sas/data/tiny
+6556     !                                                     
 6557       libname tiny80        '/bks/proj/cbp/sas/data/tiny/tiny80';
 NOTE: Libref TINY80 was successfully assigned as follows: 
       Engine:        V9 
       Physical Name: /bks/proj/cbp/sas/data/tiny/tiny80
+6557     !                                                            
 6558       libname tiny90        '/bks/proj/cbp/sas/data/tiny/tiny90';
 NOTE: Libname TINY90 refers to the same physical library as TINY80.
 NOTE: Libref TINY90 was successfully assigned as follows: 
       Engine:        V9 
       Physical Name: /bks/proj/cbp/sas/data/tiny/tiny80
+6558     !                                                            
 6559       libname library       '/bks/proj/cbp/sas/data/library_64';
 NOTE: Libref LIBRARY was successfully assigned as follows: 
       Engine:        V9 
       Physical Name: /bks/proj/cbp/sas/data/library_64
+6559     !                                                           
 6560       /*libname out           '/ofs/prod1/CCAR/material_change/data'; */
 6561       
 6562       options sasautos=('/bks/proj/cbp/sas/pgms/tiny/macros',
@@ -97,76 +103,84 @@ NOTE: Libref LIBRARY was successfully assigned as follows:
 6564                         '!SASROOT/sasautos',
 6565                         '!SASROOT/frbmac');
 6566       
-6567       %let fpath = /ofs/work_mpa/m1vxb00/nim_project/MATLAB/data/;
+6567       %let fpath =
+6567     ! /ofs/work_mpa/m1vxb00/nim_project/MATLAB/data/data_ranked_by_ie_asset
+6567     ! s/;
 6568       /* /ofs/research2/Guerrieri/valentin/term_structure/data; */
 6569       libname output "&fpath";
 NOTE: Libref OUTPUT was successfully assigned as follows: 
       Engine:        V9 
-      Physical Name: /ofs/work_mpa/m1vxb00/nim_project/MATLAB/data
+      Physical Name: 
+      /ofs/work_mpa/m1vxb00/nim_project/MATLAB/data/data_ranked_by_ie_assets
+6569     !                         
 6570       
 6571       %let sdate = 1985q1;
 6572       %let edate = 2013q1;
+3                                The SAS System      21:31 Monday, June 24, 2013
+
 6573       
 6574       *retrieve TINY data;
-6575       %let tvars = flo10300 flo10600 /*total interest income; interest
-6575     ! income on loans and leases */
+6575       %let tvars = flo10300 flo10600 
 6576                    flo10900 flo11100
 6577                    flo11200 flo11400
 6578                    flo11700 flo11900
 6579                    flo10600 flo12000
 6580                    flo12100 flo12500
 6581                    flo13400 flo12400
-3                                The SAS System    19:35 Thursday, June 20, 2013
-
-6582                    flo13410
+6582                    flo13410 
 6583                    flo20100
 6584                    flo15700 flo15800
 6585                    flo16200 flo16300
 6586                    flo16500 flo15300
-6587                    cal90100 cal25000 /*interest-earning assets breakdown
-6587     ! starts on this line */
-6588                    cal90200 cal90300
-6589                    cal90900 cal91000
-6590                    cal91900
-6591       
-6592       		;
+6587       
+6588                    cal90000 cal25300
+6589                    cal90100 cal25000 
+6590                    cal90200 cal90300
+6591                    cal90900 cal91000
+6592                    cal91900
 6593       
-6594       /* cal25000 cal90000 cal90100 /*assets_end_of_period assets
-6594     ! assets_interest_earning*/
-6595       /*  flo20100  /*netintinc */
-6596       
+6594                    flo10000 flo15000 flo17000 
+6595                    flo16600 flo13500 
+6596       		;
 6597       
-6598       %settiny(dates=%dateseq(&sdate,&edate),tsindex=date,kvars=rssd9002
-6598     ! &tvars,outds=tiny_raw);
+6598       * cal25000 cal90000 cal90100 assets_end_of_period assets
+6598     ! assets_interest_earning;
+6599       *  flo20100  netintinc;
+6600       
+6601       
+6602       %settiny(dates=%dateseq(&sdate,&edate),tsindex=date,kvars=rssd9002
+6602     ! &tvars,outds=tiny_raw);
 
 NOTE: There were 14482 observations read from the data set TINY80.TINY8503.
-NOTE: The data set WORK.BIGG has 14482 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 14482 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           3.06 seconds
-      cpu time            1.40 seconds
+      real time           2.76 seconds
+      cpu time            1.31 seconds
       
 
 
 NOTE: There were 14482 observations read from the data set WORK.BIGG.
-NOTE: The data set WORK.TINY_RAW has 14482 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 14482 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
       real time           0.02 seconds
-      cpu time            0.02 seconds
+      cpu time            0.04 seconds
       
 
 
 NOTE: There were 14466 observations read from the data set TINY80.TINY8506.
-NOTE: The data set WORK.BIGG has 14466 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 14466 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           2.84 seconds
-      cpu time            1.45 seconds
+      real time           2.74 seconds
+      cpu time            1.32 seconds
       
 
+
+4                                The SAS System      21:31 Monday, June 24, 2013
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 14466 observations read from the data set WORK.BIGG.
 NOTE: 14466 observations added.
-NOTE: The data set WORK.TINY_RAW has 28948 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 28948 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.04 seconds
       cpu time            0.03 seconds
@@ -174,19 +188,17 @@ NOTE: PROCEDURE APPEND used (Total process time):
 
 
 NOTE: There were 14442 observations read from the data set TINY80.TINY8509.
-NOTE: The data set WORK.BIGG has 14442 observations and 33 variables.
-4                                The SAS System    19:35 Thursday, June 20, 2013
-
+NOTE: The data set WORK.BIGG has 14442 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           2.81 seconds
-      cpu time            1.41 seconds
+      real time           2.75 seconds
+      cpu time            1.32 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 14442 observations read from the data set WORK.BIGG.
 NOTE: 14442 observations added.
-NOTE: The data set WORK.TINY_RAW has 43390 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 43390 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.01 seconds
@@ -194,17 +206,17 @@ NOTE: PROCEDURE APPEND used (Total process time):
 
 
 NOTE: There were 14401 observations read from the data set TINY80.TINY8512.
-NOTE: The data set WORK.BIGG has 14401 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 14401 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           2.77 seconds
-      cpu time            1.32 seconds
+      real time           2.82 seconds
+      cpu time            1.33 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 14401 observations read from the data set WORK.BIGG.
 NOTE: 14401 observations added.
-NOTE: The data set WORK.TINY_RAW has 57791 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 57791 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.01 seconds
@@ -212,55 +224,55 @@ NOTE: PROCEDURE APPEND used (Total process time):
 
 
 NOTE: There were 14383 observations read from the data set TINY80.TINY8603.
-NOTE: The data set WORK.BIGG has 14383 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 14383 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           3.13 seconds
-      cpu time            1.43 seconds
+      real time           2.84 seconds
+      cpu time            1.33 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 14383 observations read from the data set WORK.BIGG.
 NOTE: 14383 observations added.
-NOTE: The data set WORK.TINY_RAW has 72174 observations and 33 variables.
+5                                The SAS System      21:31 Monday, June 24, 2013
+
+NOTE: The data set WORK.TINY_RAW has 72174 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
-      real time           0.00 seconds
+      real time           0.01 seconds
       cpu time            0.01 seconds
       
 
 
 NOTE: There were 14295 observations read from the data set TINY80.TINY8606.
-NOTE: The data set WORK.BIGG has 14295 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 14295 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           3.73 seconds
-      cpu time            1.63 seconds
-5                                The SAS System    19:35 Thursday, June 20, 2013
-
+      real time           2.71 seconds
+      cpu time            1.30 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 14295 observations read from the data set WORK.BIGG.
 NOTE: 14295 observations added.
-NOTE: The data set WORK.TINY_RAW has 86469 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 86469 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
-      real time           0.09 seconds
-      cpu time            0.02 seconds
+      real time           0.00 seconds
+      cpu time            0.01 seconds
       
 
 
 NOTE: There were 14273 observations read from the data set TINY80.TINY8609.
-NOTE: The data set WORK.BIGG has 14273 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 14273 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           3.16 seconds
-      cpu time            1.54 seconds
+      real time           2.71 seconds
+      cpu time            1.30 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 14273 observations read from the data set WORK.BIGG.
 NOTE: 14273 observations added.
-NOTE: The data set WORK.TINY_RAW has 100742 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 100742 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.01 seconds
@@ -268,55 +280,55 @@ NOTE: PROCEDURE APPEND used (Total process time):
 
 
 NOTE: There were 14207 observations read from the data set TINY80.TINY8612.
-NOTE: The data set WORK.BIGG has 14207 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 14207 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           2.86 seconds
-      cpu time            1.61 seconds
+      real time           2.70 seconds
+      cpu time            1.31 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 14207 observations read from the data set WORK.BIGG.
 NOTE: 14207 observations added.
-NOTE: The data set WORK.TINY_RAW has 114949 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 114949 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
-      real time           0.30 seconds
+      real time           0.00 seconds
+6                                The SAS System      21:31 Monday, June 24, 2013
+
       cpu time            0.01 seconds
       
 
 
 NOTE: There were 14082 observations read from the data set TINY80.TINY8703.
-NOTE: The data set WORK.BIGG has 14082 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 14082 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           2.87 seconds
-      cpu time            1.39 seconds
+      real time           2.67 seconds
+      cpu time            1.28 seconds
       
 
-
-6                                The SAS System    19:35 Thursday, June 20, 2013
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 14082 observations read from the data set WORK.BIGG.
 NOTE: 14082 observations added.
-NOTE: The data set WORK.TINY_RAW has 129031 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 129031 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
-      real time           0.00 seconds
-      cpu time            0.00 seconds
+      real time           0.01 seconds
+      cpu time            0.02 seconds
       
 
 
 NOTE: There were 13960 observations read from the data set TINY80.TINY8706.
-NOTE: The data set WORK.BIGG has 13960 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 13960 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           2.78 seconds
-      cpu time            1.36 seconds
+      real time           2.65 seconds
+      cpu time            1.27 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 13960 observations read from the data set WORK.BIGG.
 NOTE: 13960 observations added.
-NOTE: The data set WORK.TINY_RAW has 142991 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 142991 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.01 seconds
@@ -324,37 +336,37 @@ NOTE: PROCEDURE APPEND used (Total process time):
 
 
 NOTE: There were 13877 observations read from the data set TINY80.TINY8709.
-NOTE: The data set WORK.BIGG has 13877 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 13877 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           3.18 seconds
-      cpu time            1.48 seconds
+      real time           2.63 seconds
+      cpu time            1.26 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 13877 observations read from the data set WORK.BIGG.
 NOTE: 13877 observations added.
-NOTE: The data set WORK.TINY_RAW has 156868 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 156868 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.00 seconds
       
 
+7                                The SAS System      21:31 Monday, June 24, 2013
+
 
 NOTE: There were 13730 observations read from the data set TINY80.TINY8712.
-NOTE: The data set WORK.BIGG has 13730 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 13730 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           2.73 seconds
-      cpu time            1.61 seconds
+      real time           2.60 seconds
+      cpu time            1.30 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 13730 observations read from the data set WORK.BIGG.
 NOTE: 13730 observations added.
-7                                The SAS System    19:35 Thursday, June 20, 2013
-
-NOTE: The data set WORK.TINY_RAW has 170598 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 170598 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.01 seconds
@@ -362,17 +374,17 @@ NOTE: PROCEDURE APPEND used (Total process time):
 
 
 NOTE: There were 13568 observations read from the data set TINY80.TINY8803.
-NOTE: The data set WORK.BIGG has 13568 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 13568 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           3.14 seconds
-      cpu time            1.42 seconds
+      real time           2.57 seconds
+      cpu time            1.22 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 13568 observations read from the data set WORK.BIGG.
 NOTE: 13568 observations added.
-NOTE: The data set WORK.TINY_RAW has 184166 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 184166 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.01 seconds
@@ -380,111 +392,111 @@ NOTE: PROCEDURE APPEND used (Total process time):
 
 
 NOTE: There were 13433 observations read from the data set TINY80.TINY8806.
-NOTE: The data set WORK.BIGG has 13433 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 13433 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           2.98 seconds
-      cpu time            1.53 seconds
+      real time           2.55 seconds
+      cpu time            1.25 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 13433 observations read from the data set WORK.BIGG.
 NOTE: 13433 observations added.
-NOTE: The data set WORK.TINY_RAW has 197599 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 197599 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
-      real time           0.20 seconds
+      real time           0.00 seconds
       cpu time            0.01 seconds
       
 
 
 NOTE: There were 13264 observations read from the data set TINY80.TINY8809.
-NOTE: The data set WORK.BIGG has 13264 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 13264 observations and 40 variables.
+8                                The SAS System      21:31 Monday, June 24, 2013
+
 NOTE: DATA statement used (Total process time):
-      real time           2.76 seconds
-      cpu time            1.60 seconds
+      real time           2.52 seconds
+      cpu time            1.19 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 13264 observations read from the data set WORK.BIGG.
 NOTE: 13264 observations added.
-NOTE: The data set WORK.TINY_RAW has 210863 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 210863 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
-8                                The SAS System    19:35 Thursday, June 20, 2013
-
       cpu time            0.01 seconds
       
 
 
 NOTE: There were 13148 observations read from the data set TINY80.TINY8812.
-NOTE: The data set WORK.BIGG has 13148 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 13148 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           2.98 seconds
-      cpu time            1.44 seconds
+      real time           2.50 seconds
+      cpu time            1.19 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 13148 observations read from the data set WORK.BIGG.
 NOTE: 13148 observations added.
-NOTE: The data set WORK.TINY_RAW has 224011 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 224011 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
-      real time           0.21 seconds
-      cpu time            0.02 seconds
+      real time           0.00 seconds
+      cpu time            0.01 seconds
       
 
 
 NOTE: There were 13027 observations read from the data set TINY80.TINY8903.
-NOTE: The data set WORK.BIGG has 13027 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 13027 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
       real time           2.47 seconds
-      cpu time            1.62 seconds
+      cpu time            1.15 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 13027 observations read from the data set WORK.BIGG.
 NOTE: 13027 observations added.
-NOTE: The data set WORK.TINY_RAW has 237038 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 237038 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
-      real time           0.20 seconds
-      cpu time            0.01 seconds
+      real time           0.00 seconds
+      cpu time            0.02 seconds
       
 
 
 NOTE: There were 12972 observations read from the data set TINY80.TINY8906.
-NOTE: The data set WORK.BIGG has 12972 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 12972 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
       real time           2.46 seconds
-      cpu time            1.57 seconds
+      cpu time            1.15 seconds
+9                                The SAS System      21:31 Monday, June 24, 2013
+
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 12972 observations read from the data set WORK.BIGG.
 NOTE: 12972 observations added.
-NOTE: The data set WORK.TINY_RAW has 250010 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 250010 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
-      cpu time            0.00 seconds
+      cpu time            0.01 seconds
       
-
-9                                The SAS System    19:35 Thursday, June 20, 2013
 
 
 NOTE: There were 12870 observations read from the data set TINY80.TINY8909.
-NOTE: The data set WORK.BIGG has 12870 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 12870 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
       real time           2.44 seconds
-      cpu time            1.31 seconds
+      cpu time            1.15 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 12870 observations read from the data set WORK.BIGG.
 NOTE: 12870 observations added.
-NOTE: The data set WORK.TINY_RAW has 262880 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 262880 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.01 seconds
@@ -492,55 +504,55 @@ NOTE: PROCEDURE APPEND used (Total process time):
 
 
 NOTE: There were 12736 observations read from the data set TINY80.TINY8912.
-NOTE: The data set WORK.BIGG has 12736 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 12736 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
       real time           2.42 seconds
-      cpu time            1.27 seconds
+      cpu time            1.16 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 12736 observations read from the data set WORK.BIGG.
 NOTE: 12736 observations added.
-NOTE: The data set WORK.TINY_RAW has 275616 observations and 33 variables.
-NOTE: PROCEDURE APPEND used (Total process time):
-      real time           0.25 seconds
-      cpu time            0.02 seconds
-      
-
-
-NOTE: There were 12630 observations read from the data set TINY90.TINY9003.
-NOTE: The data set WORK.BIGG has 12630 observations and 33 variables.
-NOTE: DATA statement used (Total process time):
-      real time           2.38 seconds
-      cpu time            1.24 seconds
-      
-
-
-NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
-NOTE: There were 12630 observations read from the data set WORK.BIGG.
-NOTE: 12630 observations added.
-NOTE: The data set WORK.TINY_RAW has 288246 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 275616 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.00 seconds
       
 
 
-NOTE: There were 12538 observations read from the data set TINY90.TINY9006.
-NOTE: The data set WORK.BIGG has 12538 observations and 33 variables.
-10                               The SAS System    19:35 Thursday, June 20, 2013
-
+NOTE: There were 12630 observations read from the data set TINY90.TINY9003.
+NOTE: The data set WORK.BIGG has 12630 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
       real time           2.39 seconds
-      cpu time            1.23 seconds
+      cpu time            1.12 seconds
+      
+
+
+10                               The SAS System      21:31 Monday, June 24, 2013
+
+NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
+NOTE: There were 12630 observations read from the data set WORK.BIGG.
+NOTE: 12630 observations added.
+NOTE: The data set WORK.TINY_RAW has 288246 observations and 40 variables.
+NOTE: PROCEDURE APPEND used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.02 seconds
+      
+
+
+NOTE: There were 12538 observations read from the data set TINY90.TINY9006.
+NOTE: The data set WORK.BIGG has 12538 observations and 40 variables.
+NOTE: DATA statement used (Total process time):
+      real time           2.37 seconds
+      cpu time            1.15 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 12538 observations read from the data set WORK.BIGG.
 NOTE: 12538 observations added.
-NOTE: The data set WORK.TINY_RAW has 300784 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 300784 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.00 seconds
@@ -548,35 +560,37 @@ NOTE: PROCEDURE APPEND used (Total process time):
 
 
 NOTE: There were 12446 observations read from the data set TINY90.TINY9009.
-NOTE: The data set WORK.BIGG has 12446 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 12446 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           3.04 seconds
-      cpu time            1.24 seconds
+      real time           2.36 seconds
+      cpu time            1.11 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 12446 observations read from the data set WORK.BIGG.
 NOTE: 12446 observations added.
-NOTE: The data set WORK.TINY_RAW has 313230 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 313230 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
-      cpu time            0.00 seconds
+      cpu time            0.01 seconds
       
 
 
 NOTE: There were 12376 observations read from the data set TINY90.TINY9012.
-NOTE: The data set WORK.BIGG has 12376 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 12376 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           2.84 seconds
-      cpu time            1.26 seconds
+      real time           2.34 seconds
+      cpu time            1.09 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 12376 observations read from the data set WORK.BIGG.
 NOTE: 12376 observations added.
-NOTE: The data set WORK.TINY_RAW has 325606 observations and 33 variables.
+11                               The SAS System      21:31 Monday, June 24, 2013
+
+NOTE: The data set WORK.TINY_RAW has 325606 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.01 seconds
@@ -584,85 +598,83 @@ NOTE: PROCEDURE APPEND used (Total process time):
 
 
 NOTE: There were 12285 observations read from the data set TINY90.TINY9103.
-NOTE: The data set WORK.BIGG has 12285 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 12285 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           2.44 seconds
-      cpu time            1.14 seconds
-11                               The SAS System    19:35 Thursday, June 20, 2013
-
+      real time           2.22 seconds
+      cpu time            1.05 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 12285 observations read from the data set WORK.BIGG.
 NOTE: 12285 observations added.
-NOTE: The data set WORK.TINY_RAW has 337891 observations and 33 variables.
-NOTE: PROCEDURE APPEND used (Total process time):
-      real time           0.00 seconds
-      cpu time            0.00 seconds
-      
-
-
-NOTE: There were 12193 observations read from the data set TINY90.TINY9106.
-NOTE: The data set WORK.BIGG has 12193 observations and 33 variables.
-NOTE: DATA statement used (Total process time):
-      real time           2.31 seconds
-      cpu time            1.28 seconds
-      
-
-
-NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
-NOTE: There were 12193 observations read from the data set WORK.BIGG.
-NOTE: 12193 observations added.
-NOTE: The data set WORK.TINY_RAW has 350084 observations and 33 variables.
-NOTE: PROCEDURE APPEND used (Total process time):
-      real time           0.00 seconds
-      cpu time            0.00 seconds
-      
-
-
-NOTE: There were 12118 observations read from the data set TINY90.TINY9109.
-NOTE: The data set WORK.BIGG has 12118 observations and 33 variables.
-NOTE: DATA statement used (Total process time):
-      real time           2.24 seconds
-      cpu time            1.15 seconds
-      
-
-
-NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
-NOTE: There were 12118 observations read from the data set WORK.BIGG.
-NOTE: 12118 observations added.
-NOTE: The data set WORK.TINY_RAW has 362202 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 337891 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.01 seconds
       
 
 
-NOTE: There were 11982 observations read from the data set TINY90.TINY9112.
-NOTE: The data set WORK.BIGG has 11982 observations and 33 variables.
+NOTE: There were 12193 observations read from the data set TINY90.TINY9106.
+NOTE: The data set WORK.BIGG has 12193 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           2.24 seconds
-      cpu time            1.08 seconds
+      real time           2.23 seconds
+      cpu time            1.04 seconds
       
 
 
-12                               The SAS System    19:35 Thursday, June 20, 2013
+NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
+NOTE: There were 12193 observations read from the data set WORK.BIGG.
+NOTE: 12193 observations added.
+NOTE: The data set WORK.TINY_RAW has 350084 observations and 40 variables.
+NOTE: PROCEDURE APPEND used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.01 seconds
+      
+
+
+NOTE: There were 12118 observations read from the data set TINY90.TINY9109.
+NOTE: The data set WORK.BIGG has 12118 observations and 40 variables.
+NOTE: DATA statement used (Total process time):
+      real time           2.22 seconds
+      cpu time            1.06 seconds
+      
+
+
+NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
+NOTE: There were 12118 observations read from the data set WORK.BIGG.
+NOTE: 12118 observations added.
+NOTE: The data set WORK.TINY_RAW has 362202 observations and 40 variables.
+NOTE: PROCEDURE APPEND used (Total process time):
+      real time           0.00 seconds
+12                               The SAS System      21:31 Monday, June 24, 2013
+
+      cpu time            0.01 seconds
+      
+
+
+NOTE: There were 11982 observations read from the data set TINY90.TINY9112.
+NOTE: The data set WORK.BIGG has 11982 observations and 40 variables.
+NOTE: DATA statement used (Total process time):
+      real time           2.21 seconds
+      cpu time            1.04 seconds
+      
+
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 11982 observations read from the data set WORK.BIGG.
 NOTE: 11982 observations added.
-NOTE: The data set WORK.TINY_RAW has 374184 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 374184 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
-      cpu time            0.02 seconds
+      cpu time            0.01 seconds
       
 
 
 NOTE: There were 11846 observations read from the data set TINY90.TINY9203.
-NOTE: The data set WORK.BIGG has 11846 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 11846 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           2.11 seconds
+      real time           2.10 seconds
       cpu time            1.05 seconds
       
 
@@ -670,81 +682,81 @@ NOTE: DATA statement used (Total process time):
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 11846 observations read from the data set WORK.BIGG.
 NOTE: 11846 observations added.
-NOTE: The data set WORK.TINY_RAW has 386030 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 386030 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
-      cpu time            0.00 seconds
+      cpu time            0.01 seconds
       
 
 
 NOTE: There were 11725 observations read from the data set TINY90.TINY9206.
-NOTE: The data set WORK.BIGG has 11725 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 11725 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           2.19 seconds
-      cpu time            1.17 seconds
+      real time           2.12 seconds
+      cpu time            1.00 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 11725 observations read from the data set WORK.BIGG.
 NOTE: 11725 observations added.
-NOTE: The data set WORK.TINY_RAW has 397755 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 397755 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.00 seconds
       
 
+13                               The SAS System      21:31 Monday, June 24, 2013
+
 
 NOTE: There were 11627 observations read from the data set TINY90.TINY9209.
-NOTE: The data set WORK.BIGG has 11627 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 11627 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           2.44 seconds
-      cpu time            1.08 seconds
+      real time           2.11 seconds
+      cpu time            1.01 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 11627 observations read from the data set WORK.BIGG.
 NOTE: 11627 observations added.
-13                               The SAS System    19:35 Thursday, June 20, 2013
-
-NOTE: The data set WORK.TINY_RAW has 409382 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 409382 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
-      cpu time            0.01 seconds
+      cpu time            0.00 seconds
       
 
 
 NOTE: There were 11510 observations read from the data set TINY90.TINY9212.
-NOTE: The data set WORK.BIGG has 11510 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 11510 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           2.14 seconds
-      cpu time            1.17 seconds
+      real time           2.11 seconds
+      cpu time            1.03 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 11510 observations read from the data set WORK.BIGG.
 NOTE: 11510 observations added.
-NOTE: The data set WORK.TINY_RAW has 420892 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 420892 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
-      cpu time            0.01 seconds
+      cpu time            0.00 seconds
       
 
 
 NOTE: There were 11371 observations read from the data set TINY90.TINY9303.
-NOTE: The data set WORK.BIGG has 11371 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 11371 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           2.02 seconds
-      cpu time            1.13 seconds
+      real time           1.99 seconds
+      cpu time            0.97 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 11371 observations read from the data set WORK.BIGG.
 NOTE: 11371 observations added.
-NOTE: The data set WORK.TINY_RAW has 432263 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 432263 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.01 seconds
@@ -752,55 +764,55 @@ NOTE: PROCEDURE APPEND used (Total process time):
 
 
 NOTE: There were 11246 observations read from the data set TINY90.TINY9306.
-NOTE: The data set WORK.BIGG has 11246 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 11246 observations and 40 variables.
+14                               The SAS System      21:31 Monday, June 24, 2013
+
 NOTE: DATA statement used (Total process time):
-      real time           2.28 seconds
-      cpu time            1.08 seconds
+      real time           2.02 seconds
+      cpu time            0.99 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 11246 observations read from the data set WORK.BIGG.
 NOTE: 11246 observations added.
-NOTE: The data set WORK.TINY_RAW has 443509 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 443509 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
-14                               The SAS System    19:35 Thursday, June 20, 2013
-
       cpu time            0.00 seconds
       
 
 
 NOTE: There were 11127 observations read from the data set TINY90.TINY9309.
-NOTE: The data set WORK.BIGG has 11127 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 11127 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           2.06 seconds
-      cpu time            1.08 seconds
+      real time           2.00 seconds
+      cpu time            1.01 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 11127 observations read from the data set WORK.BIGG.
 NOTE: 11127 observations added.
-NOTE: The data set WORK.TINY_RAW has 454636 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 454636 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
-      real time           0.30 seconds
+      real time           0.00 seconds
       cpu time            0.01 seconds
       
 
 
 NOTE: There were 11011 observations read from the data set TINY90.TINY9312.
-NOTE: The data set WORK.BIGG has 11011 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 11011 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           2.15 seconds
-      cpu time            0.99 seconds
+      real time           2.00 seconds
+      cpu time            0.95 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 11011 observations read from the data set WORK.BIGG.
 NOTE: 11011 observations added.
-NOTE: The data set WORK.TINY_RAW has 465647 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 465647 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.01 seconds
@@ -808,73 +820,75 @@ NOTE: PROCEDURE APPEND used (Total process time):
 
 
 NOTE: There were 10892 observations read from the data set TINY90.TINY9403.
-NOTE: The data set WORK.BIGG has 10892 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 10892 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           1.59 seconds
-      cpu time            1.14 seconds
+      real time           1.58 seconds
+      cpu time            0.92 seconds
+15                               The SAS System      21:31 Monday, June 24, 2013
+
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 10892 observations read from the data set WORK.BIGG.
 NOTE: 10892 observations added.
-NOTE: The data set WORK.TINY_RAW has 476539 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 476539 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.01 seconds
       
 
-15                               The SAS System    19:35 Thursday, June 20, 2013
-
 
 NOTE: There were 10763 observations read from the data set TINY90.TINY9406.
-NOTE: The data set WORK.BIGG has 10763 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 10763 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
       real time           1.57 seconds
-      cpu time            0.93 seconds
+      cpu time            0.88 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 10763 observations read from the data set WORK.BIGG.
 NOTE: 10763 observations added.
-NOTE: The data set WORK.TINY_RAW has 487302 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 487302 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
-      cpu time            0.01 seconds
+      cpu time            0.00 seconds
       
 
 
 NOTE: There were 10653 observations read from the data set TINY90.TINY9409.
-NOTE: The data set WORK.BIGG has 10653 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 10653 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           1.56 seconds
-      cpu time            1.02 seconds
+      real time           1.55 seconds
+      cpu time            0.86 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 10653 observations read from the data set WORK.BIGG.
 NOTE: 10653 observations added.
-NOTE: The data set WORK.TINY_RAW has 497955 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 497955 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
-      real time           0.08 seconds
-      cpu time            0.01 seconds
+      real time           0.00 seconds
+      cpu time            0.00 seconds
       
 
 
 NOTE: There were 10493 observations read from the data set TINY90.TINY9412.
-NOTE: The data set WORK.BIGG has 10493 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 10493 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           1.56 seconds
-      cpu time            0.92 seconds
+      real time           1.54 seconds
+      cpu time            0.89 seconds
       
 
+
+16                               The SAS System      21:31 Monday, June 24, 2013
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 10493 observations read from the data set WORK.BIGG.
 NOTE: 10493 observations added.
-NOTE: The data set WORK.TINY_RAW has 508448 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 508448 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.01 seconds
@@ -882,19 +896,17 @@ NOTE: PROCEDURE APPEND used (Total process time):
 
 
 NOTE: There were 10286 observations read from the data set TINY90.TINY9503.
-NOTE: The data set WORK.BIGG has 10286 observations and 33 variables.
-16                               The SAS System    19:35 Thursday, June 20, 2013
-
+NOTE: The data set WORK.BIGG has 10286 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           1.99 seconds
-      cpu time            0.85 seconds
+      real time           1.49 seconds
+      cpu time            0.83 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 10286 observations read from the data set WORK.BIGG.
 NOTE: 10286 observations added.
-NOTE: The data set WORK.TINY_RAW has 518734 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 518734 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.01 seconds
@@ -902,17 +914,17 @@ NOTE: PROCEDURE APPEND used (Total process time):
 
 
 NOTE: There were 10217 observations read from the data set TINY90.TINY9506.
-NOTE: The data set WORK.BIGG has 10217 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 10217 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           1.50 seconds
-      cpu time            0.88 seconds
+      real time           1.48 seconds
+      cpu time            0.84 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 10217 observations read from the data set WORK.BIGG.
 NOTE: 10217 observations added.
-NOTE: The data set WORK.TINY_RAW has 528951 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 528951 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.01 seconds
@@ -920,37 +932,37 @@ NOTE: PROCEDURE APPEND used (Total process time):
 
 
 NOTE: There were 10099 observations read from the data set TINY90.TINY9509.
-NOTE: The data set WORK.BIGG has 10099 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 10099 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           1.69 seconds
-      cpu time            0.88 seconds
+      real time           1.46 seconds
+      cpu time            0.81 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 10099 observations read from the data set WORK.BIGG.
 NOTE: 10099 observations added.
-NOTE: The data set WORK.TINY_RAW has 539050 observations and 33 variables.
+17                               The SAS System      21:31 Monday, June 24, 2013
+
+NOTE: The data set WORK.TINY_RAW has 539050 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
-      cpu time            0.00 seconds
+      cpu time            0.01 seconds
       
 
 
 NOTE: There were 9990 observations read from the data set TINY90.TINY9512.
-NOTE: The data set WORK.BIGG has 9990 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 9990 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           2.37 seconds
-      cpu time            0.95 seconds
-17                               The SAS System    19:35 Thursday, June 20, 2013
-
+      real time           1.45 seconds
+      cpu time            0.82 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 9990 observations read from the data set WORK.BIGG.
 NOTE: 9990 observations added.
-NOTE: The data set WORK.TINY_RAW has 549040 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 549040 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.00 seconds
@@ -958,17 +970,17 @@ NOTE: PROCEDURE APPEND used (Total process time):
 
 
 NOTE: There were 9889 observations read from the data set TINY90.TINY9603.
-NOTE: The data set WORK.BIGG has 9889 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 9889 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           1.46 seconds
-      cpu time            0.90 seconds
+      real time           1.43 seconds
+      cpu time            0.79 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 9889 observations read from the data set WORK.BIGG.
 NOTE: 9889 observations added.
-NOTE: The data set WORK.TINY_RAW has 558929 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 558929 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.01 seconds
@@ -976,55 +988,55 @@ NOTE: PROCEDURE APPEND used (Total process time):
 
 
 NOTE: There were 9736 observations read from the data set TINY90.TINY9606.
-NOTE: The data set WORK.BIGG has 9736 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 9736 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           1.56 seconds
-      cpu time            0.89 seconds
+      real time           1.42 seconds
+      cpu time            0.79 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 9736 observations read from the data set WORK.BIGG.
 NOTE: 9736 observations added.
-NOTE: The data set WORK.TINY_RAW has 568665 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 568665 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
+18                               The SAS System      21:31 Monday, June 24, 2013
+
       cpu time            0.00 seconds
       
 
 
 NOTE: There were 9639 observations read from the data set TINY90.TINY9609.
-NOTE: The data set WORK.BIGG has 9639 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 9639 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           1.42 seconds
-      cpu time            0.91 seconds
+      real time           1.40 seconds
+      cpu time            0.78 seconds
       
 
-
-18                               The SAS System    19:35 Thursday, June 20, 2013
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 9639 observations read from the data set WORK.BIGG.
 NOTE: 9639 observations added.
-NOTE: The data set WORK.TINY_RAW has 578304 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 578304 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
-      cpu time            0.02 seconds
+      cpu time            0.01 seconds
       
 
 
 NOTE: There were 9582 observations read from the data set TINY90.TINY9612.
-NOTE: The data set WORK.BIGG has 9582 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 9582 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
       real time           1.39 seconds
-      cpu time            0.78 seconds
+      cpu time            0.80 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 9582 observations read from the data set WORK.BIGG.
 NOTE: 9582 observations added.
-NOTE: The data set WORK.TINY_RAW has 587886 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 587886 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.01 seconds
@@ -1032,7 +1044,7 @@ NOTE: PROCEDURE APPEND used (Total process time):
 
 
 NOTE: There were 9503 observations read from the data set TINY90.TINY9703.
-NOTE: The data set WORK.BIGG has 9503 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 9503 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
       real time           1.38 seconds
       cpu time            0.79 seconds
@@ -1042,45 +1054,45 @@ NOTE: DATA statement used (Total process time):
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 9503 observations read from the data set WORK.BIGG.
 NOTE: 9503 observations added.
-NOTE: The data set WORK.TINY_RAW has 597389 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 597389 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.01 seconds
       
 
+19                               The SAS System      21:31 Monday, June 24, 2013
+
 
 NOTE: There were 9365 observations read from the data set TINY90.TINY9706.
-NOTE: The data set WORK.BIGG has 9365 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 9365 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           1.53 seconds
-      cpu time            0.82 seconds
+      real time           1.37 seconds
+      cpu time            0.77 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 9365 observations read from the data set WORK.BIGG.
 NOTE: 9365 observations added.
-19                               The SAS System    19:35 Thursday, June 20, 2013
-
-NOTE: The data set WORK.TINY_RAW has 606754 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 606754 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
-      real time           0.17 seconds
-      cpu time            0.02 seconds
+      real time           0.00 seconds
+      cpu time            0.00 seconds
       
 
 
 NOTE: There were 9266 observations read from the data set TINY90.TINY9709.
-NOTE: The data set WORK.BIGG has 9266 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 9266 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
       real time           1.35 seconds
-      cpu time            0.76 seconds
+      cpu time            0.78 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 9266 observations read from the data set WORK.BIGG.
 NOTE: 9266 observations added.
-NOTE: The data set WORK.TINY_RAW has 616020 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 616020 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.00 seconds
@@ -1088,7 +1100,7 @@ NOTE: PROCEDURE APPEND used (Total process time):
 
 
 NOTE: There were 9192 observations read from the data set TINY90.TINY9712.
-NOTE: The data set WORK.BIGG has 9192 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 9192 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
       real time           1.34 seconds
       cpu time            0.75 seconds
@@ -1098,101 +1110,101 @@ NOTE: DATA statement used (Total process time):
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 9192 observations read from the data set WORK.BIGG.
 NOTE: 9192 observations added.
-NOTE: The data set WORK.TINY_RAW has 625212 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 625212 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
-      cpu time            0.02 seconds
+      cpu time            0.00 seconds
       
 
 
 NOTE: There were 9074 observations read from the data set TINY90.TINY9803.
-NOTE: The data set WORK.BIGG has 9074 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 9074 observations and 40 variables.
+20                               The SAS System      21:31 Monday, June 24, 2013
+
 NOTE: DATA statement used (Total process time):
       real time           1.32 seconds
-      cpu time            0.78 seconds
+      cpu time            0.75 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 9074 observations read from the data set WORK.BIGG.
 NOTE: 9074 observations added.
-NOTE: The data set WORK.TINY_RAW has 634286 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 634286 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
-20                               The SAS System    19:35 Thursday, June 20, 2013
-
       cpu time            0.00 seconds
       
 
 
 NOTE: There were 9032 observations read from the data set TINY90.TINY9806.
-NOTE: The data set WORK.BIGG has 9032 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 9032 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           1.43 seconds
-      cpu time            0.81 seconds
+      real time           1.31 seconds
+      cpu time            0.74 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 9032 observations read from the data set WORK.BIGG.
 NOTE: 9032 observations added.
-NOTE: The data set WORK.TINY_RAW has 643318 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 643318 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
-      cpu time            0.02 seconds
+      cpu time            0.00 seconds
       
 
 
 NOTE: There were 8958 observations read from the data set TINY90.TINY9809.
-NOTE: The data set WORK.BIGG has 8958 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 8958 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           1.56 seconds
-      cpu time            0.85 seconds
+      real time           1.31 seconds
+      cpu time            0.75 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 8958 observations read from the data set WORK.BIGG.
 NOTE: 8958 observations added.
-NOTE: The data set WORK.TINY_RAW has 652276 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 652276 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
-      real time           0.33 seconds
+      real time           0.00 seconds
       cpu time            0.00 seconds
       
 
 
 NOTE: There were 8835 observations read from the data set TINY90.TINY9812.
-NOTE: The data set WORK.BIGG has 8835 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 8835 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           1.42 seconds
-      cpu time            0.77 seconds
+      real time           1.29 seconds
+      cpu time            0.73 seconds
+21                               The SAS System      21:31 Monday, June 24, 2013
+
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 8835 observations read from the data set WORK.BIGG.
 NOTE: 8835 observations added.
-NOTE: The data set WORK.TINY_RAW has 661111 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 661111 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.00 seconds
       
 
-21                               The SAS System    19:35 Thursday, June 20, 2013
-
 
 NOTE: There were 8773 observations read from the data set TINY90.TINY9903.
-NOTE: The data set WORK.BIGG has 8773 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 8773 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           1.29 seconds
-      cpu time            0.87 seconds
+      real time           1.28 seconds
+      cpu time            0.71 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 8773 observations read from the data set WORK.BIGG.
 NOTE: 8773 observations added.
-NOTE: The data set WORK.TINY_RAW has 669884 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 669884 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.00 seconds
@@ -1200,111 +1212,111 @@ NOTE: PROCEDURE APPEND used (Total process time):
 
 
 NOTE: There were 8725 observations read from the data set TINY90.TINY9906.
-NOTE: The data set WORK.BIGG has 8725 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 8725 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           1.47 seconds
-      cpu time            0.96 seconds
+      real time           1.27 seconds
+      cpu time            0.71 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 8725 observations read from the data set WORK.BIGG.
 NOTE: 8725 observations added.
-NOTE: The data set WORK.TINY_RAW has 678609 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 678609 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
-      cpu time            0.00 seconds
+      cpu time            0.02 seconds
       
 
 
 NOTE: There were 8675 observations read from the data set TINY90.TINY9909.
-NOTE: The data set WORK.BIGG has 8675 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 8675 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           1.36 seconds
-      cpu time            0.87 seconds
+      real time           1.27 seconds
+      cpu time            0.75 seconds
       
 
+
+22                               The SAS System      21:31 Monday, June 24, 2013
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 8675 observations read from the data set WORK.BIGG.
 NOTE: 8675 observations added.
-NOTE: The data set WORK.TINY_RAW has 687284 observations and 33 variables.
-NOTE: PROCEDURE APPEND used (Total process time):
-      real time           0.00 seconds
-      cpu time            0.00 seconds
-      
-
-
-NOTE: There were 8631 observations read from the data set TINY90.TINY9912.
-NOTE: The data set WORK.BIGG has 8631 observations and 33 variables.
-22                               The SAS System    19:35 Thursday, June 20, 2013
-
-NOTE: DATA statement used (Total process time):
-      real time           1.29 seconds
-      cpu time            0.79 seconds
-      
-
-
-NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
-NOTE: There were 8631 observations read from the data set WORK.BIGG.
-NOTE: 8631 observations added.
-NOTE: The data set WORK.TINY_RAW has 695915 observations and 33 variables.
-NOTE: PROCEDURE APPEND used (Total process time):
-      real time           0.00 seconds
-      cpu time            0.00 seconds
-      
-
-
-NOTE: There were 8562 observations read from the data set TINY90.TINY0003.
-NOTE: The data set WORK.BIGG has 8562 observations and 33 variables.
-NOTE: DATA statement used (Total process time):
-      real time           1.31 seconds
-      cpu time            0.89 seconds
-      
-
-
-NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
-NOTE: There were 8562 observations read from the data set WORK.BIGG.
-NOTE: 8562 observations added.
-NOTE: The data set WORK.TINY_RAW has 704477 observations and 33 variables.
-NOTE: PROCEDURE APPEND used (Total process time):
-      real time           0.19 seconds
-      cpu time            0.00 seconds
-      
-
-
-NOTE: There were 8523 observations read from the data set TINY90.TINY0006.
-NOTE: The data set WORK.BIGG has 8523 observations and 33 variables.
-NOTE: DATA statement used (Total process time):
-      real time           1.26 seconds
-      cpu time            0.90 seconds
-      
-
-
-NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
-NOTE: There were 8523 observations read from the data set WORK.BIGG.
-NOTE: 8523 observations added.
-NOTE: The data set WORK.TINY_RAW has 713000 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 687284 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.01 seconds
       
 
 
-NOTE: There were 8425 observations read from the data set TINY90.TINY0009.
-NOTE: The data set WORK.BIGG has 8425 observations and 33 variables.
+NOTE: There were 8631 observations read from the data set TINY90.TINY9912.
+NOTE: The data set WORK.BIGG has 8631 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           1.60 seconds
-      cpu time            0.78 seconds
-23                               The SAS System    19:35 Thursday, June 20, 2013
+      real time           1.26 seconds
+      cpu time            0.72 seconds
+      
 
+
+NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
+NOTE: There were 8631 observations read from the data set WORK.BIGG.
+NOTE: 8631 observations added.
+NOTE: The data set WORK.TINY_RAW has 695915 observations and 40 variables.
+NOTE: PROCEDURE APPEND used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.01 seconds
+      
+
+
+NOTE: There were 8562 observations read from the data set TINY90.TINY0003.
+NOTE: The data set WORK.BIGG has 8562 observations and 40 variables.
+NOTE: DATA statement used (Total process time):
+      real time           1.25 seconds
+      cpu time            0.71 seconds
+      
+
+
+NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
+NOTE: There were 8562 observations read from the data set WORK.BIGG.
+NOTE: 8562 observations added.
+NOTE: The data set WORK.TINY_RAW has 704477 observations and 40 variables.
+NOTE: PROCEDURE APPEND used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.01 seconds
+      
+
+
+NOTE: There were 8523 observations read from the data set TINY90.TINY0006.
+NOTE: The data set WORK.BIGG has 8523 observations and 40 variables.
+NOTE: DATA statement used (Total process time):
+      real time           1.25 seconds
+      cpu time            0.72 seconds
+      
+
+
+NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
+NOTE: There were 8523 observations read from the data set WORK.BIGG.
+NOTE: 8523 observations added.
+23                               The SAS System      21:31 Monday, June 24, 2013
+
+NOTE: The data set WORK.TINY_RAW has 713000 observations and 40 variables.
+NOTE: PROCEDURE APPEND used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: There were 8425 observations read from the data set TINY90.TINY0009.
+NOTE: The data set WORK.BIGG has 8425 observations and 40 variables.
+NOTE: DATA statement used (Total process time):
+      real time           1.23 seconds
+      cpu time            0.71 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 8425 observations read from the data set WORK.BIGG.
 NOTE: 8425 observations added.
-NOTE: The data set WORK.TINY_RAW has 721425 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 721425 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.01 seconds
@@ -1312,73 +1324,73 @@ NOTE: PROCEDURE APPEND used (Total process time):
 
 
 NOTE: There were 8366 observations read from the data set TINY90.TINY0012.
-NOTE: The data set WORK.BIGG has 8366 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 8366 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           1.50 seconds
-      cpu time            0.79 seconds
+      real time           1.23 seconds
+      cpu time            0.68 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 8366 observations read from the data set WORK.BIGG.
 NOTE: 8366 observations added.
-NOTE: The data set WORK.TINY_RAW has 729791 observations and 33 variables.
-NOTE: PROCEDURE APPEND used (Total process time):
-      real time           0.00 seconds
-      cpu time            0.00 seconds
-      
-
-
-NOTE: There were 8288 observations read from the data set TINY90.TINY0103.
-NOTE: The data set WORK.BIGG has 8288 observations and 33 variables.
-NOTE: DATA statement used (Total process time):
-      real time           1.49 seconds
-      cpu time            0.78 seconds
-      
-
-
-NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
-NOTE: There were 8288 observations read from the data set WORK.BIGG.
-NOTE: 8288 observations added.
-NOTE: The data set WORK.TINY_RAW has 738079 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 729791 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.01 seconds
       
 
 
-NOTE: There were 8225 observations read from the data set TINY90.TINY0106.
-NOTE: The data set WORK.BIGG has 8225 observations and 33 variables.
+NOTE: There were 8288 observations read from the data set TINY90.TINY0103.
+NOTE: The data set WORK.BIGG has 8288 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           1.32 seconds
-      cpu time            0.70 seconds
+      real time           1.21 seconds
+      cpu time            0.68 seconds
       
 
 
-24                               The SAS System    19:35 Thursday, June 20, 2013
+NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
+NOTE: There were 8288 observations read from the data set WORK.BIGG.
+NOTE: 8288 observations added.
+NOTE: The data set WORK.TINY_RAW has 738079 observations and 40 variables.
+NOTE: PROCEDURE APPEND used (Total process time):
+      real time           0.00 seconds
+24                               The SAS System      21:31 Monday, June 24, 2013
+
+      cpu time            0.01 seconds
+      
+
+
+NOTE: There were 8225 observations read from the data set TINY90.TINY0106.
+NOTE: The data set WORK.BIGG has 8225 observations and 40 variables.
+NOTE: DATA statement used (Total process time):
+      real time           1.16 seconds
+      cpu time            0.63 seconds
+      
+
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 8225 observations read from the data set WORK.BIGG.
 NOTE: 8225 observations added.
-NOTE: The data set WORK.TINY_RAW has 746304 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 746304 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
-      cpu time            0.00 seconds
+      cpu time            0.01 seconds
       
 
 
 NOTE: There were 8202 observations read from the data set TINY90.TINY0109.
-NOTE: The data set WORK.BIGG has 8202 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 8202 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           1.18 seconds
-      cpu time            0.83 seconds
+      real time           1.16 seconds
+      cpu time            0.62 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 8202 observations read from the data set WORK.BIGG.
 NOTE: 8202 observations added.
-NOTE: The data set WORK.TINY_RAW has 754506 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 754506 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.00 seconds
@@ -1386,55 +1398,55 @@ NOTE: PROCEDURE APPEND used (Total process time):
 
 
 NOTE: There were 8139 observations read from the data set TINY90.TINY0112.
-NOTE: The data set WORK.BIGG has 8139 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 8139 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           1.17 seconds
-      cpu time            0.81 seconds
+      real time           1.16 seconds
+      cpu time            0.61 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 8139 observations read from the data set WORK.BIGG.
 NOTE: 8139 observations added.
-NOTE: The data set WORK.TINY_RAW has 762645 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 762645 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
-      cpu time            0.00 seconds
+      cpu time            0.02 seconds
       
+
+25                               The SAS System      21:31 Monday, June 24, 2013
 
 
 NOTE: There were 8057 observations read from the data set TINY90.TINY0203.
-NOTE: The data set WORK.BIGG has 8057 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 8057 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           1.10 seconds
-      cpu time            0.77 seconds
+      real time           1.09 seconds
+      cpu time            0.60 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 8057 observations read from the data set WORK.BIGG.
 NOTE: 8057 observations added.
-25                               The SAS System    19:35 Thursday, June 20, 2013
-
-NOTE: The data set WORK.TINY_RAW has 770702 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 770702 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
-      cpu time            0.01 seconds
+      cpu time            0.00 seconds
       
 
 
 NOTE: There were 8016 observations read from the data set TINY90.TINY0206.
-NOTE: The data set WORK.BIGG has 8016 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 8016 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           1.87 seconds
-      cpu time            0.78 seconds
+      real time           1.09 seconds
+      cpu time            0.60 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 8016 observations read from the data set WORK.BIGG.
 NOTE: 8016 observations added.
-NOTE: The data set WORK.TINY_RAW has 778718 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 778718 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.00 seconds
@@ -1442,73 +1454,73 @@ NOTE: PROCEDURE APPEND used (Total process time):
 
 
 NOTE: There were 7982 observations read from the data set TINY90.TINY0209.
-NOTE: The data set WORK.BIGG has 7982 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 7982 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           1.10 seconds
-      cpu time            0.77 seconds
+      real time           1.09 seconds
+      cpu time            0.61 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 7982 observations read from the data set WORK.BIGG.
 NOTE: 7982 observations added.
-NOTE: The data set WORK.TINY_RAW has 786700 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 786700 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
-      cpu time            0.00 seconds
+      cpu time            0.02 seconds
       
 
 
 NOTE: There were 7939 observations read from the data set TINY90.TINY0212.
-NOTE: The data set WORK.BIGG has 7939 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 7939 observations and 40 variables.
+26                               The SAS System      21:31 Monday, June 24, 2013
+
 NOTE: DATA statement used (Total process time):
-      real time           1.11 seconds
-      cpu time            0.76 seconds
+      real time           1.09 seconds
+      cpu time            0.60 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 7939 observations read from the data set WORK.BIGG.
 NOTE: 7939 observations added.
-NOTE: The data set WORK.TINY_RAW has 794639 observations and 33 variables.
-NOTE: PROCEDURE APPEND used (Total process time):
-      real time           0.00 seconds
-26                               The SAS System    19:35 Thursday, June 20, 2013
-
-      cpu time            0.00 seconds
-      
-
-
-NOTE: There were 7914 observations read from the data set TINY90.TINY0303.
-NOTE: The data set WORK.BIGG has 7914 observations and 33 variables.
-NOTE: DATA statement used (Total process time):
-      real time           1.12 seconds
-      cpu time            0.76 seconds
-      
-
-
-NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
-NOTE: There were 7914 observations read from the data set WORK.BIGG.
-NOTE: 7914 observations added.
-NOTE: The data set WORK.TINY_RAW has 802553 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 794639 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.01 seconds
       
 
 
-NOTE: There were 7886 observations read from the data set TINY90.TINY0306.
-NOTE: The data set WORK.BIGG has 7886 observations and 33 variables.
+NOTE: There were 7914 observations read from the data set TINY90.TINY0303.
+NOTE: The data set WORK.BIGG has 7914 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           1.09 seconds
-      cpu time            0.71 seconds
+      real time           1.07 seconds
+      cpu time            0.60 seconds
+      
+
+
+NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
+NOTE: There were 7914 observations read from the data set WORK.BIGG.
+NOTE: 7914 observations added.
+NOTE: The data set WORK.TINY_RAW has 802553 observations and 40 variables.
+NOTE: PROCEDURE APPEND used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: There were 7886 observations read from the data set TINY90.TINY0306.
+NOTE: The data set WORK.BIGG has 7886 observations and 40 variables.
+NOTE: DATA statement used (Total process time):
+      real time           1.07 seconds
+      cpu time            0.61 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 7886 observations read from the data set WORK.BIGG.
 NOTE: 7886 observations added.
-NOTE: The data set WORK.TINY_RAW has 810439 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 810439 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.01 seconds
@@ -1516,47 +1528,47 @@ NOTE: PROCEDURE APPEND used (Total process time):
 
 
 NOTE: There were 7867 observations read from the data set TINY90.TINY0309.
-NOTE: The data set WORK.BIGG has 7867 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 7867 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           1.29 seconds
-      cpu time            0.78 seconds
+      real time           1.07 seconds
+      cpu time            0.59 seconds
+27                               The SAS System      21:31 Monday, June 24, 2013
+
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 7867 observations read from the data set WORK.BIGG.
 NOTE: 7867 observations added.
-NOTE: The data set WORK.TINY_RAW has 818306 observations and 33 variables.
-NOTE: PROCEDURE APPEND used (Total process time):
-      real time           0.00 seconds
-      cpu time            0.01 seconds
-      
-
-27                               The SAS System    19:35 Thursday, June 20, 2013
-
-
-NOTE: There were 7826 observations read from the data set TINY90.TINY0312.
-NOTE: The data set WORK.BIGG has 7826 observations and 33 variables.
-NOTE: DATA statement used (Total process time):
-      real time           1.32 seconds
-      cpu time            0.65 seconds
-      
-
-
-NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
-NOTE: There were 7826 observations read from the data set WORK.BIGG.
-NOTE: 7826 observations added.
-NOTE: The data set WORK.TINY_RAW has 826132 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 818306 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.00 seconds
       
 
 
-NOTE: There were 7764 observations read from the data set TINY90.TINY0403.
-NOTE: The data set WORK.BIGG has 7764 observations and 33 variables.
+NOTE: There were 7826 observations read from the data set TINY90.TINY0312.
+NOTE: The data set WORK.BIGG has 7826 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           1.15 seconds
+      real time           1.07 seconds
+      cpu time            0.60 seconds
+      
+
+
+NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
+NOTE: There were 7826 observations read from the data set WORK.BIGG.
+NOTE: 7826 observations added.
+NOTE: The data set WORK.TINY_RAW has 826132 observations and 40 variables.
+NOTE: PROCEDURE APPEND used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.01 seconds
+      
+
+
+NOTE: There were 7764 observations read from the data set TINY90.TINY0403.
+NOTE: The data set WORK.BIGG has 7764 observations and 40 variables.
+NOTE: DATA statement used (Total process time):
+      real time           1.05 seconds
       cpu time            0.64 seconds
       
 
@@ -1564,25 +1576,27 @@ NOTE: DATA statement used (Total process time):
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 7764 observations read from the data set WORK.BIGG.
 NOTE: 7764 observations added.
-NOTE: The data set WORK.TINY_RAW has 833896 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 833896 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
-      cpu time            0.00 seconds
+      cpu time            0.01 seconds
       
 
 
 NOTE: There were 7743 observations read from the data set TINY90.TINY0406.
-NOTE: The data set WORK.BIGG has 7743 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 7743 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           1.07 seconds
-      cpu time            0.72 seconds
+      real time           1.05 seconds
+      cpu time            0.60 seconds
       
 
+
+28                               The SAS System      21:31 Monday, June 24, 2013
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 7743 observations read from the data set WORK.BIGG.
 NOTE: 7743 observations added.
-NOTE: The data set WORK.TINY_RAW has 841639 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 841639 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.00 seconds
@@ -1590,131 +1604,129 @@ NOTE: PROCEDURE APPEND used (Total process time):
 
 
 NOTE: There were 7706 observations read from the data set TINY90.TINY0409.
-NOTE: The data set WORK.BIGG has 7706 observations and 33 variables.
-28                               The SAS System    19:35 Thursday, June 20, 2013
-
+NOTE: The data set WORK.BIGG has 7706 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           1.53 seconds
-      cpu time            0.67 seconds
+      real time           1.05 seconds
+      cpu time            0.59 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 7706 observations read from the data set WORK.BIGG.
 NOTE: 7706 observations added.
-NOTE: The data set WORK.TINY_RAW has 849345 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 849345 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
-      cpu time            0.01 seconds
+      cpu time            0.00 seconds
       
 
 
 NOTE: There were 7676 observations read from the data set TINY90.TINY0412.
-NOTE: The data set WORK.BIGG has 7676 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 7676 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           1.08 seconds
-      cpu time            0.75 seconds
+      real time           1.05 seconds
+      cpu time            0.59 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 7676 observations read from the data set WORK.BIGG.
 NOTE: 7676 observations added.
-NOTE: The data set WORK.TINY_RAW has 857021 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 857021 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
-      cpu time            0.01 seconds
+      cpu time            0.00 seconds
       
 
 
 NOTE: There were 7642 observations read from the data set TINY90.TINY0503.
-NOTE: The data set WORK.BIGG has 7642 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 7642 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           1.04 seconds
-      cpu time            0.64 seconds
+      real time           1.02 seconds
+      cpu time            0.58 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 7642 observations read from the data set WORK.BIGG.
 NOTE: 7642 observations added.
-NOTE: The data set WORK.TINY_RAW has 864663 observations and 33 variables.
+29                               The SAS System      21:31 Monday, June 24, 2013
+
+NOTE: The data set WORK.TINY_RAW has 864663 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
-      cpu time            0.01 seconds
+      cpu time            0.00 seconds
       
 
 
 NOTE: There were 7590 observations read from the data set TINY90.TINY0506.
-NOTE: The data set WORK.BIGG has 7590 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 7590 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           1.31 seconds
-      cpu time            0.59 seconds
-29                               The SAS System    19:35 Thursday, June 20, 2013
-
+      real time           1.03 seconds
+      cpu time            0.56 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 7590 observations read from the data set WORK.BIGG.
 NOTE: 7590 observations added.
-NOTE: The data set WORK.TINY_RAW has 872253 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 872253 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
-      cpu time            0.00 seconds
+      cpu time            0.02 seconds
       
 
 
 NOTE: There were 7582 observations read from the data set TINY90.TINY0509.
-NOTE: The data set WORK.BIGG has 7582 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 7582 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           1.18 seconds
-      cpu time            0.63 seconds
+      real time           1.03 seconds
+      cpu time            0.57 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 7582 observations read from the data set WORK.BIGG.
 NOTE: 7582 observations added.
-NOTE: The data set WORK.TINY_RAW has 879835 observations and 33 variables.
-NOTE: PROCEDURE APPEND used (Total process time):
-      real time           0.00 seconds
-      cpu time            0.01 seconds
-      
-
-
-NOTE: There were 7566 observations read from the data set TINY90.TINY0512.
-NOTE: The data set WORK.BIGG has 7566 observations and 33 variables.
-NOTE: DATA statement used (Total process time):
-      real time           1.49 seconds
-      cpu time            0.67 seconds
-      
-
-
-NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
-NOTE: There were 7566 observations read from the data set WORK.BIGG.
-NOTE: 7566 observations added.
-NOTE: The data set WORK.TINY_RAW has 887401 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 879835 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.00 seconds
       
 
 
-NOTE: There were 7528 observations read from the data set TINY90.TINY0603.
-NOTE: The data set WORK.BIGG has 7528 observations and 33 variables.
+NOTE: There were 7566 observations read from the data set TINY90.TINY0512.
+NOTE: The data set WORK.BIGG has 7566 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           1.34 seconds
-      cpu time            0.64 seconds
+      real time           1.03 seconds
+      cpu time            0.57 seconds
       
 
 
-30                               The SAS System    19:35 Thursday, June 20, 2013
+NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
+NOTE: There were 7566 observations read from the data set WORK.BIGG.
+NOTE: 7566 observations added.
+NOTE: The data set WORK.TINY_RAW has 887401 observations and 40 variables.
+NOTE: PROCEDURE APPEND used (Total process time):
+      real time           0.00 seconds
+30                               The SAS System      21:31 Monday, June 24, 2013
+
+      cpu time            0.01 seconds
+      
+
+
+NOTE: There were 7528 observations read from the data set TINY90.TINY0603.
+NOTE: The data set WORK.BIGG has 7528 observations and 40 variables.
+NOTE: DATA statement used (Total process time):
+      real time           1.02 seconds
+      cpu time            0.55 seconds
+      
+
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 7528 observations read from the data set WORK.BIGG.
 NOTE: 7528 observations added.
-NOTE: The data set WORK.TINY_RAW has 894929 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 894929 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.00 seconds
@@ -1722,17 +1734,17 @@ NOTE: PROCEDURE APPEND used (Total process time):
 
 
 NOTE: There were 7516 observations read from the data set TINY90.TINY0606.
-NOTE: The data set WORK.BIGG has 7516 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 7516 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           1.04 seconds
-      cpu time            0.61 seconds
+      real time           1.03 seconds
+      cpu time            0.57 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 7516 observations read from the data set WORK.BIGG.
 NOTE: 7516 observations added.
-NOTE: The data set WORK.TINY_RAW has 902445 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 902445 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.00 seconds
@@ -1740,37 +1752,37 @@ NOTE: PROCEDURE APPEND used (Total process time):
 
 
 NOTE: There were 7492 observations read from the data set TINY90.TINY0609.
-NOTE: The data set WORK.BIGG has 7492 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 7492 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           1.18 seconds
-      cpu time            0.64 seconds
+      real time           1.00 seconds
+      cpu time            0.56 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 7492 observations read from the data set WORK.BIGG.
 NOTE: 7492 observations added.
-NOTE: The data set WORK.TINY_RAW has 909937 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 909937 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.01 seconds
       
 
+31                               The SAS System      21:31 Monday, June 24, 2013
+
 
 NOTE: There were 7440 observations read from the data set TINY90.TINY0612.
-NOTE: The data set WORK.BIGG has 7440 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 7440 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           1.02 seconds
-      cpu time            0.62 seconds
+      real time           1.00 seconds
+      cpu time            0.54 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 7440 observations read from the data set WORK.BIGG.
 NOTE: 7440 observations added.
-31                               The SAS System    19:35 Thursday, June 20, 2013
-
-NOTE: The data set WORK.TINY_RAW has 917377 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 917377 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.01 seconds
@@ -1778,17 +1790,17 @@ NOTE: PROCEDURE APPEND used (Total process time):
 
 
 NOTE: There were 7413 observations read from the data set TINY90.TINY0703.
-NOTE: The data set WORK.BIGG has 7413 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 7413 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           0.99 seconds
-      cpu time            0.60 seconds
+      real time           0.92 seconds
+      cpu time            0.56 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 7413 observations read from the data set WORK.BIGG.
 NOTE: 7413 observations added.
-NOTE: The data set WORK.TINY_RAW has 924790 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 924790 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.00 seconds
@@ -1796,17 +1808,17 @@ NOTE: PROCEDURE APPEND used (Total process time):
 
 
 NOTE: There were 7385 observations read from the data set TINY90.TINY0706.
-NOTE: The data set WORK.BIGG has 7385 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 7385 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           0.94 seconds
-      cpu time            0.62 seconds
+      real time           0.92 seconds
+      cpu time            0.54 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 7385 observations read from the data set WORK.BIGG.
 NOTE: 7385 observations added.
-NOTE: The data set WORK.TINY_RAW has 932175 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 932175 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.00 seconds
@@ -1814,37 +1826,37 @@ NOTE: PROCEDURE APPEND used (Total process time):
 
 
 NOTE: There were 7340 observations read from the data set TINY90.TINY0709.
-NOTE: The data set WORK.BIGG has 7340 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 7340 observations and 40 variables.
+32                               The SAS System      21:31 Monday, June 24, 2013
+
 NOTE: DATA statement used (Total process time):
-      real time           0.94 seconds
-      cpu time            0.61 seconds
+      real time           0.92 seconds
+      cpu time            0.54 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 7340 observations read from the data set WORK.BIGG.
 NOTE: 7340 observations added.
-NOTE: The data set WORK.TINY_RAW has 939515 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 939515 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
-      real time           0.02 seconds
-32                               The SAS System    19:35 Thursday, June 20, 2013
-
-      cpu time            0.01 seconds
+      real time           0.00 seconds
+      cpu time            0.00 seconds
       
 
 
 NOTE: There were 7317 observations read from the data set TINY90.TINY0712.
-NOTE: The data set WORK.BIGG has 7317 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 7317 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           0.97 seconds
-      cpu time            0.60 seconds
+      real time           0.93 seconds
+      cpu time            0.54 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 7317 observations read from the data set WORK.BIGG.
 NOTE: 7317 observations added.
-NOTE: The data set WORK.TINY_RAW has 946832 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 946832 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.00 seconds
@@ -1852,17 +1864,17 @@ NOTE: PROCEDURE APPEND used (Total process time):
 
 
 NOTE: There were 7270 observations read from the data set TINY90.TINY0803.
-NOTE: The data set WORK.BIGG has 7270 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 7270 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           0.84 seconds
-      cpu time            0.54 seconds
+      real time           0.83 seconds
+      cpu time            0.49 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 7270 observations read from the data set WORK.BIGG.
 NOTE: 7270 observations added.
-NOTE: The data set WORK.TINY_RAW has 954102 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 954102 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.00 seconds
@@ -1870,37 +1882,37 @@ NOTE: PROCEDURE APPEND used (Total process time):
 
 
 NOTE: There were 7230 observations read from the data set TINY90.TINY0806.
-NOTE: The data set WORK.BIGG has 7230 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 7230 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           0.84 seconds
-      cpu time            0.55 seconds
+      real time           0.83 seconds
+      cpu time            0.50 seconds
+33                               The SAS System      21:31 Monday, June 24, 2013
+
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 7230 observations read from the data set WORK.BIGG.
 NOTE: 7230 observations added.
-NOTE: The data set WORK.TINY_RAW has 961332 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 961332 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
-      cpu time            0.01 seconds
+      cpu time            0.00 seconds
       
-
-33                               The SAS System    19:35 Thursday, June 20, 2013
 
 
 NOTE: There were 7172 observations read from the data set TINY90.TINY0809.
-NOTE: The data set WORK.BIGG has 7172 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 7172 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           0.84 seconds
-      cpu time            0.54 seconds
+      real time           0.83 seconds
+      cpu time            0.48 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 7172 observations read from the data set WORK.BIGG.
 NOTE: 7172 observations added.
-NOTE: The data set WORK.TINY_RAW has 968504 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 968504 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.01 seconds
@@ -1908,55 +1920,55 @@ NOTE: PROCEDURE APPEND used (Total process time):
 
 
 NOTE: There were 7115 observations read from the data set TINY90.TINY0812.
-NOTE: The data set WORK.BIGG has 7115 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 7115 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           0.84 seconds
-      cpu time            0.53 seconds
+      real time           0.82 seconds
+      cpu time            0.49 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 7115 observations read from the data set WORK.BIGG.
 NOTE: 7115 observations added.
-NOTE: The data set WORK.TINY_RAW has 975619 observations and 33 variables.
-NOTE: PROCEDURE APPEND used (Total process time):
-      real time           0.00 seconds
-      cpu time            0.00 seconds
-      
-
-
-NOTE: There were 7059 observations read from the data set TINY90.TINY0903.
-NOTE: The data set WORK.BIGG has 7059 observations and 33 variables.
-NOTE: DATA statement used (Total process time):
-      real time           0.82 seconds
-      cpu time            0.50 seconds
-      
-
-
-NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
-NOTE: There were 7059 observations read from the data set WORK.BIGG.
-NOTE: 7059 observations added.
-NOTE: The data set WORK.TINY_RAW has 982678 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 975619 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.01 seconds
       
 
 
-NOTE: There were 7016 observations read from the data set TINY90.TINY0906.
-NOTE: The data set WORK.BIGG has 7016 observations and 33 variables.
-34                               The SAS System    19:35 Thursday, June 20, 2013
-
+NOTE: There were 7059 observations read from the data set TINY90.TINY0903.
+NOTE: The data set WORK.BIGG has 7059 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           0.93 seconds
-      cpu time            0.49 seconds
+      real time           0.81 seconds
+      cpu time            0.46 seconds
+      
+
+
+34                               The SAS System      21:31 Monday, June 24, 2013
+
+NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
+NOTE: There were 7059 observations read from the data set WORK.BIGG.
+NOTE: 7059 observations added.
+NOTE: The data set WORK.TINY_RAW has 982678 observations and 40 variables.
+NOTE: PROCEDURE APPEND used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+
+NOTE: There were 7016 observations read from the data set TINY90.TINY0906.
+NOTE: The data set WORK.BIGG has 7016 observations and 40 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.71 seconds
+      cpu time            0.45 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 7016 observations read from the data set WORK.BIGG.
 NOTE: 7016 observations added.
-NOTE: The data set WORK.TINY_RAW has 989694 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 989694 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.00 seconds
@@ -1964,17 +1976,17 @@ NOTE: PROCEDURE APPEND used (Total process time):
 
 
 NOTE: There were 6935 observations read from the data set TINY90.TINY0909.
-NOTE: The data set WORK.BIGG has 6935 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 6935 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           0.77 seconds
-      cpu time            0.47 seconds
+      real time           0.70 seconds
+      cpu time            0.44 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 6935 observations read from the data set WORK.BIGG.
 NOTE: 6935 observations added.
-NOTE: The data set WORK.TINY_RAW has 996629 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 996629 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.01 seconds
@@ -1982,17 +1994,19 @@ NOTE: PROCEDURE APPEND used (Total process time):
 
 
 NOTE: There were 6862 observations read from the data set TINY90.TINY0912.
-NOTE: The data set WORK.BIGG has 6862 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 6862 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           0.75 seconds
-      cpu time            0.45 seconds
+      real time           0.70 seconds
+      cpu time            0.42 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 6862 observations read from the data set WORK.BIGG.
 NOTE: 6862 observations added.
-NOTE: The data set WORK.TINY_RAW has 1003491 observations and 33 variables.
+35                               The SAS System      21:31 Monday, June 24, 2013
+
+NOTE: The data set WORK.TINY_RAW has 1003491 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.01 seconds
@@ -2000,121 +2014,121 @@ NOTE: PROCEDURE APPEND used (Total process time):
 
 
 NOTE: There were 6796 observations read from the data set TINY90.TINY1003.
-NOTE: The data set WORK.BIGG has 6796 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 6796 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           0.68 seconds
-      cpu time            0.47 seconds
-35                               The SAS System    19:35 Thursday, June 20, 2013
-
+      real time           0.69 seconds
+      cpu time            0.44 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 6796 observations read from the data set WORK.BIGG.
 NOTE: 6796 observations added.
-NOTE: The data set WORK.TINY_RAW has 1010287 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 1010287 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
-      cpu time            0.01 seconds
+      cpu time            0.00 seconds
       
 
 
 NOTE: There were 6704 observations read from the data set TINY90.TINY1006.
-NOTE: The data set WORK.BIGG has 6704 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 6704 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           0.88 seconds
-      cpu time            0.47 seconds
+      real time           0.68 seconds
+      cpu time            0.42 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 6704 observations read from the data set WORK.BIGG.
 NOTE: 6704 observations added.
-NOTE: The data set WORK.TINY_RAW has 1016991 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 1016991 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
-      cpu time            0.01 seconds
+      cpu time            0.02 seconds
       
 
 
 NOTE: There were 6649 observations read from the data set TINY90.TINY1009.
-NOTE: The data set WORK.BIGG has 6649 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 6649 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           0.67 seconds
-      cpu time            0.46 seconds
+      real time           0.68 seconds
+      cpu time            0.43 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 6649 observations read from the data set WORK.BIGG.
 NOTE: 6649 observations added.
-NOTE: The data set WORK.TINY_RAW has 1023640 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 1023640 observations and 40 variables.
+NOTE: PROCEDURE APPEND used (Total process time):
+      real time           0.00 seconds
+36                               The SAS System      21:31 Monday, June 24, 2013
+
+      cpu time            0.00 seconds
+      
+
+
+NOTE: There were 6556 observations read from the data set TINY90.TINY1012.
+NOTE: The data set WORK.BIGG has 6556 observations and 40 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.67 seconds
+      cpu time            0.42 seconds
+      
+
+
+NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
+NOTE: There were 6556 observations read from the data set WORK.BIGG.
+NOTE: 6556 observations added.
+NOTE: The data set WORK.TINY_RAW has 1030196 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.01 seconds
       
 
 
-NOTE: There were 6556 observations read from the data set TINY90.TINY1012.
-NOTE: The data set WORK.BIGG has 6556 observations and 33 variables.
-NOTE: DATA statement used (Total process time):
-      real time           0.85 seconds
-      cpu time            0.46 seconds
-      
-
-
-36                               The SAS System    19:35 Thursday, June 20, 2013
-
-NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
-NOTE: There were 6556 observations read from the data set WORK.BIGG.
-NOTE: 6556 observations added.
-NOTE: The data set WORK.TINY_RAW has 1030196 observations and 33 variables.
-NOTE: PROCEDURE APPEND used (Total process time):
-      real time           0.00 seconds
-      cpu time            0.00 seconds
-      
-
-
 NOTE: There were 6480 observations read from the data set TINY90.TINY1103.
-NOTE: The data set WORK.BIGG has 6480 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 6480 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           0.73 seconds
-      cpu time            0.43 seconds
+      real time           0.63 seconds
+      cpu time            0.39 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 6480 observations read from the data set WORK.BIGG.
 NOTE: 6480 observations added.
-NOTE: The data set WORK.TINY_RAW has 1036676 observations and 33 variables.
-NOTE: PROCEDURE APPEND used (Total process time):
-      real time           0.00 seconds
-      cpu time            0.00 seconds
-      
-
-
-NOTE: There were 6438 observations read from the data set TINY90.TINY1106.
-NOTE: The data set WORK.BIGG has 6438 observations and 33 variables.
-NOTE: DATA statement used (Total process time):
-      real time           0.64 seconds
-      cpu time            0.42 seconds
-      
-
-
-NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
-NOTE: There were 6438 observations read from the data set WORK.BIGG.
-NOTE: 6438 observations added.
-NOTE: The data set WORK.TINY_RAW has 1043114 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 1036676 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.01 seconds
       
 
 
-NOTE: There were 6383 observations read from the data set TINY90.TINY1109.
-NOTE: The data set WORK.BIGG has 6383 observations and 33 variables.
+NOTE: There were 6438 observations read from the data set TINY90.TINY1106.
+NOTE: The data set WORK.BIGG has 6438 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           0.65 seconds
+      real time           0.63 seconds
+      cpu time            0.40 seconds
+      
+
+
+NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
+NOTE: There were 6438 observations read from the data set WORK.BIGG.
+NOTE: 6438 observations added.
+NOTE: The data set WORK.TINY_RAW has 1043114 observations and 40 variables.
+NOTE: PROCEDURE APPEND used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+37                               The SAS System      21:31 Monday, June 24, 2013
+
+
+NOTE: There were 6383 observations read from the data set TINY90.TINY1109.
+NOTE: The data set WORK.BIGG has 6383 observations and 40 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.63 seconds
       cpu time            0.41 seconds
       
 
@@ -2122,9 +2136,7 @@ NOTE: DATA statement used (Total process time):
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 6383 observations read from the data set WORK.BIGG.
 NOTE: 6383 observations added.
-37                               The SAS System    19:35 Thursday, June 20, 2013
-
-NOTE: The data set WORK.TINY_RAW has 1049497 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 1049497 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.01 seconds
@@ -2132,17 +2144,17 @@ NOTE: PROCEDURE APPEND used (Total process time):
 
 
 NOTE: There were 6322 observations read from the data set TINY90.TINY1112.
-NOTE: The data set WORK.BIGG has 6322 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 6322 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           0.84 seconds
-      cpu time            0.44 seconds
+      real time           0.62 seconds
+      cpu time            0.40 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 6322 observations read from the data set WORK.BIGG.
 NOTE: 6322 observations added.
-NOTE: The data set WORK.TINY_RAW has 1055819 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 1055819 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.00 seconds
@@ -2150,55 +2162,55 @@ NOTE: PROCEDURE APPEND used (Total process time):
 
 
 NOTE: There were 6288 observations read from the data set TINY90.TINY1203.
-NOTE: The data set WORK.BIGG has 6288 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 6288 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           0.74 seconds
-      cpu time            0.41 seconds
+      real time           0.61 seconds
+      cpu time            0.38 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 6288 observations read from the data set WORK.BIGG.
 NOTE: 6288 observations added.
-NOTE: The data set WORK.TINY_RAW has 1062107 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 1062107 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
-      cpu time            0.01 seconds
+      cpu time            0.00 seconds
       
 
 
 NOTE: There were 6243 observations read from the data set TINY90.TINY1206.
-NOTE: The data set WORK.BIGG has 6243 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 6243 observations and 40 variables.
+38                               The SAS System      21:31 Monday, June 24, 2013
+
 NOTE: DATA statement used (Total process time):
-      real time           0.72 seconds
-      cpu time            0.43 seconds
+      real time           0.61 seconds
+      cpu time            0.37 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 6243 observations read from the data set WORK.BIGG.
 NOTE: 6243 observations added.
-NOTE: The data set WORK.TINY_RAW has 1068350 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 1068350 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
-38                               The SAS System    19:35 Thursday, June 20, 2013
-
-      cpu time            0.00 seconds
+      cpu time            0.01 seconds
       
 
 
 NOTE: There were 6190 observations read from the data set TINY90.TINY1209.
-NOTE: The data set WORK.BIGG has 6190 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 6190 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           0.76 seconds
-      cpu time            0.42 seconds
+      real time           0.61 seconds
+      cpu time            0.39 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 6190 observations read from the data set WORK.BIGG.
 NOTE: 6190 observations added.
-NOTE: The data set WORK.TINY_RAW has 1074540 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 1074540 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.00 seconds
@@ -2206,409 +2218,518 @@ NOTE: PROCEDURE APPEND used (Total process time):
 
 
 NOTE: There were 6115 observations read from the data set TINY90.TINY1212.
-NOTE: The data set WORK.BIGG has 6115 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 6115 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           0.64 seconds
-      cpu time            0.43 seconds
+      real time           0.60 seconds
+      cpu time            0.37 seconds
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 6115 observations read from the data set WORK.BIGG.
 NOTE: 6115 observations added.
-NOTE: The data set WORK.TINY_RAW has 1080655 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 1080655 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
-      cpu time            0.00 seconds
+      cpu time            0.02 seconds
       
 
 
 NOTE: There were 6060 observations read from the data set TINY90.TINY1303.
-NOTE: The data set WORK.BIGG has 6060 observations and 33 variables.
+NOTE: The data set WORK.BIGG has 6060 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           0.61 seconds
-      cpu time            0.40 seconds
+      real time           0.55 seconds
+      cpu time            0.35 seconds
+39                               The SAS System      21:31 Monday, June 24, 2013
+
       
 
 
 NOTE: Appending WORK.BIGG to WORK.TINY_RAW.
 NOTE: There were 6060 observations read from the data set WORK.BIGG.
 NOTE: 6060 observations added.
-NOTE: The data set WORK.TINY_RAW has 1086715 observations and 33 variables.
+NOTE: The data set WORK.TINY_RAW has 1086715 observations and 40 variables.
 NOTE: PROCEDURE APPEND used (Total process time):
       real time           0.00 seconds
       cpu time            0.00 seconds
       
 
-39                               The SAS System    19:35 Thursday, June 20, 2013
-
-6599       data tiny; set tiny_raw; if rssd9002=. then rssd9002=entity; run;
+6603       data tiny; set tiny_raw; if rssd9002=. then rssd9002=entity; run;
 
 NOTE: There were 1086715 observations read from the data set WORK.TINY_RAW.
-NOTE: The data set WORK.TINY has 1086715 observations and 33 variables.
+NOTE: The data set WORK.TINY has 1086715 observations and 40 variables.
 NOTE: DATA statement used (Total process time):
-      real time           4.29 seconds
-      cpu time            0.87 seconds
+      real time           0.65 seconds
+      cpu time            0.66 seconds
       
 
-6600       
-6601       *keep only domestic banks;
-6602       data attr; set nic.attr(keep=id_rssd d_dt_start d_dt_end
-6602     ! domestic_ind); run;
+6603     !                                                                  
+6604       
+6605       *keep only domestic banks;
+6606       data attr; set nic.attr(keep=id_rssd d_dt_start d_dt_end
+6606     ! domestic_ind); run;
 
-NOTE: There were 822513 observations read from the data set NIC.ATTR.
-NOTE: The data set WORK.ATTR has 822513 observations and 4 variables.
+NOTE: There were 822864 observations read from the data set NIC.ATTR.
+NOTE: The data set WORK.ATTR has 822864 observations and 4 variables.
 NOTE: DATA statement used (Total process time):
-      real time           9.28 seconds
-      cpu time            1.13 seconds
+      real time           9.30 seconds
+      cpu time            0.54 seconds
       
 
-6603       proc sql;
-6604         create table tiny_dm as
-6605         select t.*, a.*
-6606         from tiny t left join attr a on (t.entity=a.id_rssd)
-6607         where (d_dt_start <= date <= d_dt_end and domestic_ind="Y")
-6608         ;
-NOTE: Table WORK.TINY_DM created, with 1086638 rows and 37 columns.
+6607       proc sql;
+6607     !          
+6608         create table tiny_dm as
+6609         select t.*, a.*
+6610         from tiny t left join attr a on (t.entity=a.id_rssd)
+6611         where (d_dt_start <= date <= d_dt_end and domestic_ind="Y")
+6612         ;
+NOTE: Table WORK.TINY_DM created, with 1086638 rows and 44 columns.
 
-6609       quit;
+6612     !    
+6613       quit;
 NOTE: PROCEDURE SQL used (Total process time):
-      real time           11.29 seconds
-      cpu time            4.85 seconds
+      real time           2.94 seconds
+      cpu time            4.02 seconds
       
 
-6610       
-6611       *rollup to BHC level;
-6612       proc sort data=tiny_dm; by date rssd9002; run;
+6613     !      
+6614       
+6615       *rollup to BHC level;
+6616       proc sort data=tiny_dm; by date rssd9002; run;
 
 NOTE: There were 1086638 observations read from the data set WORK.TINY_DM.
-NOTE: The data set WORK.TINY_DM has 1086638 observations and 37 variables.
+NOTE: The data set WORK.TINY_DM has 1086638 observations and 44 variables.
+40                               The SAS System      21:31 Monday, June 24, 2013
+
 NOTE: PROCEDURE SORT used (Total process time):
-      real time           8.20 seconds
-      cpu time            2.74 seconds
+      real time           2.73 seconds
+      cpu time            2.08 seconds
       
 
-6613       proc univariate noprint data=tiny_dm;
-6614         by date rssd9002;
-6615         var &tvars;
-6616         output out=tiny_bhc sum=&tvars;
-6617       run;
+6616     !                                               
+6617       proc univariate noprint data=tiny_dm;
+6618         by date rssd9002;
+6619         var &tvars;
+6620         output out=tiny_bhc sum=&tvars;
+6621       run;
 
 WARNING: Variable flo10600 already exists on file WORK.TINY_BHC.
-NOTE: The data set WORK.TINY_BHC has 861241 observations and 30 variables.
+NOTE: The data set WORK.TINY_BHC has 861241 observations and 37 variables.
 NOTE: PROCEDURE UNIVARIATE used (Total process time):
-      real time           3:31.47
-      cpu time            3:16.00
-40                               The SAS System    19:35 Thursday, June 20, 2013
-
+      real time           3:49.70
+      cpu time            3:49.70
       
 
-6618       
-6619       *keep only top 25 BHCs, by quarter;
-6620       proc sort data=tiny_bhc; by date descending cal25000; run;
+6621     !     
+6622       
+6623       *keep only top 25 BHCs by total assets or interest-earning assets, by
+6623     !  quarter;
+6624       *total assets, end period: cal25000, total assets, quart average:
+6624     ! cal90000, interest-earning assets, end period: cal25300,
+6624     ! interest-earning assets, quart average: cal90100;
+6625       proc sort data=tiny_bhc; by date descending cal90100; run;
 
 NOTE: There were 861241 observations read from the data set WORK.TINY_BHC.
-NOTE: The data set WORK.TINY_BHC has 861241 observations and 30 variables.
+NOTE: The data set WORK.TINY_BHC has 861241 observations and 37 variables.
 NOTE: PROCEDURE SORT used (Total process time):
-      real time           5.37 seconds
-      cpu time            1.48 seconds
+      real time           1.06 seconds
+      cpu time            1.44 seconds
       
 
-6621       data tiny_bhc25(where=(rank<=25));
-6622         set tiny_bhc;
-6623         by date;
-6624         if first.date then rank=1;
-6625         else rank+1;
-6626         retain rank;
-6627       run;
+6625     !                                                            
+6626       data tiny_bhc25(where=(rank<=25));
+6627         set tiny_bhc;
+6628         by date;
+6629         if first.date then rank=1; 
+6630         else rank+1;
+6631         retain rank;
+6632       run;
 
 NOTE: There were 861241 observations read from the data set WORK.TINY_BHC.
-NOTE: The data set WORK.TINY_BHC25 has 2825 observations and 31 variables.
+NOTE: The data set WORK.TINY_BHC25 has 2825 observations and 38 variables.
 NOTE: DATA statement used (Total process time):
-      real time           0.30 seconds
-      cpu time            0.30 seconds
+      real time           0.28 seconds
+      cpu time            0.29 seconds
       
 
-6628       
-6629       *aggregate TINY data;
-6630       proc univariate noprint data=tiny_bhc25;
-6631         by date;
-6632         var &tvars;
-6633         output out=tiny_agg25 sum=&tvars;
-6634       run;
+6632     !     
+6633       
+6634       *aggregate TINY data;
+6635       proc univariate noprint data=tiny_bhc25;
+6636         by date;
+6637         var &tvars;
+41                               The SAS System      21:31 Monday, June 24, 2013
+
+6638         output out=tiny_agg25 sum=&tvars;
+6639       run;
 
 WARNING: Variable flo10600 already exists on file WORK.TINY_AGG25.
-NOTE: The data set WORK.TINY_AGG25 has 113 observations and 29 variables.
+NOTE: The data set WORK.TINY_AGG25 has 113 observations and 36 variables.
 NOTE: PROCEDURE UNIVARIATE used (Total process time):
-      real time           0.05 seconds
+      real time           0.06 seconds
       cpu time            0.06 seconds
       
 
-6635       
-6636       *eliminate erroneous data;
-6637       data tiny_agg25;
-6638         set tiny_agg25;
-6639         %replace_num(0,.);
-6640       run;
+6639     !     
+6640       
+6641       *eliminate erroneous data;
+6642       data tiny_agg25;
+6643         set tiny_agg25;
+6644         %replace_num(0,.);
+6645       run;
 
 NOTE: There were 113 observations read from the data set WORK.TINY_AGG25.
-NOTE: The data set WORK.TINY_AGG25 has 113 observations and 29 variables.
+NOTE: The data set WORK.TINY_AGG25 has 113 observations and 36 variables.
 NOTE: DATA statement used (Total process time):
       real time           0.00 seconds
       cpu time            0.00 seconds
       
 
-41                               The SAS System    19:35 Thursday, June 20, 2013
+6645     !     
+6646         
+6647       *calculate net interest margin ratio;
+6648       data tiny_agg25(drop=&tvars);
+6649         set tiny_agg25;
+6650         total_assets_top25 = cal25000;
+6651         interest_earning_assets_top25 = cal90100;
+6652         total_interest_expense_top25 = flo15300;
+6653         total_nonint_expense_top25 = flo16600;
+6654         total_interest_inc_top25 = flo10300;
+6655         total_nonint_inc_top25 = flo13500;
+6656         net_interest_income_top25 = flo20100;
+6657       
+6658         loans_real_estate_top25 = flo10900;
+6659         loans_agr_top25 = flo11100;
+6660         loans_ci_top25 = flo11200;
+6661         loans_consumer_top25 = flo11400;
+6662         loans_foreign_top25 = flo11700;
+6663         loans_other_dom_top25 = flo11900;
+6664         lease_financing_top25 = flo12000;
+6665         inc_depository_inst_top25 = flo12100;
+6666         inc_on_securities_top25 = flo12500;
+6667         inc_trading_assets_top25 = flo13400;
+6668         inc_fedfunds_top25 = flo12400;
+6669         other_interest_inc_top25 = flo13410;
+6670       
+6671         expense_trans_accnts_top25 = flo15700;
+6672         expense_nontrans_accnts_top25 = flo15800;
+6673         expense_fedfunds_top25 = flo16200;
+6674         expense_trade_liab_top25 = flo16300;
+6675         expense_sub_debt_top25 = flo16500;
+6676       
+42                               The SAS System      21:31 Monday, June 24, 2013
 
-6641       
-6642       *calculate net interest margin ratio;
-6643       data tiny_agg25(drop=&tvars);
-6644         set tiny_agg25;
-6645         total_assets_top25 = cal25000;
-6646         interest_earning_assets_top25 = cal90100;
-6647         total_interest_expense_top25 = flo15300;
-6648         total_interest_inc_top25 = flo10300;
-6649         net_interest_income_top25 = flo20100;
-6650         nim_top25 = 100*flo20100/cal90100;
-6651         loans_real_estate_top25 = flo10900;
-6652         loans_agr_top25 = flo11100;
-6653         loans_ci_top25 = flo11200;
-6654         loans_consumer_top25 = flo11400;
-6655         loans_foreign_top25 = flo11700;
-6656         loans_other_dom_top25 = flo11900;
-6657         lease_financing_top25 = flo12000;
-6658         inc_depository_inst_top25 = flo12100;
-6659         inc_on_securities_top25 = flo12500;
-6660         inc_trading_assets_top25 = flo13400;
-6661         inc_fedfunds_top25 = flo12400;
-6662         other_interest_inc_top25 = flo13410;
-6663         expense_trans_accnts_top25 = flo15700;
-6664         expense_nontrans_accnts_top25 = flo15800;
-6665         expense_fedfunds_top25 = flo16200;
-6666         expense_trade_liab_top25 = flo16300;
-6667         expense_sub_debt_top25 = flo16500;
-6668         assets_depository_inst_top25 = cal90200;
-6669         assets_securities_notrade_top25 = cal90300;
-6670         assets_fedfunds_top25 = cal90900;
-6671         assets_all_loans_top25 = cal91000;
-6672         assets_trading_accnts_top25 = cal91900;
-6673       run;
+6677         assets_depository_inst_top25 = cal90200;
+6678         assets_securities_notrade_top25 = cal90300;
+6679         assets_fedfunds_top25 = cal90900;
+6680         assets_all_loans_top25 = cal91000;
+6681         assets_trading_accnts_top25 = cal91900;
+6682       
+6683         inc_gross_top25 = flo10000;
+6684         expense_total_top25 = flo15000;
+6685         provisions_for_loss_top25 = flo17000;
+6686       
+6687       * Excludes other_interest_inc_top25. Residual, therefore, = other
+6687     ! interest income + income from foreign offices + noise from roll up to
+6687     !  top BHC level;
+6688         our_int_inc_top25 = loans_real_estate_top25 + loans_agr_top25 +
+6688     ! loans_ci_top25 + loans_consumer_top25 + loans_foreign_top25 +
+6688     ! loans_other_dom_top25 + lease_financing_top25 +
+6688     ! inc_depository_inst_top25 + inc_on_securities_top25 +
+6688     ! inc_fedfunds_top25; 
+6689       
+6690       *The implied income from foreign offices, N.B. will also include
+6690     ! noise from roll up to top BHC level;
+6691        implied_int_inc_foreign_top25 = total_interest_inc_top25 -
+6691     ! our_int_inc_top25 - other_interest_inc_top25;
+6692       
+6693        our_int_exp_top25 = expense_trans_accnts_top25 +
+6693     ! expense_nontrans_accnts_top25 + expense_fedfunds_top25 +
+6693     ! expense_trade_liab_top25 + expense_sub_debt_top25;
+6694       
+6695       *The implied expense from foreign offices, N.B. will also include
+6695     ! noise from roll up to top BHC level;
+6696        implied_int_exp_foreign_top25 = total_interest_expense_top25 -
+6696     ! our_int_exp_top25;
+6697       
+6698       *income series  are flows for each quarter. Asset series are quarter
+6698     ! averages based on daily stocks of assets;
+6699        nim_with_tr_assets_top25 =
+6699     ! 100*net_interest_income_top25/interest_earning_assets_top25;
+6700       
+6701       *income and expense series  are flows for each quarter. Asset series
+6701     ! are quarter averages based on daily stocks of assets;
+6702        nim_no_tr_assets_top25 = 100*(net_interest_income_top25 -
+6702     ! inc_trading_assets_top25 +
+6702     ! expense_trade_liab_top25)/(interest_earning_assets_top25 -
+6702     ! assets_trading_accnts_top25); 
+6703       
+6704       run;
 
+NOTE: Missing values were generated as a result of performing an operation on 
+      missing values.
+      Each place is given by: (Number of times) at (Line):(Column).
+      64 at 6691:79   8 at 6693:49    8 at 6696:63    
 NOTE: There were 113 observations read from the data set WORK.TINY_AGG25.
-NOTE: The data set WORK.TINY_AGG25 has 113 observations and 29 variables.
+NOTE: The data set WORK.TINY_AGG25 has 113 observations and 39 variables.
 NOTE: DATA statement used (Total process time):
       real time           0.00 seconds
-      cpu time            0.00 seconds
+      cpu time            0.01 seconds
       
+43                               The SAS System      21:31 Monday, June 24, 2013
 
-6674       
-6675         *output;
-6676         data output.tiny_nims; set tiny_agg25; run;
+
+6704     !     
+6705       
+6706         *output;
+6707         data output.tiny_nims; set tiny_agg25; run;
 
 NOTE: There were 113 observations read from the data set WORK.TINY_AGG25.
-NOTE: The data set OUTPUT.TINY_NIMS has 113 observations and 29 variables.
+NOTE: The data set OUTPUT.TINY_NIMS has 113 observations and 39 variables.
 NOTE: DATA statement used (Total process time):
-      real time           0.03 seconds
+      real time           0.01 seconds
       cpu time            0.00 seconds
       
 
-6677         proc export data=tiny_agg25
-6677     ! outfile="&fpath./nims_income_expenses_assets.csv" dbms=csv replace;
-6677     !  run;
+6707     !                                              
+6708         proc export data=tiny_agg25
+6708     ! outfile="&fpath./nim_data_by_quartavg_ie_assets.csv" dbms=csv replace
+6708     ! ; run;  
 
-6678        /*******************************************************************
-42                               The SAS System    19:35 Thursday, June 20, 2013
+6709        /*******************************************************************
+6709     ! ***
+6710        *   PRODUCT:   SAS
+6711        *   VERSION:   9.3
+6712        *   CREATOR:   External File Interface
+6713        *   DATE:      24JUN13
+6714        *   DESC:      Generated SAS Datastep Code
+6715        *   TEMPLATE SOURCE:  (None Specified.)
+6716        ********************************************************************
+6716     ! ***/
+6717           data _null_;
+6718           %let _EFIERR_ = 0; /* set the ERROR detection macro variable */
+6719           %let _EFIREC_ = 0;     /* clear export record count macro
+6719     ! variable */
+6720           file
+6720     ! '/ofs/work_mpa/m1vxb00/nim_project/MATLAB/data/data_ranked_by_ie_asse
+6720     ! ts//nim_data_by_quartavg_ie_assets.csv' delimiter=',' DSD DROPOVER
+6720     ! lrecl=32767;
+6721           if _n_ = 1 then        /* write column names or labels */
+6722            do;
+6723              put
+6724                 "date"
+6725              ','
+6726                 "total_assets_top25"
+6727              ','
+6728                 "interest_earning_assets_top25"
+6729              ','
+6730                 "total_interest_expense_top25"
+6731              ','
+6732                 "total_nonint_expense_top25"
+6733              ','
+6734                 "total_interest_inc_top25"
+6735              ','
+6736                 "total_nonint_inc_top25"
+6737              ','
+6738                 "net_interest_income_top25"
+6739              ','
+6740                 "loans_real_estate_top25"
+6741              ','
+44                               The SAS System      21:31 Monday, June 24, 2013
 
-6678     ! ***
-6679        *   PRODUCT:   SAS
-6680        *   VERSION:   9.3
-6681        *   CREATOR:   External File Interface
-6682        *   DATE:      20JUN13
-6683        *   DESC:      Generated SAS Datastep Code
-6684        *   TEMPLATE SOURCE:  (None Specified.)
-6685        ********************************************************************
-6685     ! ***/
-6686           data _null_;
-6687           %let _EFIERR_ = 0; /* set the ERROR detection macro variable */
-6688           %let _EFIREC_ = 0;     /* clear export record count macro
-6688     ! variable */
-6689           file
-6689     ! '/ofs/work_mpa/m1vxb00/nim_project/MATLAB/data//nims_income_expenses_
-6689     ! assets.csv' delimiter=',' DSD DROPOVER lrecl=32767;
-6690           if _n_ = 1 then        /* write column names or labels */
-6691            do;
-6692              put
-6693                 "date"
-6694              ','
-6695                 "total_assets_top25"
-6696              ','
-6697                 "interest_earning_assets_top25"
-6698              ','
-6699                 "total_interest_expense_top25"
-6700              ','
-6701                 "total_interest_inc_top25"
-6702              ','
-6703                 "net_interest_income_top25"
-6704              ','
-6705                 "nim_top25"
-6706              ','
-6707                 "loans_real_estate_top25"
-6708              ','
-6709                 "loans_agr_top25"
-6710              ','
-6711                 "loans_ci_top25"
-6712              ','
-6713                 "loans_consumer_top25"
-6714              ','
-6715                 "loans_foreign_top25"
-6716              ','
-6717                 "loans_other_dom_top25"
-6718              ','
-6719                 "lease_financing_top25"
-6720              ','
-6721                 "inc_depository_inst_top25"
-6722              ','
-6723                 "inc_on_securities_top25"
-6724              ','
-6725                 "inc_trading_assets_top25"
-6726              ','
-6727                 "inc_fedfunds_top25"
-6728              ','
-6729                 "other_interest_inc_top25"
-6730              ','
-43                               The SAS System    19:35 Thursday, June 20, 2013
+6742                 "loans_agr_top25"
+6743              ','
+6744                 "loans_ci_top25"
+6745              ','
+6746                 "loans_consumer_top25"
+6747              ','
+6748                 "loans_foreign_top25"
+6749              ','
+6750                 "loans_other_dom_top25"
+6751              ','
+6752                 "lease_financing_top25"
+6753              ','
+6754                 "inc_depository_inst_top25"
+6755              ','
+6756                 "inc_on_securities_top25"
+6757              ','
+6758                 "inc_trading_assets_top25"
+6759              ','
+6760                 "inc_fedfunds_top25"
+6761              ','
+6762                 "other_interest_inc_top25"
+6763              ','
+6764                 "expense_trans_accnts_top25"
+6765              ','
+6766                 "expense_nontrans_accnts_top25"
+6767              ','
+6768                 "expense_fedfunds_top25"
+6769              ','
+6770                 "expense_trade_liab_top25"
+6771              ','
+6772                 "expense_sub_debt_top25"
+6773              ','
+6774                 "assets_depository_inst_top25"
+6775              ','
+6776                 "assets_securities_notrade_top25"
+6777              ','
+6778                 "assets_fedfunds_top25"
+6779              ','
+6780                 "assets_all_loans_top25"
+6781              ','
+6782                 "assets_trading_accnts_top25"
+6783              ','
+6784                 "inc_gross_top25"
+6785              ','
+6786                 "expense_total_top25"
+6787              ','
+6788                 "provisions_for_loss_top25"
+6789              ','
+6790                 "our_int_inc_top25"
+6791              ','
+6792                 "implied_int_inc_foreign_top25"
+6793              ','
+6794                 "our_int_exp_top25"
+6795              ','
+6796                 "implied_int_exp_foreign_top25"
+6797              ','
+6798                 "nim_with_tr_assets_top25"
+45                               The SAS System      21:31 Monday, June 24, 2013
 
-6731                 "expense_trans_accnts_top25"
-6732              ','
-6733                 "expense_nontrans_accnts_top25"
-6734              ','
-6735                 "expense_fedfunds_top25"
-6736              ','
-6737                 "expense_trade_liab_top25"
-6738              ','
-6739                 "expense_sub_debt_top25"
-6740              ','
-6741                 "assets_depository_inst_top25"
-6742              ','
-6743                 "assets_securities_notrade_top25"
-6744              ','
-6745                 "assets_fedfunds_top25"
-6746              ','
-6747                 "assets_all_loans_top25"
-6748              ','
-6749                 "assets_trading_accnts_top25"
-6750              ;
-6751            end;
-6752          set  TINY_AGG25   end=EFIEOD;
-6753              format date yyq4. ;
-6754              format total_assets_top25 best12. ;
-6755              format interest_earning_assets_top25 best12. ;
-6756              format total_interest_expense_top25 best12. ;
-6757              format total_interest_inc_top25 best12. ;
-6758              format net_interest_income_top25 best12. ;
-6759              format nim_top25 best12. ;
-6760              format loans_real_estate_top25 best12. ;
-6761              format loans_agr_top25 best12. ;
-6762              format loans_ci_top25 best12. ;
-6763              format loans_consumer_top25 best12. ;
-6764              format loans_foreign_top25 best12. ;
-6765              format loans_other_dom_top25 best12. ;
-6766              format lease_financing_top25 best12. ;
-6767              format inc_depository_inst_top25 best12. ;
-6768              format inc_on_securities_top25 best12. ;
-6769              format inc_trading_assets_top25 best12. ;
-6770              format inc_fedfunds_top25 best12. ;
-6771              format other_interest_inc_top25 best12. ;
-6772              format expense_trans_accnts_top25 best12. ;
-6773              format expense_nontrans_accnts_top25 best12. ;
-6774              format expense_fedfunds_top25 best12. ;
-6775              format expense_trade_liab_top25 best12. ;
-6776              format expense_sub_debt_top25 best12. ;
-6777              format assets_depository_inst_top25 best12. ;
-6778              format assets_securities_notrade_top25 best12. ;
-6779              format assets_fedfunds_top25 best12. ;
-6780              format assets_all_loans_top25 best12. ;
-6781              format assets_trading_accnts_top25 best12. ;
-6782            do;
-6783              EFIOUT + 1;
-6784              put date @;
-6785              put total_assets_top25 @;
-6786              put interest_earning_assets_top25 @;
-6787              put total_interest_expense_top25 @;
-44                               The SAS System    19:35 Thursday, June 20, 2013
+6799              ','
+6800                 "nim_no_tr_assets_top25"
+6801              ;
+6802            end;
+6803          set  TINY_AGG25   end=EFIEOD;
+6804              format date yyq4. ;
+6805              format total_assets_top25 best12. ;
+6806              format interest_earning_assets_top25 best12. ;
+6807              format total_interest_expense_top25 best12. ;
+6808              format total_nonint_expense_top25 best12. ;
+6809              format total_interest_inc_top25 best12. ;
+6810              format total_nonint_inc_top25 best12. ;
+6811              format net_interest_income_top25 best12. ;
+6812              format loans_real_estate_top25 best12. ;
+6813              format loans_agr_top25 best12. ;
+6814              format loans_ci_top25 best12. ;
+6815              format loans_consumer_top25 best12. ;
+6816              format loans_foreign_top25 best12. ;
+6817              format loans_other_dom_top25 best12. ;
+6818              format lease_financing_top25 best12. ;
+6819              format inc_depository_inst_top25 best12. ;
+6820              format inc_on_securities_top25 best12. ;
+6821              format inc_trading_assets_top25 best12. ;
+6822              format inc_fedfunds_top25 best12. ;
+6823              format other_interest_inc_top25 best12. ;
+6824              format expense_trans_accnts_top25 best12. ;
+6825              format expense_nontrans_accnts_top25 best12. ;
+6826              format expense_fedfunds_top25 best12. ;
+6827              format expense_trade_liab_top25 best12. ;
+6828              format expense_sub_debt_top25 best12. ;
+6829              format assets_depository_inst_top25 best12. ;
+6830              format assets_securities_notrade_top25 best12. ;
+6831              format assets_fedfunds_top25 best12. ;
+6832              format assets_all_loans_top25 best12. ;
+6833              format assets_trading_accnts_top25 best12. ;
+6834              format inc_gross_top25 best12. ;
+6835              format expense_total_top25 best12. ;
+6836              format provisions_for_loss_top25 best12. ;
+6837              format our_int_inc_top25 best12. ;
+6838              format implied_int_inc_foreign_top25 best12. ;
+6839              format our_int_exp_top25 best12. ;
+6840              format implied_int_exp_foreign_top25 best12. ;
+6841              format nim_with_tr_assets_top25 best12. ;
+6842              format nim_no_tr_assets_top25 best12. ;
+6843            do;
+6844              EFIOUT + 1;
+6845              put date @;
+6846              put total_assets_top25 @;
+6847              put interest_earning_assets_top25 @;
+6848              put total_interest_expense_top25 @;
+6849              put total_nonint_expense_top25 @;
+6850              put total_interest_inc_top25 @;
+6851              put total_nonint_inc_top25 @;
+6852              put net_interest_income_top25 @;
+6853              put loans_real_estate_top25 @;
+6854              put loans_agr_top25 @;
+6855              put loans_ci_top25 @;
+46                               The SAS System      21:31 Monday, June 24, 2013
 
-6788              put total_interest_inc_top25 @;
-6789              put net_interest_income_top25 @;
-6790              put nim_top25 @;
-6791              put loans_real_estate_top25 @;
-6792              put loans_agr_top25 @;
-6793              put loans_ci_top25 @;
-6794              put loans_consumer_top25 @;
-6795              put loans_foreign_top25 @;
-6796              put loans_other_dom_top25 @;
-6797              put lease_financing_top25 @;
-6798              put inc_depository_inst_top25 @;
-6799              put inc_on_securities_top25 @;
-6800              put inc_trading_assets_top25 @;
-6801              put inc_fedfunds_top25 @;
-6802              put other_interest_inc_top25 @;
-6803              put expense_trans_accnts_top25 @;
-6804              put expense_nontrans_accnts_top25 @;
-6805              put expense_fedfunds_top25 @;
-6806              put expense_trade_liab_top25 @;
-6807              put expense_sub_debt_top25 @;
-6808              put assets_depository_inst_top25 @;
-6809              put assets_securities_notrade_top25 @;
-6810              put assets_fedfunds_top25 @;
-6811              put assets_all_loans_top25 @;
-6812              put assets_trading_accnts_top25 ;
-6813              ;
-6814            end;
-6815           if _ERROR_ then call symputx('_EFIERR_',1);  /* set ERROR
-6815     ! detection macro variable */
-6816           if EFIEOD then call symputx('_EFIREC_',EFIOUT);
-6817           run;
+6856              put loans_consumer_top25 @;
+6857              put loans_foreign_top25 @;
+6858              put loans_other_dom_top25 @;
+6859              put lease_financing_top25 @;
+6860              put inc_depository_inst_top25 @;
+6861              put inc_on_securities_top25 @;
+6862              put inc_trading_assets_top25 @;
+6863              put inc_fedfunds_top25 @;
+6864              put other_interest_inc_top25 @;
+6865              put expense_trans_accnts_top25 @;
+6866              put expense_nontrans_accnts_top25 @;
+6867              put expense_fedfunds_top25 @;
+6868              put expense_trade_liab_top25 @;
+6869              put expense_sub_debt_top25 @;
+6870              put assets_depository_inst_top25 @;
+6871              put assets_securities_notrade_top25 @;
+6872              put assets_fedfunds_top25 @;
+6873              put assets_all_loans_top25 @;
+6874              put assets_trading_accnts_top25 @;
+6875              put inc_gross_top25 @;
+6876              put expense_total_top25 @;
+6877              put provisions_for_loss_top25 @;
+6878              put our_int_inc_top25 @;
+6879              put implied_int_inc_foreign_top25 @;
+6880              put our_int_exp_top25 @;
+6881              put implied_int_exp_foreign_top25 @;
+6882              put nim_with_tr_assets_top25 @;
+6883              put nim_no_tr_assets_top25 ;
+6884              ;
+6885            end;
+6886           if _ERROR_ then call symputx('_EFIERR_',1);  /* set ERROR
+6886     ! detection macro variable */
+6887           if EFIEOD then call symputx('_EFIREC_',EFIOUT);
+6888           run;
 
 NOTE: The file 
-      '/ofs/work_mpa/m1vxb00/nim_project/MATLAB/data//nims_income_expenses_asset
-      s.csv' is:
+      '/ofs/work_mpa/m1vxb00/nim_project/MATLAB/data/data_ranked_by_ie_assets//n
+      im_data_by_quartavg_ie_assets.csv' is:
       
-      Filename=/ofs/work_mpa/m1vxb00/nim_project/MATLAB/data//nims_income_expens
-      es_assets.csv,
+      Filename=/ofs/work_mpa/m1vxb00/nim_project/MATLAB/data/data_ranked_by_ie_a
+      ssets//nim_data_by_quartavg_ie_assets.csv,
       Owner Name=m1vxb00,Group Name=ofs,
       Access Permission=rw-rw-r--,
-      Last Modified=Thu Jun 20 19:43:07 2013
+      Last Modified=Mon Jun 24 21:38:28 2013
 
 NOTE: 114 records were written to the file 
-      '/ofs/work_mpa/m1vxb00/nim_project/MATLAB/data//nims_income_expenses_asset
-      s.csv'.
-      The minimum record length was 248.
-      The maximum record length was 664.
+      '/ofs/work_mpa/m1vxb00/nim_project/MATLAB/data/data_ranked_by_ie_assets//n
+      im_data_by_quartavg_ie_assets.csv'.
+      The minimum record length was 315.
+      The maximum record length was 910.
 NOTE: There were 113 observations read from the data set WORK.TINY_AGG25.
 NOTE: DATA statement used (Total process time):
-      real time           0.02 seconds
-      cpu time            0.00 seconds
+      real time           0.01 seconds
+      cpu time            0.01 seconds
       
 
 113 records created in 
-/ofs/work_mpa/m1vxb00/nim_project/MATLAB/data//nims_income_expenses_assets.csv 
-from TINY_AGG25.
-  
-45                               The SAS System    19:35 Thursday, June 20, 2013
+47                               The SAS System      21:31 Monday, June 24, 2013
 
+/ofs/work_mpa/m1vxb00/nim_project/MATLAB/data/data_ranked_by_ie_assets//nim_data
+_by_quartavg_ie_assets.csv from TINY_AGG25.
   
-NOTE: "/ofs/work_mpa/m1vxb00/nim_project/MATLAB/data//nims_income_expenses_asset
-      s.csv" file was successfully created.
+  
+NOTE: "/ofs/work_mpa/m1vxb00/nim_project/MATLAB/data/data_ranked_by_ie_assets//n
+      im_data_by_quartavg_ie_assets.csv" file was successfully created.
 NOTE: PROCEDURE EXPORT used (Total process time):
-      real time           0.35 seconds
-      cpu time            0.10 seconds
+      real time           0.13 seconds
+      cpu time            0.06 seconds
       
 
-6818       
-6819       endsas;
+6889       
+6890       endsas;
 
 NOTE: SAS Institute Inc., SAS Campus Drive, Cary, NC USA 27513-2414
 NOTE: The SAS System used:
-      real time           7:45.32
-      cpu time            5:09.67
+      real time           6:58.70
+      cpu time            5:28.85
       
