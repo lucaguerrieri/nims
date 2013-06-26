@@ -37,13 +37,13 @@ options sasautos=('/bks/proj/cbp/sas/pgms/tiny/macros',
 
 * CHANGE THINGS BELOW AS NECESSARY;
 
-%let fpath = /ofs/work_mpa/m1vxb00/nim_project/MATLAB/data/;
+%let fpath = /ofs/work_mpa/m1vxb00/nim_project/MATLAB/data/data_ranked_by_ie_assets/;
 libname ccar2012 "&fpath";
 
 %let sdate = 1997q1;
 %let edate = 2013q1; *Change this as necessary*;
 *retrieve MAY9 data;
-%let mvars = bck0450 ack0450 bck0470 ack0470 ac00600 /*bc01000*/;
+%let mvars = bck0450 ack0450 bck0470 ack0470 ac00600
              bc01950 bcr0400 acr0400 bcr0410 bcr4175
              fi01150 fi02000 fi02400 fi01350
              ac00500 fi01200
@@ -58,7 +58,7 @@ libname ccar2012 "&fpath";
              fib2210
              fib1345 fib0045 fib0725 fib0745
 	     fib0425 fib0445 fib0525 fib0625
-	     fib1540 fib1601 fib1607
+	     fib1540 fib1601 fib1607 fi00500
              ;
 
 %let rmvars = assets assets_avg assets_ie assets_ie_avg assets_tr 
@@ -76,7 +76,7 @@ libname ccar2012 "&fpath";
               nchg
               nchg_ci nchg_cld nchg_mfam nchg_nfnr
 	      nchg_heloc nchg_sfam nchg_sfam_l1 nchg_sfam_l2
-	      nchg_cons nchg_cc nchg_consxcc   
+	      nchg_cons nchg_cc nchg_consxcc inc_tr_assets   
               ;
 
 *nchg = total net charge-offs;
@@ -110,7 +110,7 @@ quit;
 
 
 *keep only top 25 BHCs;
-proc sort data=may9c_dm; by date descending assets; run;
+proc sort data=may9c_dm; by date descending assets_ie_avg; run;
 data may9c_bhc25(where=(rank<=25));
   set may9c_dm;
   by date;
@@ -134,45 +134,46 @@ run;
 /*construct financial variables*/
 data may9c_vars;
       set may9c_agg25;
-      nonintinc_xtr = sum(nonintinc,-nonintinc_tr);
-      nonintexp_xgw = sum(nonintexp,-impair_gw);
-      nonintexp_oth = sum(nonintexp,-nonintexp_comp,-nonintexp_prop,-impair_gw,-impair_oint);
-      ppnr_y9 = 100*sum(netintinc,nonintinc,-nonintexp)/assets_avg;
-      ppnr_base = 100*sum(netintinc,nonintinc,-nonintexp,impair_gw,impair_oint,-inc_extra)/assets_avg;
-      ppnr_xtr = 100*sum(netintinc,nonintinc_xtr,-nonintexp)/assets_avg;  
-      nonintinc_xtr_ta = 100*nonintinc_xtr/assets_avg;
-      nonintinc_tr_ta = 100*nonintinc_tr/assets_avg;
-      nonintinc_tr_tra = 100*nonintinc_tr/assets_tr;
-      nim_y9 = 100*netintinc/(assets_ie_avg+assets_tr);
-      nim_y9_notrading = 100*netintinc/(assets_ie_avg);
+*      nonintinc_xtr = sum(nonintinc,-nonintinc_tr);
+*      nonintexp_xgw = sum(nonintexp,-impair_gw);
+*      nonintexp_oth = sum(nonintexp,-nonintexp_comp,-nonintexp_prop,-impair_gw,-impair_oint);
+*      ppnr_y9 = 100*sum(netintinc,nonintinc,-nonintexp)/assets_avg;
+*      ppnr_base = 100*sum(netintinc,nonintinc,-nonintexp,impair_gw,impair_oint,-inc_extra)/assets_avg;
+*      ppnr_xtr = 100*sum(netintinc,nonintinc_xtr,-nonintexp)/assets_avg;  
+*      nonintinc_xtr_ta = 100*nonintinc_xtr/assets_avg;
+*      nonintinc_tr_ta = 100*nonintinc_tr/assets_avg;
+*      nonintinc_tr_tra = 100*nonintinc_tr/assets_tr;
+
+      nim_with_tr_assets_y9 = 100*netintinc/(assets_ie_avg+assets_tr);
+
       nim_ta = 100*netintinc/assets_avg;
-      nonintexp_comp_ta = 100*nonintexp_comp/assets_avg;
-      nonintexp_prop_ta = 100*nonintexp_prop/assets_avg;
-      nonintexp_oth_ta = 100*nonintexp_oth/assets_avg;
-      deps = 100*sum(dep_dom,dep_fgn)/assets_avg;
-      payout = sum(dividends,tstock_prchs);
-      alll = 100*alll_lvl/loans_avg;
-      lllp_y9 = 100*lllp_lvl/loans_avg;
-      tier1cr = tier1c/rwa;
-      chgoff_y9 = 100*nchg/loans_avg;
-      chgoff_ci_y9 = 100*nchg_ci/loans_ci;
-      chgoff_cre_y9 = 100*(sum(nchg_cld,nchg_mfam,nchg_nfnr)/sum(loans_cld,loans_mfam,loans_nfnr));
-      chgoff_cld_y9 = 100*nchg_cld/loans_cld;
-      chgoff_mfam_y9 = 100*nchg_mfam/loans_mfam;
-      chgoff_nfnr_y9 = 100*nchg_nfnr/loans_nfnr;
-      chgoff_heloc_y9 = 100*nchg_heloc/loans_heloc;
-      chgoff_sfam_y9 = 100*nchg_sfam/loans_sfam;
-      chgoff_sfam_l1_y9 = 100*nchg_sfam_l1/loans_sfam_l1;
-      chgoff_sfam_l2_y9 = 100*nchg_sfam_l2/loans_sfam_l2;
-      chgoff_cons_y9 = 100*nchg_cons/loans_cons;
-      chgoff_cc_y9 = 100*nchg_cc/loans_cc;
-      chgoff_consxcc_y9 = 100*nchg_consxcc/loans_consxcc;
-      exposure_ci_y9 = 100*loans_ci/assets_ie_avg;
-      exposure_cre_y9 = 100*sum(loans_cld,loans_mfam,loans_nfnr)/assets_ie_avg;
-      exposure_rre_y9 = 100*sum(loans_heloc,loans_sfam_l1,loans_sfam_l2)/assets_ie_avg;
-      exposure_cc_y9 = 100*loans_cc/assets_ie_avg;
-      exposure_othcons_y9 = 100*sum(loans_cons,-loans_cc)/assets_ie_avg;
-      exposure_tr_y9 = 100*assets_tr/assets_ie_avg;
+*      nonintexp_comp_ta = 100*nonintexp_comp/assets_avg;
+*      nonintexp_prop_ta = 100*nonintexp_prop/assets_avg;
+*      nonintexp_oth_ta = 100*nonintexp_oth/assets_avg;
+*      deps = 100*sum(dep_dom,dep_fgn)/assets_avg;
+*      payout = sum(dividends,tstock_prchs);
+*      alll = 100*alll_lvl/loans_avg;
+*      lllp_y9 = 100*lllp_lvl/loans_avg;
+*      tier1cr = tier1c/rwa;
+*      chgoff_y9 = 100*nchg/loans_avg;
+*      chgoff_ci_y9 = 100*nchg_ci/loans_ci;
+*      chgoff_cre_y9 = 100*(sum(nchg_cld,nchg_mfam,nchg_nfnr)/sum(loans_cld,loans_mfam,loans_nfnr));
+*      chgoff_cld_y9 = 100*nchg_cld/loans_cld;
+*      chgoff_mfam_y9 = 100*nchg_mfam/loans_mfam;
+*      chgoff_nfnr_y9 = 100*nchg_nfnr/loans_nfnr;
+*      chgoff_heloc_y9 = 100*nchg_heloc/loans_heloc;
+*      chgoff_sfam_y9 = 100*nchg_sfam/loans_sfam;
+*      chgoff_sfam_l1_y9 = 100*nchg_sfam_l1/loans_sfam_l1;
+*      chgoff_sfam_l2_y9 = 100*nchg_sfam_l2/loans_sfam_l2;
+*      chgoff_cons_y9 = 100*nchg_cons/loans_cons;
+*      chgoff_cc_y9 = 100*nchg_cc/loans_cc;
+*      chgoff_consxcc_y9 = 100*nchg_consxcc/loans_consxcc;
+*      exposure_ci_y9 = 100*loans_ci/assets_ie_avg;
+*      exposure_cre_y9 = 100*sum(loans_cld,loans_mfam,loans_nfnr)/assets_ie_avg;
+*      exposure_rre_y9 = 100*sum(loans_heloc,loans_sfam_l1,loans_sfam_l2)/assets_ie_avg;
+*      exposure_cc_y9 = 100*loans_cc/assets_ie_avg;
+*      exposure_othcons_y9 = 100*sum(loans_cons,-loans_cc)/assets_ie_avg;
+*      exposure_tr_y9 = 100*assets_tr/assets_ie_avg;
 
 run;
 
@@ -199,7 +200,7 @@ run;
 */
 
   *output;
-  data ccar2012.may9c_matchange; set may9c_vars; run;
-  proc export data=may9c_vars outfile="&fpath./may9c_matchange.csv" dbms=csv replace; run;  
+  data ccar2012.may9c_nims; set may9c_vars; run;
+  proc export data=may9c_vars outfile="&fpath./may9c_nims_by_quartavg_ie_assets.csv" dbms=csv replace; run;  
 
 endsas;
