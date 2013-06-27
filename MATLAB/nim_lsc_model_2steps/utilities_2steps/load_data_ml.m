@@ -22,9 +22,9 @@ nim_dataset_titles = char('nims_assets_by_endperiod_total_assets.csv',...
     'nims_assets_by_quartavg_ie_assets.csv');
 
 if (dataset_option == 1 | dataset_option == 2)
-    nim_dataset_path = ['../data/data_ranked_by_total_assets',nim_dataset_titles(dataset_option,:)];
+    nim_dataset_path = ['../data/data_ranked_by_total_assets/',nim_dataset_titles(dataset_option,:)];
 else
-    nim_dataset_path = ['../data/data_ranked_by_ie_assets',nim_dataset_titles(dataset_option,:)];
+    nim_dataset_path = ['../data/data_ranked_by_ie_assets/',nim_dataset_titles(dataset_option,:)];
 end
 
 if ~isunix
@@ -91,27 +91,22 @@ shadow_bank_share_assets = shadow_bank_share_assets_file(start_pos:end_pos,1)';
 % 5-8. Same as above, but based on interest-earning (ie) asset rankings (rather
 % than total asset rankings).
 
-nim_with_trading = csvread(nim_dataset_path, 1, 1);
-nim_no_trading = csvread(nim_dataset_path, 1, 2);
+nim_data = csvread(nim_dataset_path, 1, 1);
+nim_varlist = char('nim_with_trading','nim_no_trading','total_interest_earning_assets',...
+                   'assets_depository_inst','assets_securities_notrade','assets_fedfunds',...
+                   'assets_all_loans','assets_trading_accnts');
 
+n_nim_varlist = size(nim_varlist,1);
+
+for nim_indx = 1:n_nim_varlist
+    eval([nim_varlist(nim_indx,:),'=nim_data(:,nim_indx);']);
+end
+               
+               
 dates_nim = 1985.0:.25:2013.0;
 start_pos_nim = find(dates_nim==start_yobs);
 end_pos_nim = find(dates_nim==end_yobs);
 nims = 4*nim_with_trading(start_pos_nim:end_pos_nim,1)'; %Multiply by 4 to annualize
-
-nims_varlist = char('nim_top25');
-
-%Bring in different asset series. All are in thousands of dollars and have same dates as NIMs above.
-total_interest_earning_assets = csvread(nim_dataset_path, 1, 3);
-assets_depository_inst = csvread(nim_dataset_path, 1, 4);
-assets_securities_notrade = csvread(nim_dataset_path, 1, 5);
-assets_fedfunds = csvread(nim_dataset_path, 1, 6);
-assets_all_loans = csvread(nim_dataset_path, 1, 7);
-assets_trading_accnts = csvread(nim_dataset_path, 1, 8);
-
-if dataset_option == 1
-    varargout{1} = 
-end
 
 
 
@@ -133,5 +128,23 @@ factor3 = ( 2*yields(find(tau == 24),:) ...
     - yields(find(tau == 3),:)  )*5;
 
 factors = [factor1; factor2; factor3];
+
+
+%Bring in different asset series. All are in thousands of dollars and have same dates as NIMs above.
+
+if dataset_option == 1
+    additional_data  = csvread('..\data\data_ranked_by_total_assets\nims_subcomponents_by_endperiod_total_assets.csv', 1, 9);
+    
+    total_ie_assets = additional_data(:,1);
+    interest_income = additional_data(:,2);
+    interest_expense =additional_data(:,3);
+    
+    interest_income_to_ie_assets = interest_income*4/total_ie_assets;
+    interest_expense_to_ie_assets = interest_expense*4/total_ie_assets;
+    
+    varargout{1} = interest_income_to_ie_assets;
+    varargout{2} = interest_expense_to_ie_assets;
+
+end
 
 
