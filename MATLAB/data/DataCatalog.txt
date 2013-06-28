@@ -1,0 +1,68 @@
+Important files in /MATLAB/data/:
+
+pulltiny_nim.sas: Pulls Call Report (TINY) data into SAS and CSV datasets. Contains definitions for ALL NIM, asset, expense, income, etc. series that we have been using.
+
+pullY9Cdata.sas: Pulls Y9C data into SAS and CSV datasets.
+
+shadow_banking_share_assets.csv: Contains data on shadow banking share of total financial assets. 
+Calculated using a formula described in load_data_ml.m file. 
+
+nims_income_expenses_assets.csv: Contains NIMs series, income, expenses, assets series for top 25 firms, ranked by total assets. 
+
+nims_income_expenses_assets.xls: Same as above, but has some charts. I played around with decomposing NIMs into components and then adding up again. This is where we saw that there is a lot of noise in the adding up process.
+
+nims_assets_breakdown.xls: Focuses on NIM and asset decompositions. This is the file we played with to identify the culprit of the spike in NIMs in 1988Q4. We identified the foreign component as the culprit, along with the adding up noise.
+
+nim_data_dictionary.xlsx: The file that we want to include in our paper. Has tables that breakdown NIMs and the TINY codes to refer to the subcomponents that make up NIMs. Breaks down income, expenses, and assets.
+
+expenses_breakdown.csv: Provides a breakdown of just interest-related expenses.
+
+egon_corporate_spread.xlsx: Corporate spread measure taken from Egon's paper (both the monthly and the quarterly series are here). One of the tabs in this file contains the definition for the series and the citation for his paper.
+
+corporate_spread_quarterly.csv: Contains the corporate spread measure from Egon's paper in CSV format.
+
+corporate_spread_quarterly_shadow_banking_share.csv: File that contains both Egon's corporate spread and the shadow banking share. This is the file that I use in /MATLAB/data/pro_forma/sample_panel_regs.do to do panel regressions.
+
+IMPORTANT FILES IN /MATLAB/data/data_for_all_commercial_banks/:
+
+tiny_all_commercial_banks.csv: Includes assets, income, expense, and asset subcomponent series for all commercial banks.
+
+tiny_all_commercial_banks_dictionary.txt: Details the mnemonics used to pull the above series for all banks from FAME (note, series that needed to be rolled up for the top25 firms were pulled using SAS).
+
+IMPORTANT FILES IN /MATLAB/data/data_ranked_by_total_assets:
+
+nim_data_by_endperiod_total_assets.csv: NIMs and all NIM-related series, based on ranking of top 25 firms by end-period (end of quarter) total assets. nim_with_tr_assets and nim_no_tr_assets series definitions can be found in pulltiny_nim.sas.
+
+nim_data_by_quartavg_total_assets.csv: Same as above, but based on ranking of top 25 firms by quarter-average total assets.
+
+nims_assets_by_endperiod_total_assets.csv: Just the NIM series and the asset subcomponents, based on ranking of top 25 firms by endperiod total assets.
+
+nims_assets_by_quartavg_total_assets.csv: Same as above, but based on ranking of top 25 firms by quarter-average total assets.
+
+nims_subcomponents_by_endperiod_total_assets.csv: The CSV file that we use in load_data_ml.m. Has nim_with_tr_assets and nim_no_tr_assets series, assets, income, and expense series, and asset subcomponent series, all based on ranking of top 25 firms by endperiod total assets.
+
+may9c_nims_by_endperiod_total_assets.csv: All the series pulled by the pullY9Cdata.sas file. The NIM series we care about are in the last columns of this file. These data are based on ranking of top 25 firms by endperiod total assets.
+
+may9c_nims_by_endperiod_total_assets.csv: Same as above, but based on ranking of top 25 firms by quarter average total assets.
+
+nim_callreport_y9c_correlations.xlsx: This is the file where I calculated the correlations between nim_with_tr_assets from TINY and nim_with_tr_assets from MAY9C.
+
+IMPORTANT FILES IN /MATLAB/data/data_ranked_by_ie_assets:
+
+EXACTLY the same as the data_ranked_by_ie_assets directory, EXCEPT for the fact that the data is based on rankings of top 25 firms by interest-earning assets.
+
+IMPORTANT FILES IN /MATLAB/data/pro_forma:
+
+firm_ticker_permno.csv: File contains the CCAR 30 firm names, tickers, and CRSP permnos for firms used in Emre and Michael Zhang's pro-forma panel db.
+
+may9_nim_emre.csv: This is the file we got from Emre and Michael with the NIM panel for the CCAR 30 firms.
+
+may9_nim_emre_with_yields.csv: File that we got from Emre supplemented with our yields data (from the FAME yields db; see load_data_ml.m for more info on the yields).
+
+crsp_pull.csv: Data pulled by Rachel from CRSP containing returns (with dividends) for the CCAR 30 firms. Data is daily and will need to be converted into quarterly, monthly, etc. The "0" values in the Returns column are likely missing data.
+
+sample_panel_regs.do: STATA DO file that sets up and runs some sample panel regressions.
+
+may9_nim_emre_yields_corp_spread_shadow_bank_share.dta and corporate_spread_quarterly_shadow_banking_share.dta:
+
+Files that get merged in STATA by the sample_panel_regs.do file for the panel regressions.
