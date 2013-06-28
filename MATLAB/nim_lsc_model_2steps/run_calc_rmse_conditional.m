@@ -207,6 +207,7 @@ subplot(3,1,1)
 thistitle='Nims (solid) and Observed Level Factor (dashed)';
 doubleplot(nims,factors(1,:),dates,thistitle)
 
+
 subplot(3,1,2)
 thistitle='Nims (solid) and Observed Slope Factor (dashed)';
 doubleplot(nims,factors(2,:),dates,thistitle)
@@ -219,7 +220,7 @@ doubleplot(nims,factors(3,:),dates,thistitle)
 figure
 thistitle='Nims (solid) and Asset Share of Shadow Banking Sector (dashed)';
 doubleplot(nims,shadow_bank_share_assets,dates,thistitle)
-
+xlim([dates(1) dates(end)])
 
 figure
 thistitle = 'Interest Income (% of i.e. assets), Interest Expenses (% of i.e. assets) and the 3-month Treasury yield (RHS scale)'; 

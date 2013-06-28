@@ -1,8 +1,14 @@
-function doubleplot(data1,data2,dates,thistitle)
+function tripleplot(data1a,data1b,data2,dates,thistitle)
 
 
-hl1 = line(dates,data1,'Color','k');
-ax1 = gca;
+line(dates,data1a,'Color','k');
+hold on
+line(dates,data1b,'Color','k');
+hold off
+
+ax1 = gca; 
+
+
 set(ax1,'XColor','k','YColor','k')
 
 xlim([dates(1) dates(end)])
