@@ -1,0 +1,44 @@
+SOURCE:
+tiny db in FAME
+
+All data are in thousands of dollars.
+
+SERIES:
+STFBA_XEOP_MA_N.Q
+Total Assets for all commercial banks. Quarterly, end of period.
+
+STFBA_XQA_MA_N.Q
+Total assets for all commercial banks. Quarterly average (based on daily and weekly data provided by banks). From Schedule-K.
+
+STFBAI_XEOP_MA_N.Q
+Total interest-earning assets for all commercial banks. Quarterly, end of period.
+
+STFBAI_XQA_MA_N.Q
+Total interest-earning assets for all commercial banks. Quarterly average (based on daily and weekly data provided by banks). From Schedule-K.
+
+STFBYI_MA_N.Q
+Total interest income, quarterly flow for all commercial banks.
+
+STFBYIT_MA_N.Q
+Income from assets held in trading accounts, quarterly flow for all commercial banks.
+
+STFBEI_MA_N.Q
+Total interest expense, quarterly flow for all commercial banks.
+
+STFBEIT_MA_N.Q
+Total expenses on liabilities (i.e., On demand notes issued to U.S. Treasury and on other borrowed money), quarterly flow for all commercial banks.
+
+STFBAIB_XQA_MA_N.Q
+Assets subcategory: Balances due from depository institutions. Quarterly average (based on daily and weekly data provided by banks). From Schedule-K.
+
+STFBAIS_XQA_MA_N.Q
+Assets subcategory: Securities excluding trading account. Quarterly average (based on daily and weekly data provided by banks). From Schedule-K.
+
+STFBAIF_XQA_MA_N.Q
+Assets subcategory: Federal Funds sold and securities purchased under resale agreements. Quarterly average (based on daily and weekly data provided by banks). From Schedule-K.
+
+STFBAIL_XQA_MA_N.Q
+Assets subcategory: All loans and leases, gross. Quarterly average (based on daily and weekly data provided by banks). From Schedule-K.
+
+STFBAIT_XQA_MA_N.Q
+Assets subcategory: Held in trading accounts. Quarterly average (based on daily and weekly data provided by banks). From Schedule-K.

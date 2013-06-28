@@ -5,7 +5,7 @@
 * on yields (SVENY yields can be found in the 'yields' FAME db
 * under the mnemonics SVENYXXXX where SVENY0025 is a 3-month yield and SVENY1000 is a 10-year yield).
 *
-* LAST UPDATED: June 26, 2013
+* LAST UPDATED: June 28, 2013
 ******************************************************************************************************/
 
 clear all
@@ -53,8 +53,10 @@ drop if idate<yq(1990,1);
 xtset entity idate;
 save may9_nim_emre_yields_corp_spread_shadow_bank_share.dta, replace;
 
+/* Drop these firms if you want a balanced panel -- see comment at top */
 drop if firmnum == 2 | firmnum == 1 | firmnum == 19 | firmnum == 13 | firmnum == 14 | firmnum == 11 | firmnum == 24;
 
-xtreg nim sveny0025 sveny1000 if idate>yq(1996,3), fe vce(robust);
+/* This regression is a KEEPER. Balanced panel, with data starting in 1996Q3. 65 observations per series */
+xtreg nim l1.nim l1.sveny0025 l1.sveny1000 l1.shadow_banking_share_assets, fe vce(robust);
 
 
