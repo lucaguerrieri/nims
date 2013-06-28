@@ -15,8 +15,8 @@ dataset_option = 1;
     total_interest_earning_assets,...
     assets_depository_inst, assets_securities_notrade,...
     assets_fedfunds, assets_all_loans, assets_trading_accnts, ... 
-    varargout] = load_data_ml(dataset_option);
-
+    interest_income_to_ie_assets, interest_expense_to_ie_assets] = load_data_ml(dataset_option);
+ 
 out_of_sample_start_pos = find(dates==2000.0);
 end_sample_pos = length(dates);
 
@@ -203,7 +203,24 @@ doubleplot(nims,yields(9,:),dates,thistitle)
 
 
 figure
-doubleplot(nims(15:end),shadow_bank_share_assets(15:end),dates(15:end),thistitle)
+subplot(3,1,1)
+thistitle='Nims (solid) and Observed Level Factor (dashed)';
+doubleplot(nims,factors(1,:),dates,thistitle)
+
+subplot(3,1,2)
+thistitle='Nims (solid) and Observed Slope Factor (dashed)';
+doubleplot(nims,factors(2,:),dates,thistitle)
+
+subplot(3,1,3)
+thistitle='Nims (solid) and Observed Curvature Factor (dashed)';
+doubleplot(nims,factors(3,:),dates,thistitle)
+
+
+figure
 thistitle='Nims (solid) and Asset Share of Shadow Banking Sector (dashed)';
+doubleplot(nims,shadow_bank_share_assets,dates,thistitle)
 
 
+figure
+thistitle = 'Interest Income (% of i.e. assets), Interest Expenses (% of i.e. assets) and the 3-month Treasury yield (RHS scale)'; 
+tripleplot(interest_income_to_ie_assets, interest_expense_to_ie_assets, yields(1,:),dates,thistitle)
