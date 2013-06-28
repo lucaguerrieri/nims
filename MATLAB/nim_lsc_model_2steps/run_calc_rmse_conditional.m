@@ -192,6 +192,45 @@ table3_tex = tablelatex(table3,columnlabels,rowlabels);
 char(table3_tex)
 
 
+
+% Determine which forecast combination is best in RMSE
+[rmse_forecast_combination_mat0, forecast_combination_mat0] = calc_rmse_forecast_combination_conditional(nims(:,15:end), yields(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, 1,4);
+[rmse_forecast_combination_mat1, forecast_combination_mat1] = calc_rmse_forecast_combination_conditional(nims(:,15:end), factors(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, 1,4);
+[rmse_forecast_combination_mat2, forecast_combination_mat1] = calc_rmse_forecast_combination_conditional(nims(:,15:end), smoothed_factors(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, 1,4);
+[rmse_forecast_combination_mat3, forecast_combination_mat1] = calc_rmse_forecast_combination_conditional(nims(:,15:end),yields([find(tau==3),find(tau==24),find(tau==120)],15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, 1,4);
+[rmse_forecast_combination_mat4, forecast_combination_mat1] = calc_rmse_forecast_combination_conditional(nims(:,15:end),yields([find(tau==3),find(tau==120)],15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, 1,4);
+
+table4 = [rmse_forecast_combination_mat0
+          rmse_forecast_combination_mat1
+          rmse_forecast_combination_mat2
+          rmse_forecast_combination_mat3
+          rmse_forecast_combination_mat4
+          ];
+
+rowlabels = char('All yields',...
+                 'Observed Factors',...
+                 'Smoothed Factors',...
+                 '3-month, 2-year, 10-year',...
+                 '3-month, 10-year');
+      
+table4_tex = tablelatex(table4,columnlabels,rowlabels);
+char(table4_tex)
+
+
+% additional tests
+lag = 1;
+[rmse_multivariate_mat1, forecast_multivariate_mat1] = calc_rmse_multivariate_conditional(nims(:,15:end), factors(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, lag);
+[rmse_multivariate_mat2, forecast_multivariate_mat1] = calc_rmse_multivariate_conditional(nims(:,15:end), yields([find(tau==3),find(tau==24),find(tau==120)],15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, lag);
+[rmse_multivariate_mat3, forecast_multivariate_mat1] = calc_rmse_multivariate_conditional(nims(:,15:end), yields([find(tau==3),find(tau==120)],15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, lag);
+
+
+table5 = [rmse_multivariate_mat1 
+          rmse_multivariate_mat2
+          rmse_multivariate_mat3]
+
+
+
+
 figure
 subplot(2,1,1)
 thistitle='Nims (solid) and 3-Month Yields (dashed)';
