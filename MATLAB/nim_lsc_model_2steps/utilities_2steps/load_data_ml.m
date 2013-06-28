@@ -33,7 +33,6 @@ end
 
 
 
-
 start_yobs = 1985.75;
 end_yobs = 2008.25;
 dates = start_yobs:.25:end_yobs;
@@ -96,17 +95,44 @@ nim_varlist = char('nim_with_trading','nim_no_trading','total_interest_earning_a
                    'assets_depository_inst','assets_securities_notrade','assets_fedfunds',...
                    'assets_all_loans','assets_trading_accnts');
 
-n_nim_varlist = size(nim_varlist,1);
-
-for nim_indx = 1:n_nim_varlist
-    eval([nim_varlist(nim_indx,:),'=nim_data(:,nim_indx);']);
-end
-               
-               
 dates_nim = 1985.0:.25:2013.0;
 start_pos_nim = find(dates_nim==start_yobs);
 end_pos_nim = find(dates_nim==end_yobs);
-nims = 4*nim_with_trading(start_pos_nim:end_pos_nim,1)'; %Multiply by 4 to annualize
+               
+n_nim_varlist = size(nim_varlist,1);
+
+for nim_indx = 1:n_nim_varlist
+    eval([nim_varlist(nim_indx,:),'=transpose(nim_data(start_pos_nim:end_pos_nim,nim_indx));']);
+end
+
+%Multiply by 4 to annualize
+nim_with_trading = nim_with_trading*4;
+%nim_no_trading = nim_no_trading*4;
+
+nims = nim_with_trading; 
+
+
+if dataset_option == 1
+    subcomponent_path = '..\data\data_ranked_by_total_assets\nims_subcomponents_by_endperiod_total_assets.csv';
+    if ~isunix
+        subcomponent_path = strrep(subcomponent_path,'/','\');
+    end
+
+    additional_data  = csvread(subcomponent_path, 1, 9);
+    
+    total_ie_assets = additional_data(:,1);
+    interest_income = additional_data(:,2);
+    interest_expense =additional_data(:,3);
+    
+    interest_income_to_ie_assets = interest_income*4./total_ie_assets*100;
+    interest_expense_to_ie_assets = interest_expense*4./total_ie_assets*100;
+    
+    varargout{1} = transpose(interest_income_to_ie_assets(start_pos_nim:end_pos_nim));
+    varargout{2} = transpose(interest_expense_to_ie_assets(start_pos_nim:end_pos_nim));
+
+end
+
+               
 
 
 
@@ -132,19 +158,6 @@ factors = [factor1; factor2; factor3];
 
 %Bring in different asset series. All are in thousands of dollars and have same dates as NIMs above.
 
-if dataset_option == 1
-    additional_data  = csvread('..\data\data_ranked_by_total_assets\nims_subcomponents_by_endperiod_total_assets.csv', 1, 9);
-    
-    total_ie_assets = additional_data(:,1);
-    interest_income = additional_data(:,2);
-    interest_expense =additional_data(:,3);
-    
-    interest_income_to_ie_assets = interest_income*4/total_ie_assets;
-    interest_expense_to_ie_assets = interest_expense*4/total_ie_assets;
-    
-    varargout{1} = interest_income_to_ie_assets;
-    varargout{2} = interest_expense_to_ie_assets;
 
-end
 
 
