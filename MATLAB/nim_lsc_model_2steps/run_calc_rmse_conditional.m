@@ -8,7 +8,14 @@ load_paramvec_from_disk = 1;  % set to 1 to load saved param_vec from disk
 
 ntrain = 15; %We have 153 observations per time t; we're setting ntrain to ~15% of observation pool.
 
-[yobs, dates, yields, nims, nfactors, nothers, tau, factors] = load_data_ml; 
+dataset_option = 1;
+
+[yobs, dates, yields, nims, nfactors, nothers, tau, factors,...
+    shadow_bank_share_assets,...
+    total_interest_earning_assets,...
+    assets_depository_inst, assets_securities_notrade,...
+    assets_fedfunds, assets_all_loans, assets_trading_accnts, ... 
+    varargout] = load_data_ml(dataset_option);
 
 out_of_sample_start_pos = find(dates==2000.0);
 end_sample_pos = length(dates);
@@ -53,12 +60,10 @@ end
 end
 %
 load this_out_of_sample
-[yobs, dates, yields, nims, nfactors, nothers, tau, factors] = load_data_ml;
 forecast_horizon = 10;
 
 
 %% extract smoothed estimates of the yield curve factors
-[yobs, dates, yields, nims, nfactors, nothers, tau, factors,  shadow_bank_share_assets] = load_data_ml;
 forecast_horizon = 10;
 
 [f, q, r, x, a, lambda, h, xi_means, error] = kalmanFilterSetup(param_vec,tau,nfactors,nothers);
