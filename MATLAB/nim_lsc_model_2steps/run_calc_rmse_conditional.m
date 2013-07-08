@@ -82,7 +82,16 @@ lag = 1;
 [rmse_forecast_combination_mat1, forecast_combination_mat1] = calc_rmse_forecast_combination_conditional(nims(:,15:end),yields(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, 1,4);
 
 [rmse_multivariate_mat1, forecast_multivariate_mat1] = calc_rmse_multivariate_conditional(nims(:,15:end), smoothed_factors(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, lag);
+
+
 [rmse_forecast_combination_mat2, forecast_combination_mat2] = calc_rmse_forecast_combination_conditional(nims(:,15:end),smoothed_factors(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, 1,4);
+
+npc = 3;
+[rmse_pc_mat1, forecast_pc_mat1] = calc_rmse_pc(nims(:,15:end), yields(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, npc);
+
+npls = 5;
+[rmse_pls_mat1, forecast_pls_mat1] = calc_rmse_pls_conditional(nims(:,15:end), yields(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, npls);
+
 
 [rmse_forecast_combination_mat3, forecast_combination_mat3] = calc_rmse_forecast_combination_conditional(nims(:,15:end),factors(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, 1,4);
 
@@ -97,18 +106,24 @@ table1 = [
 rmse_forecast_combination_mat1
 rmse_multivariate_mat1
 rmse_forecast_combination_mat2
+rmse_pc_mat1
+rmse_pls_mat1
 rmse_forecast_combination_mat3
 rmse_varmat2
-rmse_nochangemat1];
+rmse_nochangemat1]
+
+rmse_pls_mat1
 
 
 columnlabels = char('Step 1','Step 2','Step 3','Step 4','Step 5','Step 6','Step 7','Step 8','Step 9','Step 10');
-rowlabels = char('1. Simple Forecast Combination',...
-                 '3a. DFM with 2nd Step Regression',...
-                 '3b. DFM with Forecast Combination',...
-                 '4. Forecast Combination of Observed Factors',...
-                 '5. VAR on Observed Factors',...
-                 '6. No-Change Forecast');
+rowlabels = char('1. F. Combination - Yields',...
+                 '3a. DFM with 2nd Step Reg.',...
+                 '3b. DFM with F. Combination',...
+                 '4. PCR',...
+                 '5. PLS',...
+                 '6. F. Combination - Observed Factors',...
+                 '7. VAR on Observed Factors',...
+                 '8. No-Change Forecast');
 table1_tex = tablelatex(table1,columnlabels,rowlabels);
 char(table1_tex)
 
@@ -141,6 +156,9 @@ char(table1_tex)
 
 [rmse_multivariate_mat1, forecast_multivariate_mat1] = calc_rmse_multivariate_conditional(nims, smoothed_factors, out_of_sample_start_pos, end_sample_pos, forecast_horizon, lag);
 [rmse_forecast_combination_mat2, forecast_multivariate_mat2] = calc_rmse_forecast_combination_conditional(nims,smoothed_factors, out_of_sample_start_pos, end_sample_pos, forecast_horizon, 1,4);
+npc = 3;
+[rmse_pc_mat1, forecast_pc_mat1] = calc_rmse_pc(nims, yields, out_of_sample_start_pos, end_sample_pos, forecast_horizon, npc);
+
 
 [rmse_forecast_combination_mat3, forecast_multivariate_mat3] = calc_rmse_forecast_combination_conditional(nims,factors, out_of_sample_start_pos, end_sample_pos, forecast_horizon, 1,4);
 
@@ -153,6 +171,7 @@ table2 = [
 rmse_forecast_combination_mat1
 rmse_multivariate_mat1
 rmse_forecast_combination_mat2
+rmse_pc_mat1
 rmse_forecast_combination_mat3
 rmse_varmat2
 rmse_nochangemat1];
@@ -170,6 +189,14 @@ char(table2_tex)
 [rmse_multivariate_mat1, forecast_multivariate_mat1] = calc_rmse_multivariate_conditional(nims(:,15:end), [smoothed_factors(:,15:end);shadow_bank_share_assets(:,15:end)], out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, lag);
 [rmse_forecast_combination_mat2, forecast_combination_mat2] = calc_rmse_forecast_combination_conditional(nims(:,15:end),[smoothed_factors(:,15:end);shadow_bank_share_assets(:,15:end)], out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, 1,4);
 
+
+npc = 4;
+[rmse_pc_mat1, forecast_pc_mat1] = calc_rmse_pc(nims(:,15:end), [yields(:,15:end); shadow_bank_share_assets(:,15:end)] , out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, npc);
+
+npls = 5;
+[rmse_pls_mat1, forecast_pls_mat1] = calc_rmse_pls_conditional(nims(:,15:end), [yields(:,15:end); shadow_bank_share_assets(:,15:end)], out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, npls);
+
+
 [rmse_forecast_combination_mat3, forecast_combination_mat3] = calc_rmse_forecast_combination_conditional(nims(:,15:end),[factors(:,15:end) ;shadow_bank_share_assets(:,15:end)], out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, 1,4);
 
 varlag=3;
@@ -183,6 +210,8 @@ table3 = [
 rmse_forecast_combination_mat1
 rmse_multivariate_mat1
 rmse_forecast_combination_mat2
+rmse_pc_mat1
+rmse_pls_mat1
 rmse_forecast_combination_mat3
 rmse_varmat2
 rmse_nochangemat1];
