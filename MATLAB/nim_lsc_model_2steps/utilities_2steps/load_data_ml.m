@@ -67,13 +67,13 @@ yields_varlist = char('SVENY0025','SVENY0050','SVENY0075','SVENY0100',...
 %1-((FL704090005.Q+ FL734090005.Q)/((FL413065005.Q+FL674090005.Q+FL614090005.Q+FL664090005.Q+FL504090005.Q)+(FL704090005.Q+ FL734090005.Q)))
 %Data comes from Flow of Funds FAME db fof.
 
+competition_path = '..\data\shadow_banking_share_assets.csv';
 if isunix
-    shadow_bank_share_assets_file = ...
-        csvread('../data/measures_of_competitiveness/shadow_banking_share_assets.csv', 1, 1);
-else
-    shadow_bank_share_assets_file = ...
-        csvread('..\data\shadow_banking_share_assets.csv', 1, 1);
+    competition_path = strrep(competition_path,'\','/');
 end
+shadow_bank_share_assets_file = ...
+        csvread(competition_path, 1, 1);
+
 
 %This data has same dates as yields
 shadow_bank_share_assets = shadow_bank_share_assets_file(start_pos:end_pos,1)';
@@ -114,10 +114,9 @@ nims = nim_with_trading;
 
 if dataset_option == 1
     subcomponent_path = '..\data\data_ranked_by_total_assets\nims_subcomponents_by_endperiod_total_assets.csv';
-    if ~isunix
-        subcomponent_path = strrep(subcomponent_path,'/','\');
+    if isunix
+        subcomponent_path = strrep(subcomponent_path,'\','/');
     end
-
     additional_data  = csvread(subcomponent_path, 1, 9);
     
     total_ie_assets = additional_data(:,1);
