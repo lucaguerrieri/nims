@@ -1,0 +1,921 @@
+%!PS-Adobe-3.0 
+%%Creator: MATLAB, The MathWorks, Inc. Version 7.14.0.739 (R2012a). Operating System: Microsoft Windows Server 2008 R2.
+%%Title: .\figure_CCAR_2013.ps
+%%CreationDate: 07/08/2013  16:58:05
+%%DocumentNeededFonts: Helvetica
+%%DocumentProcessColors: Cyan Magenta Yellow Black
+%%LanguageLevel: 2
+%%Pages: (atend)
+%%BoundingBox: (atend)
+%%EndComments
+
+%%BeginProlog
+% MathWorks dictionary
+/MathWorks 160 dict begin
+% definition operators
+/bdef {bind def} bind def
+/ldef {load def} bind def
+/xdef {exch def} bdef
+/xstore {exch store} bdef
+% operator abbreviations
+/c  /clip ldef
+/cc /concat ldef
+/cp /closepath ldef
+/gr /grestore ldef
+/gs /gsave ldef
+/mt /moveto ldef
+/np /newpath ldef
+/cm /currentmatrix ldef
+/sm /setmatrix ldef
+/rm /rmoveto ldef
+/rl /rlineto ldef
+/s {show newpath} bdef
+/sc {setcmykcolor} bdef
+/sr /setrgbcolor ldef
+/sg /setgray ldef
+/w /setlinewidth ldef
+/j /setlinejoin ldef
+/cap /setlinecap ldef
+/rc {rectclip} bdef
+/rf {rectfill} bdef
+% page state control
+/pgsv () def
+/bpage {/pgsv save def} bdef
+/epage {pgsv restore} bdef
+/bplot /gsave ldef
+/eplot {stroke grestore} bdef
+% orientation switch
+/portraitMode 0 def /landscapeMode 1 def /rotateMode 2 def
+% coordinate system mappings
+/dpi2point 0 def
+% font control
+/FontSize 0 def
+/FMS {/FontSize xstore findfont [FontSize 0 0 FontSize neg 0 0]
+  makefont setfont} bdef
+/ISOLatin1Encoding where {pop /WindowsLatin1Encoding 256 array bdef
+ISOLatin1Encoding WindowsLatin1Encoding copy pop
+/.notdef/.notdef/quotesinglbase/florin/quotedblbase/ellipsis/dagger
+/daggerdbl/circumflex/perthousand/Scaron/guilsinglleft/OE/.notdef/.notdef
+/.notdef/.notdef/quoteleft/quoteright/quotedblleft/quotedblright/bullet
+/endash/emdash/tilde/trademark/scaron/guilsinglright/oe/.notdef/.notdef
+/Ydieresis WindowsLatin1Encoding 128 32 getinterval astore pop}
+{/WindowsLatin1Encoding StandardEncoding bdef} ifelse
+/reencode {exch dup where {pop load} {pop StandardEncoding} ifelse
+  exch dup 3 1 roll findfont dup length dict begin
+  { 1 index /FID ne {def}{pop pop} ifelse } forall
+  /Encoding exch def currentdict end definefont pop} bdef
+/isroman {findfont /CharStrings get /Agrave known} bdef
+/FMSR {3 1 roll 1 index dup isroman {reencode} {pop pop} ifelse
+  exch FMS} bdef
+/csm {1 dpi2point div -1 dpi2point div scale neg translate
+ dup landscapeMode eq {pop -90 rotate}
+  {rotateMode eq {90 rotate} if} ifelse} bdef
+% line types: solid, dotted, dashed, dotdash
+/SO { [] 0 setdash } bdef
+/DO { [.5 dpi2point mul 4 dpi2point mul] 0 setdash } bdef
+/DA { [6 dpi2point mul] 0 setdash } bdef
+/DD { [.5 dpi2point mul 4 dpi2point mul 6 dpi2point mul 4
+  dpi2point mul] 0 setdash } bdef
+% macros for lines and objects
+/L {lineto stroke} bdef
+/MP {3 1 roll moveto 1 sub {rlineto} repeat} bdef
+/AP {{rlineto} repeat} bdef
+/PDlw -1 def
+/W {/PDlw currentlinewidth def setlinewidth} def
+/PP {closepath eofill} bdef
+/DP {closepath stroke} bdef
+/MR {4 -2 roll moveto dup  0 exch rlineto exch 0 rlineto
+  neg 0 exch rlineto closepath} bdef
+/FR {MR stroke} bdef
+/PR {MR fill} bdef
+/L1i {{currentfile picstr readhexstring pop} image} bdef
+/tMatrix matrix def
+/MakeOval {newpath tMatrix currentmatrix pop translate scale
+0 0 1 0 360 arc tMatrix setmatrix} bdef
+/FO {MakeOval stroke} bdef
+/PO {MakeOval fill} bdef
+/PD {currentlinewidth 2 div 0 360 arc fill
+   PDlw -1 eq not {PDlw w /PDlw -1 def} if} def
+/FA {newpath tMatrix currentmatrix pop translate scale
+  0 0 1 5 -2 roll arc tMatrix setmatrix stroke} bdef
+/PA {newpath tMatrix currentmatrix pop	translate 0 0 moveto scale
+  0 0 1 5 -2 roll arc closepath tMatrix setmatrix fill} bdef
+/FAn {newpath tMatrix currentmatrix pop translate scale
+  0 0 1 5 -2 roll arcn tMatrix setmatrix stroke} bdef
+/PAn {newpath tMatrix currentmatrix pop translate 0 0 moveto scale
+  0 0 1 5 -2 roll arcn closepath tMatrix setmatrix fill} bdef
+/vradius 0 def /hradius 0 def /lry 0 def
+/lrx 0 def /uly 0 def /ulx 0 def /rad 0 def
+/MRR {/vradius xdef /hradius xdef /lry xdef /lrx xdef /uly xdef
+  /ulx xdef newpath tMatrix currentmatrix pop ulx hradius add uly
+  vradius add translate hradius vradius scale 0 0 1 180 270 arc 
+  tMatrix setmatrix lrx hradius sub uly vradius add translate
+  hradius vradius scale 0 0 1 270 360 arc tMatrix setmatrix
+  lrx hradius sub lry vradius sub translate hradius vradius scale
+  0 0 1 0 90 arc tMatrix setmatrix ulx hradius add lry vradius sub
+  translate hradius vradius scale 0 0 1 90 180 arc tMatrix setmatrix
+  closepath} bdef
+/FRR {MRR stroke } bdef
+/PRR {MRR fill } bdef
+/MlrRR {/lry xdef /lrx xdef /uly xdef /ulx xdef /rad lry uly sub 2 div def
+  newpath tMatrix currentmatrix pop ulx rad add uly rad add translate
+  rad rad scale 0 0 1 90 270 arc tMatrix setmatrix lrx rad sub lry rad
+  sub translate rad rad scale 0 0 1 270 90 arc tMatrix setmatrix
+  closepath} bdef
+/FlrRR {MlrRR stroke } bdef
+/PlrRR {MlrRR fill } bdef
+/MtbRR {/lry xdef /lrx xdef /uly xdef /ulx xdef /rad lrx ulx sub 2 div def
+  newpath tMatrix currentmatrix pop ulx rad add uly rad add translate
+  rad rad scale 0 0 1 180 360 arc tMatrix setmatrix lrx rad sub lry rad
+  sub translate rad rad scale 0 0 1 0 180 arc tMatrix setmatrix
+  closepath} bdef
+/FtbRR {MtbRR stroke } bdef
+/PtbRR {MtbRR fill } bdef
+/stri 6 array def /dtri 6 array def
+/smat 6 array def /dmat 6 array def
+/tmat1 6 array def /tmat2 6 array def /dif 3 array def
+/asub {/ind2 exch def /ind1 exch def dup dup
+  ind1 get exch ind2 get sub exch } bdef
+/tri_to_matrix {
+  2 0 asub 3 1 asub 4 0 asub 5 1 asub
+  dup 0 get exch 1 get 7 -1 roll astore } bdef
+/compute_transform {
+  dmat dtri tri_to_matrix tmat1 invertmatrix 
+  smat stri tri_to_matrix tmat2 concatmatrix } bdef
+/ds {stri astore pop} bdef
+/dt {dtri astore pop} bdef
+/db {2 copy /cols xdef /rows xdef mul dup 3 mul string
+  currentfile 
+  3 index 0 eq {/ASCIIHexDecode filter}
+  {/ASCII85Decode filter 3 index 2 eq {/RunLengthDecode filter} if }
+  ifelse exch readstring pop
+  dup 0 3 index getinterval /rbmap xdef
+  dup 2 index dup getinterval /gbmap xdef
+  1 index dup 2 mul exch getinterval /bbmap xdef pop pop}bdef
+/it {gs np dtri aload pop moveto lineto lineto cp c
+  cols rows 8 compute_transform 
+  rbmap gbmap bbmap true 3 colorimage gr}bdef
+/il {newpath moveto lineto stroke}bdef
+currentdict end def
+%%EndProlog
+
+%%BeginSetup
+MathWorks begin
+
+0 cap
+
+end
+%%EndSetup
+
+%%Page: 1 1
+%%BeginPageSetup
+%%PageBoundingBox:    75    88   552   739
+MathWorks begin
+bpage
+%%EndPageSetup
+
+%%BeginObject: obj1
+bplot
+
+/dpi2point 12 def
+portraitMode 0204 9276 csm
+
+  698   401  5727  7819 rc
+85 dict begin %Colortable dictionary
+/c0 { 0.000000 0.000000 0.000000 sr} bdef
+/c1 { 1.000000 1.000000 1.000000 sr} bdef
+/c2 { 0.900000 0.000000 0.000000 sr} bdef
+/c3 { 0.000000 0.820000 0.000000 sr} bdef
+/c4 { 0.000000 0.000000 0.800000 sr} bdef
+/c5 { 0.910000 0.820000 0.320000 sr} bdef
+/c6 { 1.000000 0.260000 0.820000 sr} bdef
+/c7 { 0.000000 0.820000 0.820000 sr} bdef
+c0
+1 j
+1 sg
+   0    0 6913 9073 rf
+6 w
+0 1958 2300 0 0 -1958 899 2638 4 MP
+PP
+-2300 0 0 1958 2300 0 0 -1958 899 2638 5 MP stroke
+4 w
+DO
+SO
+6 w
+0 sg
+ 899  680 mt 3199  680 L
+ 899 2638 mt 3199 2638 L
+3199 2638 mt 3199  680 L
+ 899 2638 mt  899  680 L
+ 899 2638 mt 3199 2638 L
+ 899 2638 mt  899  680 L
+ 899 2638 mt  899 2615 L
+ 899  680 mt  899  703 L
+%%IncludeResource: font Helvetica
+/Helvetica /WindowsLatin1Encoding 120 FMSR
+
+ 766 2783 mt 
+(2012) s
+1665 2638 mt 1665 2615 L
+1665  680 mt 1665  703 L
+1532 2783 mt 
+(2013) s
+2432 2638 mt 2432 2615 L
+2432  680 mt 2432  703 L
+2299 2783 mt 
+(2014) s
+3199 2638 mt 3199 2615 L
+3199  680 mt 3199  703 L
+3066 2783 mt 
+(2015) s
+ 899 2638 mt  922 2638 L
+3199 2638 mt 3176 2638 L
+ 798 2682 mt 
+(0) s
+ 899 2148 mt  922 2148 L
+3199 2148 mt 3176 2148 L
+ 798 2192 mt 
+(1) s
+ 899 1659 mt  922 1659 L
+3199 1659 mt 3176 1659 L
+ 798 1703 mt 
+(2) s
+ 899 1169 mt  922 1169 L
+3199 1169 mt 3176 1169 L
+ 798 1213 mt 
+(3) s
+ 899  680 mt  922  680 L
+3199  680 mt 3176  680 L
+ 798  724 mt 
+(4) s
+ 899  680 mt 3199  680 L
+ 899 2638 mt 3199 2638 L
+3199 2638 mt 3199  680 L
+ 899 2638 mt  899  680 L
+gs 899 680 2301 1959 rc
+192 -94 192 -90 191 -83 192 -75 192 -125 191 0 192 -49 192 0 
+191 0 1474 2589 10 MP stroke
+DA
+/c8 { 1.000000 0.000000 0.000000 sr} bdef
+c8
+192 0 192 0 191 0 192 0 192 0 191 0 192 0 192 0 
+191 0 1474 2589 10 MP stroke
+gr
+
+c8
+DA
+0 sg
+1394  585 mt 
+(3-Month Treasury Yields) s
+ 882 2681 mt 
+( ) s
+3183  722 mt 
+( ) s
+SO
+1 sg
+0 334 1944 0 0 -334 959 1074 4 MP
+PP
+-1944 0 0 334 1944 0 0 -334 959 1074 5 MP stroke
+4 w
+DO
+SO
+6 w
+0 sg
+ 959  740 mt 2903  740 L
+ 959 1074 mt 2903 1074 L
+2903 1074 mt 2903  740 L
+ 959 1074 mt  959  740 L
+ 959 1074 mt 2903 1074 L
+ 959 1074 mt  959  740 L
+ 959  740 mt 2903  740 L
+ 959 1074 mt 2903 1074 L
+2903 1074 mt 2903  740 L
+ 959 1074 mt  959  740 L
+1436  875 mt 
+(Baseline) s
+gs 959 740 1945 335 rc
+367 0 1032 832 2 MP stroke
+gr
+
+1436 1024 mt 
+(Severely Adverse Scenario) s
+gs 959 740 1945 335 rc
+DA
+c8
+367 0 1032 981 2 MP stroke
+SO
+gr
+
+c8
+1 sg
+0 1958 2301 0 0 -1958 3942 2638 4 MP
+PP
+-2301 0 0 1958 2301 0 0 -1958 3942 2638 5 MP stroke
+4 w
+DO
+SO
+6 w
+0 sg
+3942  680 mt 6243  680 L
+3942 2638 mt 6243 2638 L
+6243 2638 mt 6243  680 L
+3942 2638 mt 3942  680 L
+3942 2638 mt 6243 2638 L
+3942 2638 mt 3942  680 L
+3942 2638 mt 3942 2614 L
+3942  680 mt 3942  703 L
+3809 2783 mt 
+(2012) s
+4709 2638 mt 4709 2614 L
+4709  680 mt 4709  703 L
+4576 2783 mt 
+(2013) s
+5476 2638 mt 5476 2614 L
+5476  680 mt 5476  703 L
+5343 2783 mt 
+(2014) s
+6243 2638 mt 6243 2614 L
+6243  680 mt 6243  703 L
+6110 2783 mt 
+(2015) s
+3942 2638 mt 3965 2638 L
+6243 2638 mt 6219 2638 L
+3841 2682 mt 
+(0) s
+3942 2148 mt 3965 2148 L
+6243 2148 mt 6219 2148 L
+3841 2192 mt 
+(1) s
+3942 1659 mt 3965 1659 L
+6243 1659 mt 6219 1659 L
+3841 1703 mt 
+(2) s
+3942 1169 mt 3965 1169 L
+6243 1169 mt 6219 1169 L
+3841 1213 mt 
+(3) s
+3942  680 mt 3965  680 L
+6243  680 mt 6219  680 L
+3841  724 mt 
+(4) s
+3942  680 mt 6243  680 L
+3942 2638 mt 6243 2638 L
+6243 2638 mt 6243  680 L
+3942 2638 mt 3942  680 L
+gs 3942 680 2302 1959 rc
+192 -94 192 -90 192 -83 191 -75 192 -125 192 0 192 -49 191 0 
+192 0 4517 2589 10 MP stroke
+DA
+c8
+192 -122 192 0 192 0 191 -122 192 -123 192 -244 192 -245 191 -245 
+192 -245 4517 2393 10 MP stroke
+gr
+
+c8
+DA
+0 sg
+4438  585 mt 
+(3-Month Treasury Yields) s
+3925 2681 mt 
+( ) s
+6227  722 mt 
+( ) s
+SO
+1 sg
+0 334 1451 0 0 -334 4002 1074 4 MP
+PP
+-1451 0 0 334 1451 0 0 -334 4002 1074 5 MP stroke
+4 w
+DO
+SO
+6 w
+0 sg
+4002  740 mt 5453  740 L
+4002 1074 mt 5453 1074 L
+5453 1074 mt 5453  740 L
+4002 1074 mt 4002  740 L
+4002 1074 mt 5453 1074 L
+4002 1074 mt 4002  740 L
+4002  740 mt 5453  740 L
+4002 1074 mt 5453 1074 L
+5453 1074 mt 5453  740 L
+4002 1074 mt 4002  740 L
+4477  875 mt 
+(Baseline) s
+gs 4002 740 1452 335 rc
+365 0 4075 832 2 MP stroke
+gr
+
+4477 1024 mt 
+(Adverse Scenario) s
+gs 4002 740 1452 335 rc
+DA
+c8
+365 0 4075 981 2 MP stroke
+SO
+gr
+
+c8
+1 sg
+0 1957 2300 0 0 -1957 899 5356 4 MP
+PP
+-2300 0 0 1957 2300 0 0 -1957 899 5356 5 MP stroke
+4 w
+DO
+SO
+6 w
+0 sg
+ 899 3399 mt 3199 3399 L
+ 899 5356 mt 3199 5356 L
+3199 5356 mt 3199 3399 L
+ 899 5356 mt  899 3399 L
+ 899 5356 mt 3199 5356 L
+ 899 5356 mt  899 3399 L
+ 899 5356 mt  899 5333 L
+ 899 3399 mt  899 3422 L
+ 766 5501 mt 
+(2012) s
+1665 5356 mt 1665 5333 L
+1665 3399 mt 1665 3422 L
+1532 5501 mt 
+(2013) s
+2432 5356 mt 2432 5333 L
+2432 3399 mt 2432 3422 L
+2299 5501 mt 
+(2014) s
+3199 5356 mt 3199 5333 L
+3199 3399 mt 3199 3422 L
+3066 5501 mt 
+(2015) s
+ 899 5356 mt  922 5356 L
+3199 5356 mt 3176 5356 L
+ 798 5400 mt 
+(0) s
+ 899 4964 mt  922 4964 L
+3199 4964 mt 3176 4964 L
+ 798 5008 mt 
+(1) s
+ 899 4573 mt  922 4573 L
+3199 4573 mt 3176 4573 L
+ 798 4617 mt 
+(2) s
+ 899 4181 mt  922 4181 L
+3199 4181 mt 3176 4181 L
+ 798 4225 mt 
+(3) s
+ 899 3790 mt  922 3790 L
+3199 3790 mt 3176 3790 L
+ 798 3834 mt 
+(4) s
+ 899 3399 mt  922 3399 L
+3199 3399 mt 3176 3399 L
+ 798 3443 mt 
+(5) s
+ 899 3399 mt 3199 3399 L
+ 899 5356 mt 3199 5356 L
+3199 5356 mt 3199 3399 L
+ 899 5356 mt  899 3399 L
+gs 899 3399 2301 1958 rc
+192 -94 192 -79 191 -81 192 -82 192 -113 191 -79 192 -39 192 -78 
+191 -39 1474 4690 10 MP stroke
+DA
+c8
+192 -51 192 -63 191 -79 192 -98 192 0 191 0 192 0 192 0 
+191 78 1474 4792 10 MP stroke
+gr
+
+c8
+DA
+0 sg
+1409 3304 mt 
+(10-Year Treasury Yields) s
+ 882 5399 mt 
+( ) s
+3183 3441 mt 
+( ) s
+SO
+1 sg
+0 334 1944 0 0 -334 959 3793 4 MP
+PP
+-1944 0 0 334 1944 0 0 -334 959 3793 5 MP stroke
+4 w
+DO
+SO
+6 w
+0 sg
+ 959 3459 mt 2903 3459 L
+ 959 3793 mt 2903 3793 L
+2903 3793 mt 2903 3459 L
+ 959 3793 mt  959 3459 L
+ 959 3793 mt 2903 3793 L
+ 959 3793 mt  959 3459 L
+ 959 3459 mt 2903 3459 L
+ 959 3793 mt 2903 3793 L
+2903 3793 mt 2903 3459 L
+ 959 3793 mt  959 3459 L
+1436 3594 mt 
+(Baseline) s
+gs 959 3459 1945 335 rc
+367 0 1032 3551 2 MP stroke
+gr
+
+1436 3743 mt 
+(Severely Adverse Scenario) s
+gs 959 3459 1945 335 rc
+DA
+c8
+367 0 1032 3700 2 MP stroke
+SO
+gr
+
+c8
+1 sg
+0 1957 2301 0 0 -1957 3942 5356 4 MP
+PP
+-2301 0 0 1957 2301 0 0 -1957 3942 5356 5 MP stroke
+4 w
+DO
+SO
+6 w
+0 sg
+3942 3399 mt 6243 3399 L
+3942 5356 mt 6243 5356 L
+6243 5356 mt 6243 3399 L
+3942 5356 mt 3942 3399 L
+3942 5356 mt 6243 5356 L
+3942 5356 mt 3942 3399 L
+3942 5356 mt 3942 5332 L
+3942 3399 mt 3942 3422 L
+3809 5501 mt 
+(2012) s
+4709 5356 mt 4709 5332 L
+4709 3399 mt 4709 3422 L
+4576 5501 mt 
+(2013) s
+5476 5356 mt 5476 5332 L
+5476 3399 mt 5476 3422 L
+5343 5501 mt 
+(2014) s
+6243 5356 mt 6243 5332 L
+6243 3399 mt 6243 3422 L
+6110 5501 mt 
+(2015) s
+3942 5356 mt 3965 5356 L
+6243 5356 mt 6219 5356 L
+3841 5400 mt 
+(0) s
+3942 4964 mt 3965 4964 L
+6243 4964 mt 6219 4964 L
+3841 5008 mt 
+(1) s
+3942 4573 mt 3965 4573 L
+6243 4573 mt 6219 4573 L
+3841 4617 mt 
+(2) s
+3942 4181 mt 3965 4181 L
+6243 4181 mt 6219 4181 L
+3841 4225 mt 
+(3) s
+3942 3790 mt 3965 3790 L
+6243 3790 mt 6219 3790 L
+3841 3834 mt 
+(4) s
+3942 3399 mt 3965 3399 L
+6243 3399 mt 6219 3399 L
+3841 3443 mt 
+(5) s
+3942 3399 mt 6243 3399 L
+3942 5356 mt 6243 5356 L
+6243 5356 mt 6243 3399 L
+3942 5356 mt 3942 3399 L
+gs 3942 3399 2302 1958 rc
+192 -94 192 -79 192 -81 191 -82 192 -113 192 -79 192 -39 191 -78 
+192 -39 4517 4690 10 MP stroke
+DA
+c8
+192 -106 192 -84 192 -74 191 -94 192 -148 192 -106 192 -2 191 -169 
+192 -153 4517 4366 10 MP stroke
+gr
+
+c8
+DA
+0 sg
+4453 3304 mt 
+(10-Year Treasury Yields) s
+3925 5399 mt 
+( ) s
+6227 3441 mt 
+( ) s
+SO
+1 sg
+0 334 1451 0 0 -334 4002 3793 4 MP
+PP
+-1451 0 0 334 1451 0 0 -334 4002 3793 5 MP stroke
+4 w
+DO
+SO
+6 w
+0 sg
+4002 3459 mt 5453 3459 L
+4002 3793 mt 5453 3793 L
+5453 3793 mt 5453 3459 L
+4002 3793 mt 4002 3459 L
+4002 3793 mt 5453 3793 L
+4002 3793 mt 4002 3459 L
+4002 3459 mt 5453 3459 L
+4002 3793 mt 5453 3793 L
+5453 3793 mt 5453 3459 L
+4002 3793 mt 4002 3459 L
+4477 3594 mt 
+(Baseline) s
+gs 4002 3459 1452 335 rc
+365 0 4075 3551 2 MP stroke
+gr
+
+4477 3743 mt 
+(Adverse Scenario) s
+gs 4002 3459 1452 335 rc
+DA
+c8
+365 0 4075 3700 2 MP stroke
+SO
+gr
+
+c8
+1 sg
+0 1957 2300 0 0 -1957 899 8073 4 MP
+PP
+-2300 0 0 1957 2300 0 0 -1957 899 8073 5 MP stroke
+4 w
+DO
+SO
+6 w
+0 sg
+ 899 6116 mt 3199 6116 L
+ 899 8073 mt 3199 8073 L
+3199 8073 mt 3199 6116 L
+ 899 8073 mt  899 6116 L
+ 899 8073 mt 3199 8073 L
+ 899 8073 mt  899 6116 L
+ 899 8073 mt  899 8050 L
+ 899 6116 mt  899 6139 L
+ 766 8219 mt 
+(2012) s
+1665 8073 mt 1665 8050 L
+1665 6116 mt 1665 6139 L
+1532 8219 mt 
+(2013) s
+2432 8073 mt 2432 8050 L
+2432 6116 mt 2432 6139 L
+2299 8219 mt 
+(2014) s
+3199 8073 mt 3199 8050 L
+3199 6116 mt 3199 6139 L
+3066 8219 mt 
+(2015) s
+ 899 8073 mt  922 8073 L
+3199 8073 mt 3176 8073 L
+ 698 8117 mt 
+(2.4) s
+ 899 7584 mt  922 7584 L
+3199 7584 mt 3176 7584 L
+ 698 7628 mt 
+(2.6) s
+ 899 7095 mt  922 7095 L
+3199 7095 mt 3176 7095 L
+ 698 7139 mt 
+(2.8) s
+ 899 6606 mt  922 6606 L
+3199 6606 mt 3176 6606 L
+ 798 6650 mt 
+(3) s
+ 899 6116 mt  922 6116 L
+3199 6116 mt 3176 6116 L
+ 698 6160 mt 
+(3.2) s
+ 899 6116 mt 3199 6116 L
+ 899 8073 mt 3199 8073 L
+3199 8073 mt 3199 6116 L
+ 899 8073 mt  899 6116 L
+gs 899 6117 2301 1957 rc
+192 25 192 48 191 58 192 39 192 78 191 72 192 83 192 71 
+191 77 1474 6483 10 MP stroke
+DA
+c8
+192 65 192 50 191 64 192 81 192 89 191 76 192 84 192 93 
+191 91 1474 6451 10 MP stroke
+DD
+192 45 192 27 191 66 192 71 192 48 191 27 192 47 192 55 
+191 34 1474 6193 10 MP stroke
+gr
+
+c8
+DD
+0 sg
+1593 6022 mt 
+(Forecast of NIMs) s
+ 882 8116 mt 
+( ) s
+3183 6159 mt 
+( ) s
+gs 899 6117 2301 1957 rc
+c8
+192 84 192 73 191 62 192 90 192 132 191 125 192 120 192 131 
+191 148 1474 6709 10 MP stroke
+SO
+gr
+
+c8
+SO
+1 sg
+0 480 1436 0 0 -480 959 8014 4 MP
+PP
+-1436 0 0 480 1436 0 0 -480 959 8014 5 MP stroke
+4 w
+DO
+SO
+6 w
+0 sg
+ 959 7534 mt 2395 7534 L
+ 959 8014 mt 2395 8014 L
+2395 8014 mt 2395 7534 L
+ 959 8014 mt  959 7534 L
+ 959 8014 mt 2395 8014 L
+ 959 8014 mt  959 7534 L
+ 959 7534 mt 2395 7534 L
+ 959 8014 mt 2395 8014 L
+2395 8014 mt 2395 7534 L
+ 959 8014 mt  959 7534 L
+1435 7669 mt 
+(Baseline) s
+gs 959 7534 1437 481 rc
+366 0 1032 7626 2 MP stroke
+gr
+
+1435 7817 mt 
+(Severely Adverse) s
+gs 959 7534 1437 481 rc
+DA
+c8
+366 0 1032 7774 2 MP stroke
+SO
+gr
+
+c8
+0 sg
+1435 7965 mt 
+(1-RMSE band) s
+gs 959 7534 1437 481 rc
+DD
+c8
+366 0 1032 7921 2 MP stroke
+SO
+gr
+
+c8
+1 sg
+0 1957 2301 0 0 -1957 3942 8073 4 MP
+PP
+-2301 0 0 1957 2301 0 0 -1957 3942 8073 5 MP stroke
+4 w
+DO
+SO
+6 w
+0 sg
+3942 6116 mt 6243 6116 L
+3942 8073 mt 6243 8073 L
+6243 8073 mt 6243 6116 L
+3942 8073 mt 3942 6116 L
+3942 8073 mt 6243 8073 L
+3942 8073 mt 3942 6116 L
+3942 8073 mt 3942 8050 L
+3942 6116 mt 3942 6140 L
+3809 8219 mt 
+(2012) s
+4709 8073 mt 4709 8050 L
+4709 6116 mt 4709 6140 L
+4576 8219 mt 
+(2013) s
+5476 8073 mt 5476 8050 L
+5476 6116 mt 5476 6140 L
+5343 8219 mt 
+(2014) s
+6243 8073 mt 6243 8050 L
+6243 6116 mt 6243 6140 L
+6110 8219 mt 
+(2015) s
+3942 8073 mt 3965 8073 L
+6243 8073 mt 6219 8073 L
+3741 8117 mt 
+(2.4) s
+3942 7584 mt 3965 7584 L
+6243 7584 mt 6219 7584 L
+3741 7628 mt 
+(2.6) s
+3942 7095 mt 3965 7095 L
+6243 7095 mt 6219 7095 L
+3741 7139 mt 
+(2.8) s
+3942 6606 mt 3965 6606 L
+6243 6606 mt 6219 6606 L
+3841 6650 mt 
+(3) s
+3942 6116 mt 3965 6116 L
+6243 6116 mt 6219 6116 L
+3741 6160 mt 
+(3.2) s
+3942 6116 mt 6243 6116 L
+3942 8073 mt 6243 8073 L
+6243 8073 mt 6243 6116 L
+3942 8073 mt 3942 6116 L
+gs 3942 6117 2302 1957 rc
+192 25 192 48 192 58 191 39 192 78 192 72 192 83 191 71 
+192 77 4517 6483 10 MP stroke
+DA
+c8
+192 -55 192 -10 192 -8 191 1 192 66 192 87 192 158 191 58 
+192 40 4517 6492 10 MP stroke
+DD
+192 -75 192 -33 192 -6 191 -9 192 24 192 38 192 122 191 20 
+192 -18 4517 6235 10 MP stroke
+gr
+
+c8
+DD
+0 sg
+4640 6022 mt 
+(Forecast of Nims) s
+3925 8116 mt 
+( ) s
+6227 6159 mt 
+( ) s
+gs 3942 6117 2302 1957 rc
+c8
+192 -36 192 13 192 -10 191 10 192 108 192 136 192 195 191 96 
+192 97 4517 6750 10 MP stroke
+SO
+gr
+
+c8
+SO
+1 sg
+0 480 1289 0 0 -480 4002 8014 4 MP
+PP
+-1289 0 0 480 1289 0 0 -480 4002 8014 5 MP stroke
+4 w
+DO
+SO
+6 w
+0 sg
+4002 7534 mt 5291 7534 L
+4002 8014 mt 5291 8014 L
+5291 8014 mt 5291 7534 L
+4002 8014 mt 4002 7534 L
+4002 8014 mt 5291 8014 L
+4002 8014 mt 4002 7534 L
+4002 7534 mt 5291 7534 L
+4002 8014 mt 5291 8014 L
+5291 8014 mt 5291 7534 L
+4002 8014 mt 4002 7534 L
+4485 7669 mt 
+(Baseline) s
+gs 4002 7534 1290 481 rc
+371 0 4076 7626 2 MP stroke
+gr
+
+4485 7817 mt 
+(Adverse) s
+gs 4002 7534 1290 481 rc
+DA
+c8
+371 0 4076 7774 2 MP stroke
+SO
+gr
+
+c8
+0 sg
+4485 7965 mt 
+(1-RMSE band) s
+gs 4002 7534 1290 481 rc
+DD
+c8
+371 0 4076 7921 2 MP stroke
+SO
+gr
+
+c8
+
+end %%Color Dict
+
+eplot
+%%EndObject
+
+epage
+end
+
+showpage
+
+%%Trailer
+%%BoundingBox:    75    88   552   739
+%%Pages: 001
+%%EOF
