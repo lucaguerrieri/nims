@@ -7,7 +7,7 @@
 \usepackage{color}
 \usepackage{colortbl}
 \usepackage{dcolumn}
-\usepackage{verbatim} 
+\usepackage{verbatim}
 \newcolumntype{.}{D{.}{.}{3}}
 %\usetheme{Berlin}
   \setbeamercovered{transparent}
@@ -40,9 +40,9 @@
 
 \title[Stressing Bank Profitability for Interest Rate Risk]
 {Stressing Bank Profitability for Interest Rate Risk}
-\author[Bolotnyy, Edge, \& Guerrieri]{Valentin Bolotnyy, Federal Reserve Board, \\  
-                           \vspace{0.05in}Rochelle M. Edge, Federal Reserve Board, \\ 
-                           \vspace{0.05in} and \\ 
+\author[Bolotnyy, Edge, \& Guerrieri]{Valentin Bolotnyy, Federal Reserve Board, \\
+                           \vspace{0.05in}Rochelle M. Edge, Federal Reserve Board, \\
+                           \vspace{0.05in} and \\
                            \vspace{0.05in}Luca Guerrieri, Federal Reserve Board}
 \date[8/2013]{July 8, 2013}
 
@@ -54,7 +54,7 @@
 \end{frame}
 
 \begin{frame}
-\frametitle{Motivation} 
+\frametitle{Motivation}
 \begin{itemize}
 \item \vspace{0.075in} Regular bank stress testing is one of the three complementary reforms made to U.S. capital regulation since the crisis.
 \item \vspace{0.25in} There are two important parts of stress testing.
@@ -64,18 +64,18 @@
 \end{itemize}
 \item \vspace{0.25in} It is important that stress tests are able to translate accurately scenarios into bank financial statement outcomes.
 \begin{itemize}
-\item \vspace{0.075in} We examine this question for models of bank net interest margins (NIMs). 
+\item \vspace{0.075in} We examine this question for models of bank net interest margins (NIMs).
 \end{itemize}
 \end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{Net interest margins (for the top 25 bank holding companies, assessed quarterly)}
+\frametitle{NIMs (for the top 25BHCs, assessed quarterly)}
 
 \vspace{-0.15in}
 \begin{eqnarray}\textsf{Net interest margins}\!\!\!\!&=&\!\!\!\!\frac{\textsf{Net interest income (NII)}}{\textsf{Interest bearing assets}} \nonumber \\
-                \!\!\!\!&=&\!\!\!\!\frac{\textsf{Total interest income}-\textsf{Total interest expenses}}{\textsf{Interest bearing assets}}  \nonumber 
-\end{eqnarray} 
+                \!\!\!\!&=&\!\!\!\!\frac{\textsf{Total interest income}-\textsf{Total interest expenses}}{\textsf{Interest bearing assets}}  \nonumber
+\end{eqnarray}
 \begin{center}
 \includegraphics[height=5.4cm,width=7.2cm]{nims_crop.pdf}
 \end{center}
@@ -87,10 +87,10 @@
 
 
 \begin{frame}
-\frametitle{Why study NIMs} 
+\frametitle{Why study NIMs}
 \begin{itemize}
-\item \vspace{0.0in} Losses from banks' earning depressed or negative NII is an important source of risk to banks and the financial sector.
-\item \vspace{0.1in} The U.S. savings and loans crisis was associated with NII and NIMs turning negative in the sector.
+\item \vspace{0.0in} Losses from banks' earnings depressing NII is an important source of risk to banks and the financial sector.
+\item \vspace{0.1in} The U.S. savings and loans crisis was associated with NII and NIMs turning negative in the thrift sector.
 \end{itemize}
 \begin{center}
 \includegraphics[height=4.4cm,width=5.9cm]{NIMs_Thrifts_CROP.pdf}
@@ -99,16 +99,16 @@
 \end{frame}
 
 \begin{frame}
-\frametitle{Why study NIMs, continued} 
+\frametitle{Why study NIMs, continued}
 \begin{itemize}
-\item \vspace{0.0in} A few other banking crises have also been associated with depressed or negative NIMs; including,       
+\item \vspace{0.0in} A few other banking crises have also been associated with depressed or negative NIMs; including,
 \begin{itemize}
-\item \vspace{0.125in} The Nordic banking crises (in Finland, Sweden, and Norway) of the late 1980s/early 1990s; and, 
-\item \vspace{0.125in} The U.K. secondary banking of 1973-75. 
+\item \vspace{0.125in} The Nordic banking crises (in Finland, Sweden, and Norway) of the late 1980s/early 1990s; and,
+\item \vspace{0.125in} The U.K. secondary banking of 1973-75.
 \end{itemize}
 \item \vspace{0.25in} NII is an important part of bank profitability.
 \begin{itemize}
-\item \vspace{0.125in} Bank equity analysis direct considerable attention to NII and NIMs in evaluating future bank profitability.
+\item \vspace{0.125in} Bank equity analysts direct considerable attention to NII and NIMs in evaluating future bank profitability.
 \item \vspace{0.125in} This reflects the fact that NII and NIMs are less volatile than other components of bank revenue.
 \end{itemize}
 \end{itemize}
@@ -117,18 +117,18 @@
 \begin{frame}
 \frametitle{Objective of this paper}
 \begin{itemize}
-\item \vspace{0.0in} To develop a model that can be used to forecast bank net interest margins (NIMs). 
+\item \vspace{0.0in} To develop a model that can be used to forecast bank net interest margins (NIMs).
 \end{itemize}
-\vspace{-0.05in} 
-\hspace{0.35in}\[\textsf{Net interest margins (NIMs)}=\frac{\textsf{Net interest income (NIIs)}}{\textsf{Interest bearing assets}} \] 
-%\item \vspace{0.075in} $\textsf{Net interest margins (NIMs)} = 
-%\frac{\textsf{Net interest income (NII)}}{\textsf{Interest bearing assets}}$ 
+\vspace{-0.05in}
+\hspace{0.35in}\[\textsf{Net interest margins (NIMs)}=\frac{\textsf{Net interest income (NIIs)}}{\textsf{Interest bearing assets}} \]
+%\item \vspace{0.075in} $\textsf{Net interest margins (NIMs)} =
+%\frac{\textsf{Net interest income (NII)}}{\textsf{Interest bearing assets}}$
 \begin{itemize}
-\item \vspace{0.05in} We focus on conditional forecast performance.  
+\item \vspace{0.05in} We focus on conditional forecast performance.
 \begin{itemize}
-\item \vspace{0.075in} Our interest is not in forecasting the macroeconomy (and especially not interest rates). 
-\item \vspace{0.075in} Our interest is in forecasting bank profitability given the macroeconomy. 
-\item \vspace{0.075in} Stress tests -- an important use of our model -- 
+\item \vspace{0.075in} Our interest is not in forecasting the macroeconomy (and especially not interest rates).
+\item \vspace{0.075in} Our interest is in forecasting bank profitability given the macroeconomy.
+\item \vspace{0.075in} Stress tests -- an important use of our model --
                        are conducted conditional on a set of macroeconomic scenarios.
 \end{itemize}
 \end{itemize}
@@ -137,16 +137,16 @@
 \begin{frame}
 \frametitle{Key variables for modeling NIMs}
 \begin{itemize}
-\item \vspace{0.0in} The slope of the Treasury yield curve. 
+\item \vspace{0.0in} The slope of the Treasury yield curve.
 \begin{itemize}
-\item \vspace{0.05in} Reflects banks' return on maturity-transformation serivces -- one of the key services provided by banks.  
+\item \vspace{0.05in} Reflects banks' return on maturity-transformation serivces -- one of the key services provided by banks.
 \end{itemize}
-\item \vspace{0.1in} The level of short-term interest rates. 
+\item \vspace{0.1in} The level of short-term interest rates.
 \begin{itemize}
 \item \vspace{0.05in} Indirectly reflects banks' return on transactions services -- another key service provided by banks.
-\item \vspace{0.05in} The level of the short rate puts an upper limit on how much banks can earn from transactions services.  
+\item \vspace{0.05in} The level of the short rate puts an upper limit on how much banks can earn from transactions services.
 \end{itemize}
-\item \vspace{0.1in} The use of these variables is common in the macro-banking literature modeling NIMs.
+\item \vspace{0.1in} The 10-year yield less 3-month rate and the 3-month rate are commonly used in the macro-banking NIM literature.
 \begin{itemize}
 \item \vspace{0.05in} Kovner and Vickery (2012)
 \item \vspace{0.05in} Covas, Rump, and Zakrajsek (2012)
@@ -167,8 +167,8 @@
 \begin{itemize}
 \item \vspace{0.025in} Reflects the increased return to maturity transformation.
 \end{itemize}
-\item \vspace{0.075in} Changes in the short rate drive changes in the slope of the yield curve. 
-\item \vspace{0.075in} There is an evident downward trend in the time series. 
+\item \vspace{0.075in} Changes in the short rate drive changes in the slope of the yield curve.
+\item \vspace{0.075in} There is an evident downward trend in the NIM time series.
 \begin{itemize}
 \item \vspace{0.025in} This may be tied to the lower level of interest rates.
 \end{itemize}
@@ -201,14 +201,14 @@
 \item \vspace{0.05in} The degree of competition faced by banks in loan and deposit markets; and,
 \item \vspace{0.05in} The volatility of interest rates.
 \end{itemize}
-\item\vspace{0.1in} The greater the degree of competition faced by banks in loan and deposit markets, 
+\item\vspace{0.1in} The greater the degree of competition faced by banks in loan and deposit markets,
 \begin{itemize}
-\item \vspace{0.05in} The lower the level of NIMs that banks can set. 
+\item \vspace{0.05in} The lower the level of NIMs that banks can set.
 \end{itemize}
 \item\vspace{0.1in} If banks are risk averse, the greater the volatility of interest rates,
 \begin{itemize}
 \item \vspace{0.05in} The more compensation for risk that banks will require to take deposits and make loans, and,
-\item \vspace{0.05in} The higher the level of NIMs that banks will set. 
+\item \vspace{0.05in} The higher the level of NIMs that banks will set.
 \end{itemize}
 \end{itemize}
 \end{frame}
@@ -218,8 +218,8 @@
 \begin{itemize}
 \item \vspace{0.15in} Relevant papers in the empirical micro-banking literature on modeling NIMs include:
 \begin{itemize}
-\item \vspace{0.15in} Ho and Saunders (1981) 
-\item \vspace{0.15in} Angbazo (1997) 
+\item \vspace{0.15in} Ho and Saunders (1981)
+\item \vspace{0.15in} Angbazo (1997)
 \item \vspace{0.15in} Saunders and Schumacher (2000)
 \end{itemize}
 
@@ -248,7 +248,7 @@
 \end{frame}
 
 \begin{frame}
-\frametitle{Net interest margins:  A few quirks in the data}
+\frametitle{NIMs:  A few quirks in the data}
 
 \begin{columns}[4cm]
 
@@ -261,7 +261,7 @@
 \begin{itemize}
 \item \vspace{0.075in} This reflects interest from Brazil overdue since early 1987.
 \end{itemize}
-\item \vspace{0.15in} The jump in 2010:Q1 reflects FAS 167 going into effect. 
+\item \vspace{0.15in} The jump in 2010:Q1 reflects FAS 167 going into effect.
 \begin{itemize}
 \item \vspace{0.075in} We will adjust for this jump.
 \end{itemize}
@@ -270,7 +270,7 @@
 \end{frame}
 
 \begin{frame}
-\frametitle{Forecasting models} 
+\frametitle{Forecasting models}
 
 We are interesting in comparing the pseudo-out-of-sample forecasting performance of different models:
 \begin{enumerate}
@@ -291,7 +291,7 @@ We are interesting in comparing the pseudo-out-of-sample forecasting performance
 
 \item Next -- We describe each of the models in our horse race
 
-\item We focus on the baseline specification for each model 
+\item We focus on the baseline specification for each model
 
 \item Each model can be extended to include additional variables (sensitivity analysis)
 
@@ -357,7 +357,7 @@ a_{41} & a_{42} & a_{43} & a_{44}%
 
 $L_{t},S_{t},$ and $C_{t}$ are level slope and curvature factors for
 the yield curve, respectively, and $\widehat{NIM}_{t}$ represent a measure
-of NIMs cleaned of observation error. 
+of NIMs cleaned of observation error.
 
 The term $\mu _{x}$ denotes the mean
 of $x$. The terms ${\eta _{Lt}}$, ${\eta _{St}}$, ${\eta _{Ct}}$, ${\eta
@@ -449,13 +449,13 @@ r(\tau )=\left(
 \begin{array}{c}
 {L_{t}-\mu _{L}} \\
 {S_{t}-\mu _{S}} \\
-{C_{t}-\mu _{C}} 
+{C_{t}-\mu _{C}}
 \end{array}%
 \right) +e(\tau )_{t},
 \end{equation*}
 
 We obtain smoothed estimates of the factors $L_{t},S_{t},$ and $C_{t}$
-conditional on information up until period $T.$ 
+conditional on information up until period $T.$
 \end{frame}
 
 \begin{frame}
@@ -469,7 +469,7 @@ _{C}C_{t-1}
 \end{equation*}
 
 {\blue Alternative b.}  Forecast Combination (each factor included in a
-separate equation and forecasts from each equation combined) 
+separate equation and forecasts from each equation combined)
 \begin{equation*}
 NIM_{t}=c_{i}+\rho _{i}NIM_{t-1}+\gamma _{i}F_{i,t-1}+{\eta _{i,t},}
 \end{equation*}%
@@ -493,7 +493,7 @@ NIM_{t+s/t}=\sum_{i}\frac{NIM_{i,t+s/t}}{3}.
 
 \item We estimate:
 \begin{equation*}
-NIM_t = c + \rho NIM_{t-1} + \sum_{i=1}^3 \gamma_i PC_{i,t-1}. 
+NIM_t = c + \rho NIM_{t-1} + \sum_{i=1}^3 \gamma_i PC_{i,t-1}.
 \end{equation*}
 \end{itemize}
 
@@ -506,7 +506,7 @@ NIM_t = c + \rho NIM_{t-1} + \sum_{i=1}^3 \gamma_i PC_{i,t-1}.
 
 \begin{itemize}
 \item Partial least squares is a compression technique analogous to principal components.
-\item Project the regressors onto a lower dimensional space. 
+\item Project the regressors onto a lower dimensional space.
 \item Each new regressor is a linear combination of the original regressors.
 \item What distinguishes PLS from PCR is how the
 projection is done.
@@ -514,7 +514,7 @@ projection is done.
 dimensional projection to describe as much as
 possible the variation in the data $X$.
 \item However nothing guarantees that the principal
-components, which ÒexplainÓ $X$ optimally, will be
+components, which ï¿½explainï¿½ $X$ optimally, will be
 relevant for the prediction of $Y$.
 \item Solution: incorporate information from $Y$ when
 choosing the projection (use SVD of $X'Y$).
@@ -525,10 +525,10 @@ choosing the projection (use SVD of $X'Y$).
 \begin{frame}
 \frametitle{5. Partial Least Squares -- continued}
 
-Choose X to include 
+Choose X to include
 \begin{itemize}
 \item Lagged NIM
-\item Yields 
+\item Yields
 \end{itemize}
 
 Focus on PLS with 4 factors.
@@ -552,7 +552,7 @@ $C = \left[ r(3m)-r(2yr) \right] - \left[ r(2yr)-r(10yr) \right]$
 \begin{equation*}
 NIM_{i,t}=c_{i}+\rho _{i}NIM_{t-1}+\gamma _{i}O_{i,t-1}+{\eta _{i,t},}
 \end{equation*}%
-where $O_{i}\in \left\{ L,S,C\right\} .$ 
+where $O_{i}\in \left\{ L,S,C\right\} .$
 
 \item Forecasts  from each separate
 regression, $NIM_{i,t+s/t}$, are aggregated as:
@@ -573,7 +573,7 @@ NIM_{t+s/t}=\sum_{\tau }\frac{NIM_{i,t+s/t}}{N}.
 \item The VAR(4) includes:\begin{itemize} \item Observed Level factor
 \item Observed slope factor
 \item Observed curvature factor
-\item NIMs. 
+\item NIMs.
 \end{itemize}
 
 \item Forecasts conditional on the factors are obtained using
@@ -606,11 +606,11 @@ NIM_{t+s/t}=NIM_{t}.
 
 \item We aggregate NIMs for the top 25 BHCs, as ranked by total assets, which is assessed quarterly.
 
-\item The yields data are derived using a smoothing technique from Gurkaynak, et al. (2007), based on Nelson and Siegel (1987) and Svensson (1994), which allows for daily measures of an off-the-run Treasury yield curve. 
+\item The yields data are derived using a smoothing technique from Gurkaynak, et al. (2007), based on Nelson and Siegel (1987) and Svensson (1994), which allows for daily measures of an off-the-run Treasury yield curve.
 
 \item We use yields for twelve maturities in our models: 3 month, 6 month, 9 month, 1 year, 2 year, 3 year, 5 year, 7 year, 10 year, 15 year, 20 year, and 30 year.
 
-\item The yields included are quarterly averages of daily yields.  
+\item The yields included are quarterly averages of daily yields.
 
 \end{itemize}
 
@@ -630,7 +630,7 @@ NIM_{t+s/t}=NIM_{t}.
 
 \item We use a recursive estimation window.
 
-\item The shortest window ends in 1999q4. 
+\item The shortest window ends in 1999q4.
 
 \item The evaluation window spans 2000q1 through 2008q2.
 
@@ -639,14 +639,14 @@ NIM_{t+s/t}=NIM_{t}.
 \end{frame}
 
 \begin{frame}
-\frametitle{Baseline Results -- RMSEs} 
+\frametitle{Baseline Results -- RMSEs}
 \footnotesize
-\begin{table}                                                                                     
-\center                                                                                           
-\begin{tabular}{|l|c|c|c|c|c|c|c|c|}                                                          
-\hline                                                                                            
-&Step 1 &Step 2 &Step 3 &Step 4 &Step 5 &Step 6 &Step 7 &Step 8 \\                
-\hline                                                                                            
+\begin{table}
+\center
+\begin{tabular}{|l|c|c|c|c|c|c|c|c|}
+\hline
+&Step 1 &Step 2 &Step 3 &Step 4 &Step 5 &Step 6 &Step 7 &Step 8 \\
+\hline
 1.           &0.107&0.133&0.148&0.168&0.187&0.202&0.213&0.209\\
 2.           &0.122&0.148&0.169&0.212&0.247&0.278&0.316&0.340\\
 3a.         &0.118&0.167&0.209&0.260&0.308&0.356&0.398&0.433\\
@@ -656,9 +656,9 @@ NIM_{t+s/t}=NIM_{t}.
 6. 	     &0.118&0.169&0.216&0.273&0.336&0.399&0.456&0.509\\
 7.           &0.166&0.209&0.263&0.302&0.342&0.375&0.380&0.430\\
 8.           &0.107&0.138&0.154&0.181&0.206&0.228&0.244&0.248\\
-\hline                                                                                            
-\end{tabular}                                                                                     
-\end{table}          
+\hline
+\end{tabular}
+\end{table}
 
 
 1. F. Combination of yields;  2. DFM; 3a. DFM with 2nd step multivariate regression; 3b. DFM with 2nd step forecast combination; 4. PCR; 5. PLS. 6. F. Combination of observed yields; 7. VAR on observed yields; 8. no change forecast.
@@ -668,19 +668,39 @@ NIM_{t+s/t}=NIM_{t}.
 \begin{frame}
 \frametitle{Competition from the shadow banking sector}
 
-ADD SOMETHING ON WHAT IS BEING CAPTURED AS A SHADOW BANK
-
+\begin{itemize}
+\item \vspace{0.0in} The most relevant source of competition compressing NIMs seems to have come from the shadow banking sector, which,
+\begin{itemize}
+\item \vspace{0.1in} Offers alternatives to deposits; \emph{e.g.}, MMMFs.
+\item \vspace{0.1in} Offers alternatives to bank loans, \emph{e.g.}, from finance companies.
+\end{itemize}
+\item \vspace{0.125in} We measure competition by the share of intermediated credit accounted for by shadow banking sector.
+\item \vspace{0.125in} Following Adrian, Monch, and Shin (2010) we define:
+\begin{itemize}
+\item \vspace{0.1in} The shadow banking sector as funding corporations, mortgage pools, finance companies, ABS issuers, and broker-dealers; and,
+\item \vspace{0.1in} The traditional banking sector as commercial banks, saving institutions, and credit unions.
+\end{itemize}
+\end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{Results -- accounting for competition from the shadow-banking sector} 
+\frametitle{Competition and NIMs}
+
+\hspace{0.65in}\includegraphics[height=5.4cm,width=7.2cm]{nims_competition_crop.pdf}
+
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Results -- accounting for competition from the shadow-banking sector}
 \footnotesize
-\begin{table}                                                                                     
-\center                                                                                           
-\begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|}                                                          
-\hline                                                                                            
-&Step 1 &Step 2 &Step 3 &Step 4 &Step 5 &Step 6 &Step 7 &Step 8 \\                
-\hline                                                                                            
+\begin{table}
+\center
+\begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|}
+\hline
+&Step 1 &Step 2 &Step 3 &Step 4 &Step 5 &Step 6 &Step 7 &Step 8 \\
+\hline
 1.   &0.110&0.143&0.165&0.192&0.222&0.248&0.267&0.274\\
 3a. &0.121&0.170&0.212&0.262&0.312&0.360&0.403&0.436\\
 3b. &0.106&0.140&0.165&0.193&0.222&0.248&0.267&0.274\\
@@ -689,41 +709,41 @@ ADD SOMETHING ON WHAT IS BEING CAPTURED AS A SHADOW BANK
 6.   &0.109&0.141&0.165&0.193&0.222&0.249&0.267&0.274\\
 7.   &0.344&0.396&0.476&0.494&0.521&0.569&0.631&0.670\\
 8.   &0.107&0.138&0.154&0.181&0.206&0.228&0.244&0.248\\
-\hline                                                                                            
-\end{tabular}                                                                                     
-\end{table}                                                                                       
+\hline
+\end{tabular}
+\end{table}
 1. F. Combination of yields; 3a. DFM with 2nd step multivariate regression; 3b. DFM with 2nd step forecast combination; 4. PCR; 5. PLS. 6. F. Combination of observed yields; 7. VAR on observed yields; 8. no change forecast.
 \end{frame}
 
 \begin{frame}
-\frametitle{Results -- Alternative Forecast Combinations} 
+\frametitle{Results -- Alternative Forecast Combinations}
 \footnotesize
-\begin{table}                                                                         
-\center                                                                               
-\begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|}                                              
-\hline                                                                                
-&Step 1 &Step 2 &Step 3 &Step 4 &Step 5 &Step 6 &Step 7 &Step 8 \\    
-\hline                                                                                
+\begin{table}
+\center
+\begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|}
+\hline
+&Step 1 &Step 2 &Step 3 &Step 4 &Step 5 &Step 6 &Step 7 &Step 8 \\
+\hline
 a.  &0.107&0.133&0.148&0.168&0.187&0.202&0.213&0.209\\
 b.  &0.118&0.169&0.216&0.273&0.336&0.399&0.456&0.509\\
 c.  &0.112&0.159&0.199&0.247&0.300&0.351&0.399&0.438\\
 d.  &0.105&0.130&0.141&0.160&0.178&0.197&0.202&0.198\\
 e.  &0.105&0.129&0.144&0.159&0.179&0.196&0.200&0.200\\
-\hline                                                                                
-\end{tabular}                                                                         
-\end{table}     
+\hline
+\end{tabular}
+\end{table}
 a. All 12 yields; b. observed factors; c. smoothed factors; d. 3-month, 2-year, 10-year;  e. 3-month, 10-year.
 \end{frame}
 
 %\begin{frame}
-%\frametitle{Scenario analysis} 
+%\frametitle{Scenario analysis}
 %\begin{itemize}
 %\item \vspace{0.0in} SHOW RESULTS FOR CCAR-2013 SEVERELY ADVERSE AND ADVERSE SCENARIOS.
 %\end{itemize}
 %\end{frame}
 
 \begin{frame}
-\frametitle{Planned extensions} 
+\frametitle{Planned extensions}
 \begin{itemize}
 \item \vspace{0.0in} Switching regime at the zero lower bound
 \item \vspace{0.0in} Panel estimation on pro-forma data
@@ -731,6 +751,14 @@ a. All 12 yields; b. observed factors; c. smoothed factors; d. 3-month, 2-year, 
 \item \vspace{0.0in} Additional sensitivity analysis
 \end{itemize}
 \end{frame}
+
+\begin{frame}
+\frametitle{CCAR-2013 Scenarios}
+\vspace{-0.4in}
+\hspace{0.65in}\includegraphics[height=10.4cm,width=8cm]{figure_ccar_2013.pdf}
+
+\end{frame}
+
 
 
 \end{document}
