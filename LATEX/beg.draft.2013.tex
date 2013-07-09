@@ -34,8 +34,9 @@ Federal Reserve Board \and
 \maketitle
 
 \begin{abstract}
- Regular bank stress testing is one of the three complementary reforms that has been made to U.S. capital regulation in response to the shortcomings of the pre-crisis regime.
- The form of stress testing mandated by the Dodd-Frank Act for the Federal Reserve to undertake is one based around a small number of scenarios.  This approach involves specifying macroeconomic and financial scenarios that represents stressful conditions over the time horizon of the stress test and then projecting, for each bank holding company in the stress test, its losses, income, and path of capital \textit{given that scenario}. In this paper, we focus on the path of income. In particular, we consider the ability of empirical models to translate developments in interest rates into bank net interest margins (NIMs).
+Regular bank stress testing is one of the three complementary reforms that has been made to U.S. capital regulation in response to the shortcomings of the pre-crisis regime.
+The form of stress testing mandated by the Dodd-Frank Act for the Federal Reserve to undertake is one based around a small number of scenarios.  This approach involves specifying macroeconomic and financial scenarios that represents stressful conditions over the time horizon of the stress test and then projecting, for each bank holding company in the stress test, its losses, income, and path of capital \textit{given that scenario}. In this paper, we focus on the path of income. In particular, we consider the ability of empirical models to translate developments in interest rates into bank net interest margins (NIMs).
+\end{abstract}
 
 \vspace{.125in}
 
@@ -45,7 +46,7 @@ Federal Reserve Board \and
 
 \noindent JEL Classification: C53, E47, G21
 
-\vspace{2cm}
+\vspace{3cm} \renewcommand{\baselinestretch}{1} \normalsize
 \noindent $^*$ The views
 expressed in this paper are solely the responsibility of the
 authors and should not be interpreted as reflecting the views of
@@ -56,8 +57,8 @@ Contact Information: valentin.bolotnyy@frb.gov; rochelle.m.edge@frb.gov; luca.gu
 
 
 
-\end{abstract}
-\renewcommand{\baselinestretch}{1.5}
+
+\renewcommand{\baselinestretch}{1.5} \normalsize
 \thispagestyle{empty}
 
 \newpage
@@ -86,7 +87,7 @@ Given their already low level, any adverse development that puts further downwar
 
 Despite the importance of NIMs for the financial condition of banks and despite the attention that it receives from bank equity analysts, the modeling of NIMs has received much less attention in the risk-management literature relative to the modeling of bank variables related to credit risk.  To be sure, the recent increase in the importance of stress testing has led to the development of a number of models that link NIMs to macroeconomic variables---such as, short-term Treasury rates and the slope of the Treasury yield curve---with Kovner \textit{et al}.~(2011) and Covas \textit{et al}.~(2012) being two notable examples for the U.S.  However, this research places relatively less emphasis on the conditional forecasting properties of these models, which is important given that these models are ultimately to be used to project bank losses, income, and capital given macroeconomic scenarios.\renewcommand{\baselinestretch}{1}\footnote{Covas \textit{et al}. do present some forecast evaluation results in order to demonstrate the benefits of focusing on quantile projections. However, they only report results for net chargeoffs and pre-provisioning net revenue and their focus is on density forecast evaluation.\vspace{0.05in}}\renewcommand{\baselinestretch}{1.5}
 
-Scenario based stress tests are predicated on the ability to produce reliable conditional forecasts for key measures of profitability such as net interest margins. This kind of stress test program is not limited to the U.S. banking system. Stress testing of banks based on scenarios was undertaken during the Scandinavian banking crisis to shore up confidence in the ability of banks to withstand the crisis. Most extensively, the European Banking Authority conducted stress tests based on scenario analysis throughout the European Union in 2009, 2010, and 2011. The results of such programs can only be effective in restoring confidence from the public in the midst of a crisis to the extent that the public can be convinced of the ability of regulators to assess the consequences of their scenarios on banks. If forecast methods at the frontier of efficiency have disentangling the implications of baseline and severe stress scenarios, the ability of stress test programs to avoid panic is called in question.
+Scenario based stress tests are predicated on the ability to produce reliable conditional forecasts for key measures of profitability such as net interest margins. This kind of stress test program is not limited to the U.S. banking system. Stress testing of banks based on scenarios was undertaken during the Scandinavian banking crisis to shore up confidence in the ability of banks to withstand the crisis. Most extensively, the European Banking Authority conducted stress tests based on scenario analysis throughout the European Union in 2009, 2010, and 2011. The results of such programs can only be effective in restoring confidence from the public in the midst of a crisis to the extent that the public can be convinced of the ability of regulators to assess the consequences of their scenarios on banks. If forecast methods at the frontier of efficiency have trouble disentangling the implications of baseline and severe stress scenarios, the ability of stress test programs to avoid panic is called in question.
 
 %In summing up our motivation on the importance of modeling NIMs and studying interest rate risk, we would also note that the Federal Reserve chose to feature interest rate risk in one of the scenarios specified for the 2013 %Dodd-Frank Act (DFA) stress tests.  In particular, for the 2013 DFA stress tests, the Federal Reserve specified the adverse scenario as one in which the Treasury yield curve shifted up and flattened.  As noted by the Federal %Reserve in its (proposed) Policy Statement on scenario design, the Board varies ``the approach it uses for the adverse scenario each year so that the results of the scenario provide the most value to supervisors, in light of %current condition of the economy and the financial services industry.''
 
@@ -123,21 +124,21 @@ In summing up, in addition, to short- and long-term interest rates, a few variab
 
 \section{Models for forecasting NIMs}
 
-We construct forecasts from a wide array of methods taken from the forecasting literature. We used data with quarterly frequency and consider a forecast horizon up to ten quarters long. We are interested in forecasts for NIMs conditional on the variables in scenario $I$, which we denote $NIM_{t+s/I}$. Here are the methods considered.
+We construct forecasts from a wide array of standard methods taken from the forecasting literature. We use data with quarterly frequency and consider a forecast horizon up to ten quarters long. We are interested in forecasts for NIMs conditional on the variables in scenario $I$, which we denote $NIM_{t+s/I}$. Here are the methods considered:
 
 \vspace{-0.1in}
-\noindent \textbf{1. Simple forecast combination.} We regress NIMs on each yield $r(\tau )_{t-1}$ separately: \
+\noindent \textbf{1. Equal-weighted forecast combination.} We regress NIMs on each yield $r(\tau )_{t-1}$ separately: \
 \[
 NIM_{t}=c_{\tau }+\rho _{\tau }NIM_{t-1}+\sum_{j=1}^4\gamma _{\tau,j}r(\tau)_{t-j}+{\eta
 _{\tau ,t}}
 \]
-Each regression is used to produce an $s$ step-ahead forecast of NIMs conditional on yields on treasuries r(\tau) in scenario $I$ with maturity $\tau$ observed through period $t+s-1.$ This conditional forecast is denoted by $NIM_{\tau,t+s/I}.$ The simple forecast comnination is then given by:
+Each regression is used to produce an $s$ step-ahead forecast of NIMs conditional on yields on treasuries $r(\tau)$ in scenario $I$ with maturity $\tau$ observed through period $t+s-1.$ This conditional forecast is denoted by $NIM_{\tau,t+s/I}.$ The equal-weighted forecast combination is then given by:
 \[
 NIM_{t+s/I}=\sum_{\tau }\frac{NIM_{\tau ,t+s/I}}{N},
 \]
-where $N$ is the number of maturities considered.
+where $N$ is the number of maturities considered.\footnote{Experimentation with alternative lag structures led to no improvement in the forecast results reported below.}
 
-\noindent \textbf{2. A dynamic factor model for NIMs.} Using the state space representation, the state equations of our restricted dynamic factor model is given by
+\noindent \textbf{2. A dynamic factor model for NIMs.} We include NIMs in the dynamic factor model for the yield curve developed by Diebold and Li (2006). Using the state space representation, the state equations of our dynamic factor model is given by:
 \[
 \left(
 \begin{array}{c}
@@ -204,11 +205,9 @@ NIM_{t}=\left(
 \end{array}%
 \right) +e(NIM)_{t},
 \]
-where $e(NIM)_{t}$ is i.i.d. measurement error assumed to be uncorrelated across observations.
+where $e(NIM)_{t}$ is i.i.d. measurement error assumed to be uncorrelated across observations. Out-of-sample conditional forecasts for NIMs from this model, are obtained using the Kalman filter. We focus on the filtered estimates of NIMs given a path for all yields included in the model.
 
-Out-of-sample conditional forecasts for NIMs from this model, are obtained using the Kalman filter.
-
-\noindent \textbf{3. Dynamic factor model with second-step regression for NIMs.} The dynamic factor model we consider takes the form
+\noindent \textbf{3. Dynamic factor model with second-step regression for NIMs.} This model extracts level, slope, and curvature factors for the yield curve following Diebold and Li (2006). The factors are used to forecast NIMs in a separate second-step regression. The dynamic factor model we consider takes the form
 \[
 \left(
 \begin{array}{c}
@@ -247,12 +246,10 @@ r(\tau )=\left(
 \begin{array}{c}
 {L_{t}-\mu _{L}} \\
 {S_{t}-\mu _{S}} \\
-{C_{t}-\mu _{C}} \\
-\widehat{NIM}_{t}-\mu _{\widehat{NIM}}%
+{C_{t}-\mu _{C}} 
 \end{array}%
 \right) +e(\tau )_{t},
 \]
-
 We obtain smoothed estimates of the factors $L_{t},S_{t},$ and $C_{t}$ conditional on information up until period $T.$ We estimate two alternative second-step forecasting equations:
 
 \noindent \textbf{Alternative a. Multivariate} (all yield curve factors included in one NIM equation)
@@ -260,29 +257,37 @@ We obtain smoothed estimates of the factors $L_{t},S_{t},$ and $C_{t}$ condition
 NIM_{t}=c+\rho NIM_{t-1}+\gamma _{L}L_{t-1}+\gamma _{S}S_{t-1}+\gamma
 _{C}C_{t-1}
 \]
+We use this equation to produce recursive forecasts for NIMs conditional on the the smoothed factors.
 
 \noindent \textbf{Alternative b. Forecast combination} (each factor included in a separate equation and forecasts from each equation combined)
 \[
 NIM_{t}=c_{i}+\rho _{i}NIM_{t-1}+\gamma _{i}F_{i,t-1}+{\eta _{i,t},}
 \]%
-where $F_{i}\in \left\{ L,S,C\right\} .$ Forecasts $NIM_{i,t+s/t}$ from each separate regression are then aggregated as:
-
+where $F_{i}\in \left\{ L,S,C\right\}.$ Recursive forecasts $NIM_{i,t+s/I}$ from each separate regression are then aggregated as:
 \[
-NIM_{t+s/t}=\sum_{i}\frac{NIM_{i,t+s/t}}{3},
+NIM_{t+s/I}=\sum_{i}\frac{NIM_{i,t+s/I}}{3},
 \]
 
-\noindent \textbf{4. Forecast combination with observed factors.} Define $\left\{L,S,C \right\} ,$ the observed factors as in subsection 3.1 above.
+\textbf{4. Principal component regression}
+Let $X$ a $T \times n$ matrix of $n$ Treasury yields.  Using the spectral decomposition, one obtains $X'X = VDV'$. Let $V_i$ be the normalized eigenvector corresponding to $i^{th}$ largest eigenvalue.
+The $i^{th}$ principal component is defined as $PC_i = XV_i$. We estimate
+\begin{equation*}
+NIM_t = c + \rho NIM_{t-1} + \sum_{i=1}^3 \gamma_i PC_{i,t-1} + e_t.
+\end{equation*}
+using ordinary least squares and we construct recursive forecasts for net interest margins conditional on the principal components.
+
+\begin{frame}
+
+\noindent \textbf{5. Forecast combination with observed factors.} Define level factor $L$ to coincide with an average of the 3-month, 2-year and 10-year Treasury yields; define the slope factor as the difference between the 10-year and the 3-month yields; define the curvatures factor to be 2 times the 2-year yield minus the the sum of the 3-month and 10-year yields. Define $\left\{L,S,C \right\} ,$ the observed factors as in subsection 3.1 above.
 \[
 NIM_{t}=c_{i}+\rho _{i}NIM_{t-1}+\gamma _{i}O_{i,t-1}+{\eta _{i,t},}
 \]%
 where $O_{i}\in \left\{ L,S,C\right\} .$ Forecasts  from each separate regression, $NIM_{i,t+s/t},$are then aggregated as:
 
-\noindent \textbf{5. VAR with observed factors.} Define level factor to coincide with the 10-year yield; define the slope factor as the difference between the 10-year and the 3-month yields; define the curvatures factor to be 2 times the 2-year yield minus the the sum of the 3-month and 10-year yields. The VAR of order four includes the three observed factors defined as above and NIMs. Forecasts conditional on the factors are obtained using the Kalman filter.
-\[
-NIM_{t+s/t}=\sum_{i}\frac{NIM_{i,t+s/t}}{3},
-\]
+\noindent \textbf{6. VAR with observed factors.}  The VAR of order four includes the three observed factors defined as above and NIMs. Forecasts conditional on the factors are obtained using the Kalman filter.
 
-\noindent \textbf{6. No-change forecast.} According to this model $NIM_{t+s/t}=NIM_{t}${\normalsize . }
+
+\noindent \textbf{7. No-change forecast.} According to this model $NIM_{t+s/t}=NIM_{t}${\normalsize . }
 
 
 %\renewcommand{\baselinestretch}{1}\footnote{...\vspace{0.05in}}\renewcommand{\baselinestretch}{1.5}
