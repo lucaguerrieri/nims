@@ -197,8 +197,7 @@ title('Forecast of NIMs')
 legend('Baseline','Severely Adverse','1-RMSE band','Location','SouthWest')
 
 plot(forecast_dates, forecast_severe-rmse_forecast_combination_mat4,'r-.')
-xlim([2012 2015])
-ylim([2.4 3.2])
+
 
 
 subplot(3,2,6)
@@ -210,8 +209,7 @@ plot(forecast_dates, forecast_adverse-rmse_forecast_combination_mat4,'r-.')
 
 
 title('Forecast of Nims')
-xlim([2012 2015])
-ylim([2.4 3.2])
+
 
 
 
