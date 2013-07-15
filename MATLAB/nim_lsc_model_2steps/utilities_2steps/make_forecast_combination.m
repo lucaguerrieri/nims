@@ -1,4 +1,4 @@
-function forecast_mat = make_forecast_combination(this_yobs, this_other_obs, previous_forecast, other_obs_out_of_sample,firstlag,lastlag)
+function forecast_mat = make_forecast_combination(this_yobs, this_other_obs, previous_forecast_orig, other_obs_out_of_sample,firstlag,lastlag)
 
 
     this_forecast_horizon = size(other_obs_out_of_sample,2)-lastlag;
@@ -6,12 +6,14 @@ function forecast_mat = make_forecast_combination(this_yobs, this_other_obs, pre
     forecast = zeros(n_other_obs,this_forecast_horizon);
     
     for this_macro_factor = 1:n_other_obs
+        previous_forecast = previous_forecast_orig;
         
         yreg = this_yobs(1+max(lastlag,1):end);
         xreg = [];
         for this_lag=firstlag:lastlag
             xreg = [xreg; this_other_obs(this_macro_factor,1+max(lastlag,1)-this_lag:end-this_lag)];
         end
+        
         xreg = [ones(1,length(yreg)); this_yobs(1+lastlag-firstlag:end-max(firstlag,1)); xreg];
         
         ols_coef = estimate_ols(yreg,xreg);
@@ -25,7 +27,7 @@ function forecast_mat = make_forecast_combination(this_yobs, this_other_obs, pre
             previous_forecast = forecast(this_macro_factor,this_step);
         end
         
-    end
     
+    end
 
 forecast_mat = mean(forecast);
