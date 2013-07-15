@@ -81,6 +81,14 @@ lag = 1;
 % Table 1 -- Shortened sample:
 [rmse_forecast_combination_mat1, forecast_combination_mat1] = calc_rmse_forecast_combination_conditional(nims(:,15:end),yields(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, 1,4);
 
+nims_change = nims(:,15:end)-nims(:,14:end-1);
+nims_change_out_of_sample = nims_change(out_of_sample_start_pos-14:end);
+nims_change_pre_out_of_sample = nims_change(out_of_sample_start_pos-15);
+
+[rmse_forecast_combination_change_mat1, forecast_combination_change_mat1] = calc_rmse_forecast_combination_conditional(nims_change,yields(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, 1,4);
+[rmse_forecast_combination_level_mat1, forecast_combination_level_mat1] = rmse_change2level(forecast_combination_change_mat1,nims_change_out_of_sample,nims_change_pre_out_of_sample); 
+
+
 [rmse_multivariate_mat1, forecast_multivariate_mat1] = calc_rmse_multivariate_conditional(nims(:,15:end), smoothed_factors(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, lag);
 
 
@@ -104,6 +112,7 @@ varlag=4;
 
 table1 = [
 rmse_forecast_combination_mat1
+rmse_forecast_combination_level_mat1
 rmse_multivariate_mat1
 rmse_forecast_combination_mat2
 rmse_pc_mat1
@@ -117,6 +126,7 @@ rmse_pls_mat1
 
 columnlabels = char('Step 1','Step 2','Step 3','Step 4','Step 5','Step 6','Step 7','Step 8','Step 9','Step 10');
 rowlabels = char('1. F. Combination - Yields',...
+                 '1b. F. Combination of change - Yields',... 
                  '3a. DFM with 2nd Step Reg.',...
                  '3b. DFM with F. Combination',...
                  '4. PCR',...
