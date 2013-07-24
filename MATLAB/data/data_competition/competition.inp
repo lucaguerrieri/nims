@@ -1,0 +1,40 @@
+--] .........................................................................
+--]	Program: competition.inp
+--]	Purpose: derives competition series (basically share of bank assets relative to shadow bank assets)
+--]     Freq: Quarterly
+--] ........................................................................
+
+close all
+overwrite on
+--//Step 1: frequency and date of your series, default = quarterly, and data is quarterly
+   
+   date 1980q1 to *
+
+--//Step 2: Open Fame databases -- FOF and US
+
+   $open us
+   $open fof
+   open <acc o> "tdb2.db" as tdb
+   open <acc o> "comp.fas.167.db" as comp
+   
+
+--//Step 3: construct new series for the project using series from both the fof and us databases
+--// The FL series have a funny jump in the 2010q1 due to FAS 167
+--// First the market-based lending variables
+  tdb'LA413065005.Q = fof'FL413065005.Q[1980q1] + csum(fof'FA413065005.Q/4)
+  tdb'LA674090005.Q = fof'FL674090005.Q[1980q1] + csum(fof'FA674090005.Q/4)
+  tdb'LA614090005.Q = fof'FL614090005.Q[1980q1] + csum(fof'FA614090005.Q/4)
+  tdb'LA664090005.Q = fof'FL664090005.Q[1980q1] + csum(fof'FA664090005.Q/4)
+  tdb'LA504090005.Q = fof'FL504090005.Q[1980q1] + csum(fof'FA504090005.Q/4)
+--// Now the bank-based lending variables
+  tdb'LA704090005.Q = fof'FL704090005.Q[1980q1] + csum(fof'FA704090005.Q/4)
+  tdb'LA734090005.Q = fof'FL734090005.Q[1980q1] + csum(fof'FA734090005.Q/4)
+--// Summing
+  comp'shad.bank.lending.adj.Q = tdb'LA413065005.Q + tdb'LA674090005.Q+ tdb'LA614090005.Q + tdb'LA664090005.Q + tdb'LA504090005.Q
+  comp'trad.bank.lending.adj.Q = tdb'LA704090005.Q + tdb'LA734090005.Q
+  comp'shad.bank.lending.unadj.Q = fof'FL413065005.q+fof'FL674090005.q+fof'FL614090005.q+fof'FL664090005.q+fof'FL504090005.q 
+  comp'trad.bank.lending.unadj.Q = fof'FL704090005.q+fof'FL734090005.q
+
+
+   close all
+

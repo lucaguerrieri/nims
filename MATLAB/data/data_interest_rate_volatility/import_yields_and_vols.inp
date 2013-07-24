@@ -1,0 +1,84 @@
+-- this portion converts the yields to weekly series
+deci 8
+
+over on
+$open yields
+date *
+open <acc update> "/ofs/work_mpa/m1jml02/interest_rate_volatility/weekly_yields.db" as weekly_yields
+weekly_yields'sveny0025.w = convert(yields'sveny0025, weekly(sunday), disc, ave, business, true)
+weekly_yields'sveny0050.w = convert(yields'sveny0050, weekly(sunday), disc, ave, business, true)
+weekly_yields'sveny0075.w = convert(yields'sveny0075, weekly(sunday), disc, ave, business, true)
+weekly_yields'sveny0100.w = convert(yields'sveny0100, weekly(sunday), disc, ave, business, true)
+weekly_yields'sveny0200.w = convert(yields'sveny0200, weekly(sunday), disc, ave, business, true)
+weekly_yields'sveny0300.w = convert(yields'sveny0300, weekly(sunday), disc, ave, business, true)
+weekly_yields'sveny0500.w = convert(yields'sveny0500, weekly(sunday), disc, ave, business, true)
+weekly_yields'sveny0700.w = convert(yields'sveny0700, weekly(sunday), disc, ave, business, true)
+weekly_yields'sveny1000.w = convert(yields'sveny1000, weekly(sunday), disc, ave, business, true)
+weekly_yields'sveny1500.w = convert(yields'sveny1500, weekly(sunday), disc, ave, business, true)
+weekly_yields'sveny2000.w = convert(yields'sveny2000, weekly(sunday), disc, ave, business, true)
+weekly_yields'sveny3000.w = convert(yields'sveny3000, weekly(sunday), disc, ave, business, true)
+
+-- this creates the series for variance and then loops by date 
+freq q
+series var_sveny0025.q, var_sveny0050.q, var_sveny0075.q, var_sveny0100.q, var_sveny0200.q, var_sveny0300.q, var_sveny0500.q, var_sveny0700.q, var_sveny1000.q, var_sveny1500.q, var_sveny2000.q, var_sveny3000.q 
+
+loop for quarter = 86:1 to 13:2
+     date quarter to quarter
+     update var_sveny0025.q = var(sveny0025.w)
+     update var_sveny0050.q = var(sveny0050.w)
+     update var_sveny0075.q = var(sveny0075.w)
+     update var_sveny0100.q = var(sveny0100.w)
+     update var_sveny0200.q = var(sveny0200.w)
+     update var_sveny0300.q = var(sveny0300.w)
+     update var_sveny0500.q = var(sveny0500.w)
+     update var_sveny0700.q = var(sveny0700.w)
+     update var_sveny1000.q = var(sveny1000.w)
+     update var_sveny1500.q = var(sveny1500.w)
+     update var_sveny2000.q = var(sveny2000.w)
+     update var_sveny3000.q = var(sveny3000.w)
+end loop
+
+
+date *
+$open friday
+weekly_yields'imp10yrvol.b = friday'tenyvol
+weekly_yields'imp10yrvol.m = convert(weekly_yields'imp10yrvol.b, monthly, disc, ave, business, true)
+
+-- this concatenates the MOVE series from the Excel file and the MOVE series in the friday database
+
+weekly_yields'moveindex.b = friday'moveindex.b
+
+weekly_yields'mfma_moveindex.m = convert(friday'moveindex.b, monthly, disc, ave, business, true)
+
+
+freq m
+load "/ofs/lib/fame/fame_excel.pc"
+over on
+show vertical
+scalar work'bdate: date(monthly) = 88:4
+scalar work'varnames: namelist = {moveindex.m}
+$getexcel "/ofs/work_mpa/m1jml02/interest_rate_volatility/moveindex_m.xls", weekly_yields, bdate, varnames, 2, 1, 1
+
+moveindex.m = overlay(moveindex.m, mfma_moveindex.m)
+
+delete mfma_moveindex.m
+
+-- this creates the quarterly series for moveindex and imp10yrvol
+
+weekly_yields'imp10yrvol.q = convert(weekly_yields'imp10yrvol.m, quarterly, disc, ave)
+weekly_yields'moveindex.q = convert(weekly_Yields'moveindex.m, quarterly, disc, ave)
+
+-- outputs quarterly series
+
+freq q
+date *
+show vertical
+length full
+width 1000
+output <access overwrite> "/ofs/work_mpa/m1jml02/interest_rate_volatility/weekly_yields.csv"
+report moveindex.q, imp10yrvol.q, var_sveny0025.q, var_sveny0050.q, var_sveny0075.q, var_sveny0100.q, var_sveny0200.q, var_sveny0300.q, var_sveny0500.q, var_sveny0700.q, var_sveny1000.q, var_sveny1500.q, var_sveny2000.q, var_sveny3000.q
+output terminal
+
+close all
+
+
