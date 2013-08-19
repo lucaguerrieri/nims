@@ -1,0 +1,257 @@
+\documentclass[11pt]{article}
+\addtolength{\topmargin}{-0.375in}
+\addtolength{\oddsidemargin}{-0.35in}
+\addtolength{\evensidemargin}{-0.35in}
+\addtolength{\textheight}{0.5in}
+\addtolength{\textwidth}{1.1in}
+\addtolength{\parskip}{0.05in}
+\renewcommand{\baselinestretch}{1.1}
+\newcommand{\vsp}{\vspace{\baselineskip}}
+\newcommand{\be}{\begin{equation}}
+\newcommand{\ee}{\end{equation}}
+\newcommand{\gr}[1]{\ensuremath  {\frac{\dot {#1}}{#1}}}
+
+
+\begin{document}
+
+\noindent
+
+\textbf{First just the time series model (i.e., not the panel models)}
+
+\textbf{Models with yield or factors based on yield only}
+
+\begin{enumerate}
+\item No change forecast 
+\begin{itemize}
+\item I'm listing this first because I think the tables should only report RMSEs for the no change forecast and show all other RMSE's as relative to the no change forecast's RMSE.  
+\item It may also be worth having a table reporting Barbara's full sample $A$ measures, just to set things up for later.  From an ordering perspective they should be the same as reporting relative RMSEs.  That is, while relative RMSEs are $\sqrt{\sum \epsilon^{2}_{alt.mod.}}/\sqrt{\sum \epsilon^{2}_{no.chg}}$, Barbara's $A$ measure is  $\sum \epsilon^{2}_{alt.mod.}-\sum \epsilon^{2}_{no.chg}$.
+\item Additionally, it may also be work having some charts reporting rolling window relative RMSEs and rolling window versions of Barbara's $A$ measure.  
+\begin{itemize}
+\item It would probably make sense to do this only for a selection of models (i.e., models that are different enough).  
+\item Doing the rolling window versions of Barbara's $A$ measure would set things up later for doing the hand-wavy version of Barbara's decomposition. (Recall, that we can not do a proper version of Barbara's decomposition because she does it for DAR forecasts and while we could do DAR forecasts they do not really make sense when we want to do conditional forecasts.)  
+\end{itemize}
+\end{itemize}
+\item Models with yields
+\begin{enumerate}
+\item Equally-weighted average (EWA) of 12 recursive autoregression (RAR) models that individual includes all 12 yields 
+\item EWA of 3 RAR models that individually include the 3-month rate, 2-year yield, and 10-year yield
+\item EWA of 2 RAR models that individually include the 3-month rate and 10-year yield
+\end{enumerate}
+\item Models with data-based factors ($level=10.year.yield$, $slope=10.year.yield–-3.month.rate$, and $curvature=2*2.year.yield–-3.month.rate–-10.year.yield$)
+\begin{enumerate}
+\item RAR model that jointly includes the 3 data-based factors
+\item EWA of 3 RAR models that individually include the 3 data-based factors
+\end{enumerate}
+\item Models with PCA-based factors (1st PC, 2nd PC, and 3rd PC)
+\begin{enumerate}
+\item RAR model that jointly includes the first 3 PCA-based factors
+\item EWA of 3 RAR models that individually include the first 3 PCA-based factors
+\end{enumerate}
+\item Models with Nelson-Siegel model-based factors (level, slope, and curvature)
+\begin{enumerate}
+\item RAR model that jointly includes the 3 Nelson-Siegel-based factors
+\item EWA of 3 RAR models that individually include the 3 Nelson-Siegel-based factors
+\end{enumerate}
+\item Models with PLS-based factors
+\begin{enumerate}
+\item RAR model that jointly includes the first 3 PLS-based factors
+\item EWA of 3 RAR models that individually include the first 3 PLS-based factors
+\item RAR model that includes the first PLS-based factor
+\end{enumerate}
+\item Should we include the system approaches that we have already done
+\begin{enumerate}
+\item The VAR model with NIMs and the data-based factors
+\item The VAR model with NIMs and the Nelson-Siegel model-based factors
+\end{enumerate}
+\item Bayesian model averaging – should we pursue?
+\end{enumerate}
+
+\textbf{Models with yield or factors based on yield and banking variables}
+
+\begin{itemize}
+\item Models listed above plus a measure of banking competition (the shadow banking sector's share of intermediation)
+\item Models listed above plus a measure of interest rate volatility (i.e., the MOVE index or the volatility measures from the banking literature)
+\item I think that ultimately these additions to the model fail to improve forecast performance so these results are really just for completeness and in recognition of the previous banking literature on NIMs.
+\end{itemize}
+
+\textbf{Model estimation period}
+
+\begin{itemize}
+\item Expanding windows [this is what we have been doing]
+\item Fixed rolling windows
+\end{itemize}
+
+\textbf{Type of forecasting model}
+
+\begin{itemize}
+\item Recursive autoregression (RAR) forecasting models [this is what we have been using]
+\item Direct autoregression (DAR) forecasting models
+\end{itemize}
+
+\textbf{Forecast evaluation period}
+
+\begin{itemize}
+\item Out-of-sample [this is what we have been doing] 
+\item In-sample
+\end{itemize}
+
+\textbf{Barbara's method for comparing two models}
+
+\begin{itemize}
+\item Barbara's method applies to DAR forecasts; that is, $y_{t+h}=\alpha_{0}x_{t}+\alpha_{1}x_{t-1}+\cdots+\epsilon^{\alpha}_{t}$ and $y_{t+h}=\gamma_{0}z_{t}+\gamma_{1}z_{t-1}+\cdots+\epsilon^{\gamma}_{t}$, and not forecasts generated recursively (i.e., RAR forecasts).  Most of the paper works with rolling window estimation periods, though in the last paragraph of section~3 she says that everything goes through with expanding estimation periods and the discussion is in the appendix (though it sounds like there is some adjustment needed for variances when doing the decomposition).
+\item Models A and G can be estimated for different step-ahead equations and over fixed rolling windows and used to forecast out-of-sample.  This will imply for every period and every h-step ahead forecast a squared forecast error $\left(\overrightarrow{\eta}^{\alpha}_{t+h}\right)^{2}$ and
+ $\left(\overrightarrow{\eta}^{\gamma}_{t+h}\right)^{2}$.  (I'm using ``over-arrows'' to denote out-of-sample forecasts.  This is my notation, not Barbara's. I realize that over-arrows typically mean vectors but I find it more intuitive to denote out-of-sample forecasts with an arrow and in-sample with a bar.)
+\begin{itemize}
+\item For one-step ahead we have $\left\{\left(\overrightarrow{\eta}^{\alpha}_{R+i+1|R+i}\right)^{2}\right\}_{i=0}^{T-R-1}$ and $\left\{\left(\overrightarrow{\eta}^{\gamma}_{R+i+1|R+i}\right)^{2}\right\}_{i=0}^{T-R-1}$, where in each case the rolling window estimation period \underline{and data used to generate the forecast}
+ends at $R, R+1, \dots, T-1$.
+\item For two-step ahead we have $\left\{\left(\overrightarrow{\eta}^{\alpha}_{R+i+2|R+i}\right)^{2}\right\}_{i=0}^{T-R-2}$ and $\left\{\left(\overrightarrow{\eta}^{\gamma}_{R+i+2||R+i}\right)^{2}\right\}_{i=0}^{T-R-2}$, where in each case the rolling window estimation period \underline{and data used to generate the forecast} ends at $R, R+1, \dots, T-2$.
+\item $\cdots$
+\item $\cdots$
+\item For h-step ahead we have $\left\{\left(\overrightarrow{\eta}^{\alpha}_{R+i+h||R+i}\right)^{2}\right\}_{i=0}^{T-R-h}$ and $\left\{\left(\overrightarrow{\eta}^{\gamma}_{R+i+h||R+i}\right)^{2}\right\}_{i=0}^{T-R-h}$, where in each case the rolling window estimation period \underline{and data used to generate the forecast} ends at $R, R+1, \dots, T-h$.
+\item Note there is a different model estimated for each one-step, two-step, ..., h-step ahead forecast and a different model estimated for each date.  
+\end{itemize}
+\item One can then take the difference of these squared forecast errors $\left(\overrightarrow{\eta}^{\alpha}_{t+h}\right)^{2}$ and
+ $\left(\overrightarrow{\eta}^{\gamma}_{t+h}\right)^{2}$, which I'll call $\overrightarrow{\mathcal{RL}}_{t+h}$ for ``rolling loss.''
+\begin{itemize}
+\item For one-step ahead we have $\left\{\overrightarrow{\mathcal{RL}}_{R+i+1|R+i}\right\}_{i=0}^{T-R-1}\!\!\!\!=\left\{\left(\overrightarrow{\eta}^{\alpha}_{R+i+1|R+i}\right)^{2}\!\!-\left(\overrightarrow{\eta}^{\gamma}_{R+i+1|R+i}\right)^{2}\right\}_{i=0}^{T-R-1}$
+\item For two-step ahead we have $\left\{\overrightarrow{\mathcal{RL}}_{R+i+2|R+i}\right\}_{i=0}^{T-R-2}\!\!\!\!=\left\{\left(\overrightarrow{\eta}^{\alpha}_{R+i+2|R+i}\right)^{2}\!\!-\left(\overrightarrow{\eta}^{\gamma}_{R+i+2|R+i}\right)^{2}\right\}_{i=0}^{T-R-2}$
+\item $\cdots$
+\item $\cdots$
+\item For h-step ahead we have $\left\{\overrightarrow{\mathcal{RL}}_{R+i+h|R+i}\right\}_{i=0}^{T-R-h}\!\!\!\!=\left\{\left(\overrightarrow{\eta}^{\alpha}_{R+i+h|R+i}\right)^{2}\!\!-\left(\overrightarrow{\eta}^{\gamma}_{R+i+h|R+i}\right)^{2}\right\}_{i=0}^{T-R-h}$
+\end{itemize}
+\item So for any date after $R+h$ there are $h$ rolling loss $\overrightarrow{\mathcal{RL}}$ observations, corresponding to different step ahead forecasts.  For date $R+h-1$ there are $h-1$ rolling loss $\overrightarrow{\mathcal{RL}}$ observations, and so on until $R+1$ where there is just one rolling loss $\overrightarrow{\mathcal{RL}}$ observation.
+\item Models A and G can be estimated over fixed rolling windows and used to forecast in-sample.  Note that whereas when one forecasts out-of-sample there is for each estimated model only 1 one-step ahead forecast, only 1 two-step ahead forecast, ..., and only 1 h-step ahead forecast, when one forecasts in-sample there is for each fixed rolling window of length $R$, $R-1$ one-step ahead forecasts, $R-2$ two-step ahead forecasts, ..., and $R-h$ h-step ahead forecasts.  When looking at in-sample forecasts errors Barbara only looks at the \emph{very last} one-step, two-step, ..., h-step ahead forecast for that model.  
+\item Models A and G estimated over fixed rolling windows and used to forecast in-sample will for every period and every h-step ahead forecast imply a squared forecast error for the last period of the estimation period $\left(\overline{\eta}^{\alpha}_{t}\right)^{2}$ and
+ $\left(\overline{\eta}^{\gamma}_{t}\right)^{2}$.  (I'm using ``over arrows'' to denote out-of-sample forecasts.  This is my notation, not Barbara's.)
+\begin{itemize}
+\item For one-step ahead we have $\left\{\left(\overline{\eta}^{\alpha}_{R+i|R+i-1}\right)^{2}\right\}_{i=0}^{T-R}$ and $\left\{\left(\overline{\eta}^{\gamma}_{R+i|R+i-1}\right)^{2}\right\}_{i=0}^{T-R}$, where in each case the rolling window estimation period
+ends at $R, R+1, \dots, T$ but the data used to generate the forecast ends in $R-1, R, \dots, T-1$.
+\item For two-step ahead we have $\left\{\left(\overline{\eta}^{\alpha}_{R+i|R+i-2}\right)^{2}\right\}_{i=0}^{T-R}$ and $\left\{\left(\overline{\eta}^{\gamma}_{R+i|R+i-2}\right)^{2}\right\}_{i=0}^{T-R}$, where in each case the rolling window estimation period
+ends at $R, R+1, \dots, T$ but the data used to generate the forecast ends in $R-2, R-1, \dots, T-2$.
+\item $\cdots$
+\item $\cdots$
+\item For h-step ahead we have $\left\{\left(\overline{\eta}^{\alpha}_{R+i|R+i-h}\right)^{2}\right\}_{i=0}^{T-R}$ and $\left\{\left(\overline{\eta}^{\gamma}_{R+i|R+i-h}\right)^{2}\right\}_{i=0}^{T-R}$, where in each case the rolling window estimation period
+ends at $R, R+1, \dots, T$ but the data used to generate the forecast ends in $R-h, R-h+1, \dots, T-h$.
+\end{itemize}
+\item One can then take the difference of these squared forecast errors $\left(\overline{\eta}^{\alpha}_{t}\right)^{2}$ and
+ $\left(\overline{\eta}^{\gamma}_{t}\right)^{2}$, which I'll call $\overline{\mathcal{RL}}_{t+h}$ for ``rolling loss.''
+\begin{itemize}
+\item For one-step ahead we have $\left\{\overline{\mathcal{RL}}_{R+i|R+i-1}\right\}_{i=0}^{T-R-1}\!\!\!\!=\left\{\left(\overline{\eta}^{\alpha}_{R+i|R+i-1}\right)^{2}\!\!-\left(\overline{\eta}^{\gamma}_{R+i|R+i-1}\right)^{2}\right\}_{i=0}^{T-R-1}$
+\item For two-step ahead we have $\left\{\overline{\mathcal{RL}}_{R+i|R+i-2}\right\}_{i=0}^{T-R-2}\!\!\!\!=\left\{\left(\overline{\eta}^{\alpha}_{R+i|R+i-2}\right)^{2}\!\!-\left(\overline{\eta}^{\gamma}_{R+i|R+i-2}\right)^{2}\right\}_{i=0}^{T-R-2}$
+\item $\cdots$
+\item $\cdots$
+\item For h-step ahead we have $\left\{\overline{\mathcal{RL}}_{R+i|R+i-h}\right\}_{i=0}^{T-R-h}\!\!\!\!=\left\{\left(\overline{\eta}^{\alpha}_{R+i|R+i-h}\right)^{2}\!\!-\left(\overline{\eta}^{\gamma}_{R+i|R+i-h}\right)^{2}\right\}_{i=0}^{T-R-h}$
+\end{itemize}
+\item Then one starts regressing different losses on each other.
+\begin{itemize}
+\item So for the one-step ahead forecast we regress $\left\{\overrightarrow{\mathcal{RL}}_{R+i+1|R+i}\right\}_{i=0}^{T-R-1}$ on $\left\{\overline{\mathcal{RL}}_{R+i|R+i-1}\right\}_{i=0}^{T-R-1}$.  The models being used to generate these losses are estimated one rolling windows that end on $R, R+1, \cdots, T$.
+\item So for the two-step ahead forecast we regress $\left\{\overrightarrow{\mathcal{RL}}_{R+i+2|R+i}\right\}_{i=0}^{T-R-1}$ on $\left\{\overline{\mathcal{RL}}_{R+i|R+i-2}\right\}_{i=0}^{T-R-1}$.  The models being used to generate these losses are estimated one rolling windows that end on $R, R+1, \cdots, T$.
+\item $\cdots$
+\item $\cdots$
+\item So for the h-step ahead forecast we regress $\left\{\overrightarrow{\mathcal{RL}}_{R+i+h|R+i}\right\}_{i=0}^{T-R-1}$ on $\left\{\overline{\mathcal{RL}}_{R+i|R+i-h}\right\}_{i=0}^{T-R-1}$.  The models being used to generate these losses are estimated one rolling windows that end on $R, R+1, \cdots, T$.
+\end{itemize}
+\item The regressions are:
+\begin{itemize}
+\item One-step: $\overrightarrow{\mathcal{RL}}_{R+i+1|R+i}=\widehat{\beta}_{1}\overline{\mathcal{RL}}_{R+i|R+i-1}+\widehat{u}_{R+i+1}$, where $i=0, 1, \cdots, T-R-1$.
+\item Two-step: $\overrightarrow{\mathcal{RL}}_{R+i+2|R+i}=\widehat{\beta}_{2}\overline{\mathcal{RL}}_{R+i|R+i-2}+\widehat{u}_{R+i+2}$, where $i=0, 1, \cdots, T-R-2$.
+\item $\cdots$
+\item $\cdots$
+\item h-step: $\overrightarrow{\mathcal{RL}}_{R+i+h|R+i}=\widehat{\beta}_{h}\overline{\mathcal{RL}}_{R+i|R+i-h}+\widehat{u}_{R+i+h}$, where $i=0, 1, \cdots, T-R-h$.
+\item It may be worth noting that every out-of-sample-based loss being regressed on a corresponding in-sample-based loss uses exactly the same two versions -- where versions refer to the estimation period -- of the A and G model.  That is the models are all estimated on rolling windows ending $R, R+1, \cdots, T$ but the in-sample forecasts use this estimated model but condition on earlier data for period $R-step, R-step+1, \cdots, T-step$ forecasts while the out-of-sample forecasts use this estimated model, condition on $R, R+1, \cdots, T-step$ data and project out  $R+step, R+step+1, \cdots, T+step-step$.
+\end{itemize}
+\item From the regressions we can calculate:
+\begin{itemize}
+\item One-step: 
+\begin{eqnarray}
+\underbrace{\frac{1}{T\!-\!R}\!\!\sum_{i=0}^{T-R-1}\!\!\overrightarrow{\mathcal{RL}}_{R+i+1|R+i}}_{=A_{1,T\!-\!R}}
+\!\!\!\!&=&\!\!\!\!\underbrace{\widehat{\beta}_{1}\cdot\frac{1}{T\!-\!R}\!\!\sum_{i=0}^{T-R-1}\!\!\overline{\mathcal{RL}}_{R+i|R+i-1}}_{=B_{1,T\!-\!R}} \nonumber \\
+\!\!\!\!&+&\!\!\!\!\underbrace{\frac{1}{T\!-\!R}\!\!\sum_{i=0}^{T-R-1}\!\!\widehat{u}_{R+i+1}}_{=U_{1,T\!-\!R}}, \nonumber
+\end{eqnarray}
+where $i=0, 1, \cdots, T-R-1$.
+\item Two-step: 
+\begin{eqnarray}
+\underbrace{\frac{1}{T\!-\!R\!-\!1}\!\!\sum_{i=0}^{T-R-2}\!\!\overrightarrow{\mathcal{RL}}_{R+i+2|R+i}}_{=A_{2,T\!-\!R\!-\!1}}
+\!\!\!\!&=&\!\!\!\!\underbrace{\widehat{\beta}_{2}\cdot\frac{1}{T\!-\!R\!-\!1}\!\!\sum_{i=0}^{T-R-2}\!\!\overline{\mathcal{RL}}_{R+i|R+i-2}}_{=B_{2,T\!-\!R\!-\!1}} \nonumber \\
+\!\!\!\!&+&\!\!\!\!\underbrace{\frac{1}{T\!-\!R\!-\!1}\!\!\sum_{i=0}^{T-R-2}\!\!\widehat{u}_{R+i+2}}_{=U_{2,T\!-\!R\!-\!1}}, \nonumber 
+\end{eqnarray}
+where $i=0, 1, \cdots, T-R-2$.
+\item $\cdots$
+\item $\cdots$
+\item h-step: 
+\begin{eqnarray}
+\underbrace{\frac{1}{T\!-\!R\!-\!(h\!-\!1)}\!\!\sum_{i=0}^{T-R-(h-1)}\!\!\overrightarrow{\mathcal{RL}}_{R+i+h|R+i}}_{=A_{h,T\!-\!R\!-\!\!(h\!-\!1)}}
+\!\!\!\!&=&\!\!\!\!\underbrace{\widehat{\beta}_{h}\cdot\frac{1}{T\!-\!R\!-\!(h\!-\!1)}\!\!\sum_{i=0}^{T-R-(h-1)}\!\!\overline{\mathcal{RL}}_{R+i|R+i-h}}_{=B_{h,T\!-\!R\!-\!(h\!-\!1)}} \nonumber \\
+\!\!\!\!&+&\!\!\!\!\underbrace{\frac{1}{T\!-\!R\!-\!(h\!-\!1)}\!\!\sum_{i=0}^{T-R-(h-1)}\!\!\widehat{u}_{R+i+h}}_{=U_{h,T\!-\!R\!-\!(h\!-\!1)}}, \nonumber
+\end{eqnarray}
+where $i=0, 1, \cdots, T-R-h$.
+\end{itemize}
+\item The interpretation of the $A$, $B$, and $U$ terms are as follows.
+\begin{itemize}
+\item $A_{1,T\!-\!R}$, $A_{2,T\!-\!R\!-\!1}$, ..., $A_{h,T\!-\!R\!-\!\!(h\!-\!1)}$ measures the two models' relative out-of-sample forecasting ability \underline{on average} over the \underline{full} out-of-sample forecast evaluation period.
+\item $B_{1,T\!-\!R}$, $B_{2,T\!-\!R\!-\!1}$, ..., $B_{h,T\!-\!R\!-\!\!(h\!-\!1)}$ are proportional to the two models' relative in-sample forecasting ability \underline{on average} over the \underline{full} in-sample forecast evaluation period.  This represents the part of the two models' out-of-sample relative forecasting ability that is reflected in in-sample forecasting ability.  When the $B$ terms have the same sign as their corresponding $A$ term it means that in-sample relative forecast performance has predictive content for out-of-sample relative performance.  If they have the opposite sign, there is predictive content but it is misleading.
+\item $U_{1,T\!-\!R}$, $U_{2,T\!-\!R\!-\!1}$, ..., $U_{h,T\!-\!R\!-\!\!(h\!-\!1)}$ represents the part of the two models' out-of-sample relative forecasting ability that is \underline{not} reflected in in-sample forecasting ability. 
+\end{itemize}
+\item Barbara also wanted to look at how the two models' relative out-of-sample forecasting ability varies across the full out-of-sample forecast evaluation period so they thought about rolling windows for:
+\begin{eqnarray}
+A_{1,T\!-\!R}\!\!\!\!&=&\!\!\!\!\frac{1}{T\!-\!R}\!\!\sum_{i=0}^{T-R-1}\!\!\overrightarrow{\mathcal{RL}}_{R+i+1|R+i} \nonumber \\
+A_{2,T\!-\!R\!-\!1}\!\!\!\!&=&\!\!\!\!\frac{1}{T\!-\!R\!-\!1}\!\!\sum_{i=0}^{T-R-2}\!\!\overrightarrow{\mathcal{RL}}_{R+i+2|R+i} \nonumber \\
+\!\!\!\!&&\!\!\!\!\cdots  \nonumber \\
+\!\!\!\!&&\!\!\!\!\cdots  \nonumber \\
+A_{h,T\!-\!R\!-\!\!(h\!-\!1)}\!\!\!\!&=&\!\!\!\!\frac{1}{T\!-\!R\!-\!(h\!-\!1)}\!\!\sum_{i=0}^{T-R-(h-1)}\!\!\overrightarrow{\mathcal{RL}}_{R+i+h|R+i}. \nonumber
+\end{eqnarray}
+\item If the moving windows are of length $m$ then:
+\begin{itemize}
+\item For $A_{1,T\!-\!R}$ there are $T-R-m$ possible windows, where the windows are: 
+\[\left\{\overrightarrow{\mathcal{RL}}_{R+i+1|R+i}\ \ , \ \  . \ \  . \ \  . \ \ ,\ \ \overrightarrow{\mathcal{RL}}_{R+i+1+m|R+i+m}\right\}_{i=0}^{T-R-1-m}\] 
+and so the rolling window relative out-of-sample forecast performance terms would be:
+\[\frac{1}{m}\sum_{j=0}^{m}\overrightarrow{\mathcal{RL}}_{R+i+1+j|R+i+j}\ \ \ \mathrm{for} \ \ \ i=0,1,\cdots,T\!-\!R\!-\!1\!-\!m. \]
+\item For $A_{2,T\!-\!R\!-\!1}$ there are $T-R-m-1$ possible windows, where the windows are: 
+\[\left\{\overrightarrow{\mathcal{RL}}_{R+i+2|R+i}\ \ , \ \  . \ \  . \ \  . \ \ ,\ \ \overrightarrow{\mathcal{RL}}_{R+i+2+m|R+i+m}\right\}_{i=0}^{T-R-2-m}\] 
+and so the rolling window relative out-of-sample forecast performance terms would be:
+\[\frac{1}{m}\sum_{j=0}^{m}\overrightarrow{\mathcal{RL}}_{R+i+2+j|R+i+j}\ \ \ \mathrm{for} \ \ \ i=0,1,\cdots,T\!-\!R\!-\!2\!-\!m. \]
+\item And so on for all the other steps until we get to the $h$-th step
+\item For $A_{h,T\!-\!R\!-\!(h-1)}$ there are $T-R-m-(h-1)$ possible windows, where the windows are: 
+\[\left\{\overrightarrow{\mathcal{RL}}_{R+i+h|R+i}\ \ , \ \  . \ \  . \ \  . \ \ ,\ \ \overrightarrow{\mathcal{RL}}_{R+i+h+m|R+i+m}\right\}_{i=0}^{T-R-h-m}\] 
+and so the rolling window relative out-of-sample forecast performance terms would be:
+\[\frac{1}{m}\sum_{j=0}^{m}\overrightarrow{\mathcal{RL}}_{R+i+h+j|R+i+j}\ \ \ \mathrm{for} \ \ \ i=0,1,\cdots,T\!-\!R\!-\!h\!-\!m. \]
+\end{itemize}
+\item So then it is the rolling window relative out-of-sample forecast performances -- that is, $\frac{1}{m}\sum_{j=0}^{m}\overrightarrow{\mathcal{RL}}_{R+i+1+j|R+i+j}$, $\frac{1}{m}\sum_{j=0}^{m}\overrightarrow{\mathcal{RL}}_{R+i+2+j|R+i+j}$, . . . , $\frac{1}{m}\sum_{j=0}^{m}\overrightarrow{\mathcal{RL}}_{R+i+h+j|R+i+j}$ -- that one wants to decompose.  These are done as follows.
+\begin{eqnarray}
+\frac{1}{m}\sum_{j=0}^{m}\overrightarrow{\mathcal{RL}}_{R+i+1+j|R+i+j}\!\!\!\!&=&\!\!\!\!\underbrace{\frac{1}{m}\sum_{j=0}^{m}\overrightarrow{\mathcal{RL}}_{R+i+1+j|R+i+j}-\underbrace{\frac{1}{T\!-\!R}\!\!\sum_{i=0}^{T-R-1}\!\!\overrightarrow{\mathcal{RL}}_{R+i+1|R+i}}_{=A_{1,T\!-\!R}}}_{=A_{i,1,T-R}} \nonumber \\
+\!\!\!\!&+&\!\!\!\!B_{1,T-R}+U_{1,T-R} \ \ \ \ \   \ \ \ \ \   \ \ \ \ \   \mathrm{for} \ i=0,1,\cdots,T\!-\!R\!-\!1\!-\!m. \nonumber
+\end{eqnarray}
+\begin{eqnarray}
+\frac{1}{m}\sum_{j=0}^{m}\overrightarrow{\mathcal{RL}}_{R+i+2+j|R+i+j}\!\!\!\!&=&\!\!\!\!\underbrace{\frac{1}{m}\sum_{j=0}^{m}\overrightarrow{\mathcal{RL}}_{R+i+2+j|R+i+j}-\underbrace{\frac{1}{T\!-\!R\!-\!1}\!\!\sum_{i=0}^{T-R-2}\!\!\overrightarrow{\mathcal{RL}}_{R+i+2|R+i}}_{=A_{2,T\!-\!R\!-\!1}}}_{=A_{i,2,T-R-1}} \nonumber \\
+\!\!\!\!&+&\!\!\!\!B_{2,T-R-1}+U_{2,T-R-1} \ \ \ \ \   \ \ \ \ \   \mathrm{for} \ i=0,1,\cdots,T\!-\!R\!-\!2\!-\!m. \nonumber
+\end{eqnarray}
+\[ \cdots \]
+\[ \cdots \]
+\begin{eqnarray}
+\frac{1}{m}\sum_{j=0}^{m}\overrightarrow{\mathcal{RL}}_{R+i+h+j|R+i+j}\!\!\!\!&=&\!\!\!\!\underbrace{\frac{1}{m}\sum_{j=0}^{m}\overrightarrow{\mathcal{RL}}_{R+i+h+j|R+i+j}-\underbrace{\frac{1}{T\!-\!R\!-\!(h\!-\!1)}\!\!\sum_{i=0}^{T-R-(h-1)}\!\!\overrightarrow{\mathcal{RL}}_{R+i+h|R+i}}_{=A_{h,T\!-\!R-(h-1)}}}_{=A_{i,h,T-R-(h-1)}} \nonumber \\
+\!\!\!\!&+&\!\!\!\!B_{h,T-R-(h-1)}+U_{h,T-R-(h-1)} \ \ \ \ \   \ \ \ \ \   \mathrm{for} \ i=0,1,\cdots,T\!-\!R\!-\!h\!-\!m. \nonumber
+\end{eqnarray}
+In summary we have
+\begin{eqnarray}
+\frac{1}{m}\sum_{j=0}^{m}\overrightarrow{\mathcal{RL}}_{R+i+1+j|R+i+j}\!\!\!\!&=&\!\!\!\!A_{i,1,T-R}+B_{1,T-R}+U_{1,T-R} \nonumber \\
+\frac{1}{m}\sum_{j=0}^{m}\overrightarrow{\mathcal{RL}}_{R+i+2+j|R+i+j}\!\!\!\!&=&\!\!\!\!A_{i,2,T-R-1}+B_{2,T-R-1}+U_{2,T-R-1} \nonumber \\
+\frac{1}{m}\sum_{j=0}^{m}\overrightarrow{\mathcal{RL}}_{R+i+h+j|R+i+j}\!\!\!\!&=&\!\!\!\!A_{i,h,T-R-(h-1)}+B_{h,T-R-(h-1)}+U_{h,T-R-(h-1)} \nonumber
+\end{eqnarray}
+\item So basically one calculates the rolling window relative out-of-sample forecast performances -- that is, $\frac{1}{m}\sum_{j=0}^{m}\overrightarrow{\mathcal{RL}}_{R+i+1+j|R+i+j}$, $\frac{1}{m}\sum_{j=0}^{m}\overrightarrow{\mathcal{RL}}_{R+i+2+j|R+i+j}$, . . . , $\frac{1}{m}\sum_{j=0}^{m}\overrightarrow{\mathcal{RL}}_{R+i+h+j|R+i+j}$ -- and tries to understand them in terms of the above components. 
+\begin{itemize}
+\item  I think what is interesting about looking at these is that the relative out-of-sample forecasting performance of the two models could change over time.  That is, over some windows one of the two models may forecast better where as over other windows the other of the two models may forecast better. 
+\end{itemize}
+\item When Barbara does the exchange rate forecasting example the ultimate finding is not so interesting, since basically she just reports that ``the lack of out-of-sample predictive ability is related to the lack of in-sample predictive ability.''
+\item We should be able to do something like Barbara's decomposition because we can generate in-sample forecasts (and one only ends up using the in-sample forecast errors for the very last period of the sample) but it is not clear -- indeed very unlikely -- that the components that we decompose the rolling relative out-of-sample into will be independent and that all the proofs that Barbara does will go through.
+\end{itemize}
+
+\textbf{Panel models}
+\begin{itemize}
+\item  Possible models: 
+\begin{itemize}
+\item Panel model
+\item Bank-specific equations with SUR
+\item Swamy random coefficients model?
+\end{itemize}
+\item Evaluate forecasts but also compare them to the SNL analysts forecasts.
+\end{itemize}
+\end{document}               % End of document.
