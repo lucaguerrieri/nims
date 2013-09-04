@@ -22,9 +22,11 @@ nim_dataset_titles = char('nims_assets_by_endperiod_total_assets.csv',...
     'nims_assets_by_quartavg_ie_assets.csv');
 
 if (dataset_option == 1 | dataset_option == 2)
-    nim_dataset_path = ['../data/data_ranked_by_total_assets/',nim_dataset_titles(dataset_option,:)];
+    nim_dataset_path = ['../data/data_ranked_by_total_assets/',deblank(nim_dataset_titles(dataset_option,:))];
+    
 else
-    nim_dataset_path = ['../data/data_ranked_by_ie_assets/',nim_dataset_titles(dataset_option,:)];
+    nim_dataset_path = ['../data/data_ranked_by_ie_assets/',deblank(nim_dataset_titles(dataset_option,:))];
+    
 end
 
 if ~isunix
@@ -90,11 +92,16 @@ shadow_bank_share_assets = shadow_bank_share_assets_file(start_pos:end_pos,1)';
 % 5-8. Same as above, but based on interest-earning (ie) asset rankings (rather
 % than total asset rankings).
 
+
 nim_data = csvread(nim_dataset_path, 1, 1);
+
+
 nim_varlist = char('nim_with_trading','nim_no_trading','total_interest_earning_assets',...
                    'assets_depository_inst','assets_securities_notrade','assets_fedfunds',...
                    'assets_all_loans','assets_trading_accnts');
 
+               
+               
 dates_nim = 1985.0:.25:2013.0;
 start_pos_nim = find(dates_nim==start_yobs);
 end_pos_nim = find(dates_nim==end_yobs);
@@ -128,6 +135,8 @@ if dataset_option == 1
     
     varargout{1} = transpose(interest_income_to_ie_assets(start_pos_nim:end_pos_nim));
     varargout{2} = transpose(interest_expense_to_ie_assets(start_pos_nim:end_pos_nim));
+else 
+    varargout{1} = [];
 
 end
 

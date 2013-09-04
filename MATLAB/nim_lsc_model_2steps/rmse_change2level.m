@@ -17,13 +17,13 @@ end
 n_steps_ahead = size(forecast_mat_change,2);
 n_obs_out_of_sample = size(forecast_mat_change,1);
 
-forecast_mat_level = forecast_mat_change;
+forecast_mat_level = 0*forecast_mat_change;
 
 level = y_pre_out_of_sample;
 for this_obs = 1:n_obs_out_of_sample
 
 
-for this_step = n_steps_ahead
+for this_step = 1:n_steps_ahead
     level = level+forecast_mat_change(this_obs,this_step);
     forecast_mat_level(this_obs,this_step) = level;    
 end
@@ -33,11 +33,10 @@ end
 
 
 % arrange y data to be conformable with forecast matrix
-y_mat = nan*out_of_sample_y;
+[y_mat] = make_y_mat(out_of_sample_y',n_steps_ahead);
 
-for this_step = 1:n_steps_ahead
-    y_mat(1:end-this_step+1,this_step) = out_of_sample_y(this_step:end);
-end
+
+
 
 forecast_errors_mat =forecast_mat_level-y_mat; 
 

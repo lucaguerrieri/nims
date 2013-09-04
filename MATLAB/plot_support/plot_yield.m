@@ -29,7 +29,7 @@ plot(dates, factor1, 'k')
 hold on
 plot(dates, xi1tHistory(1,:)+xi_means(1), 'r--')
 title('Level Factor')
-legend('Diebold-Li Estimate of the Factor','Smoothed Estimate of the Factor')
+legend('Simple Observed Factor','Smoothed Estimate of the Unobserved Factor')
 xlim([dates(16) dates(end)])
 subplot(3,1,2)
 plot(dates, factor2, 'k')

@@ -63,7 +63,7 @@ for pos_index = out_of_sample_start_pos:end_sample_pos
         
         ols_coef = estimate_ols(yreg,xreg);
         
-        
+        % in sample forecast for very last period
         
         
         

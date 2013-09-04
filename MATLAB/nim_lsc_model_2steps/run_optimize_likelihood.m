@@ -5,7 +5,7 @@ setpath;
 nreps_minimizer = 0;           % set to 0 to avoid re-optimizing
 
 load_paramvec_from_disk = 1;  % set to 1 to load saved param_vec from disk
-                             % set to 0 to use first guess as defined below
+                              % set to 0 to use first guess as defined below
 
 [yobs, dates, yields, nims, nfactors, nothers, tau, factors] = load_data_ml; 
 
