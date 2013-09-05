@@ -1,4 +1,4 @@
-function [rmse_mat, forecast_mat] = calc_rmse_forecast_combination_conditional(yobs, other_obs, out_of_sample_start_pos, end_sample_pos, forecast_horizon, firstlag,lastlag)
+function [rmse_mat, forecast_mat,insample_forecast_mat, forecast_errors_mat, insample_forecast_errors_mat] = calc_rmse_forecast_combination_conditional(yobs, other_obs, out_of_sample_start_pos, end_sample_pos, forecast_horizon, firstlag,lastlag)
 %This function computes rmse for a VAR forecast and also returns
 %forecast history over a pseudo-out of sample portion of the sample.
 %
@@ -28,7 +28,9 @@ n_other_obs = size(other_obs, 1);
 
 num_periods = end_sample_pos - out_of_sample_start_pos + 1;
 forecast_errors_mat = nan*ones(num_periods, forecast_horizon);
+insample_forecast_errors_mat = nan*ones(num_periods,1);
 forecast_mat = nan*ones(num_periods, forecast_horizon);
+insample_forecast_mat = nan*ones(num_periods,1);
 
 for pos_index = out_of_sample_start_pos:end_sample_pos
     
@@ -51,7 +53,7 @@ for pos_index = out_of_sample_start_pos:end_sample_pos
     % run through variables and steps ahead
     this_forecast_horizon = min(end_sample_pos-pos_index+1,10);
     forecast = zeros(n_other_obs,this_forecast_horizon);
-    
+    insample_forecast = zeros(n_other_obs,1);
     for this_macro_factor = 1:n_other_obs
         
         yreg = this_yobs(1+max(lastlag,1):end);
@@ -63,10 +65,9 @@ for pos_index = out_of_sample_start_pos:end_sample_pos
         
         ols_coef = estimate_ols(yreg,xreg);
         
-        % in sample forecast for very last period
         
         
-        
+       
         previous_forecast = this_yobs(1,end);
         for this_step = 1:this_forecast_horizon
             % figure out dimensions
@@ -76,21 +77,28 @@ for pos_index = out_of_sample_start_pos:end_sample_pos
             previous_forecast = forecast(this_macro_factor,this_step);
         end
         
+        % in sample forecast for very last period
+        previous_insample_forecast = this_yobs(1,end-1);
+        pos_vec =  (firstlag:lastlag);
+        insample_forecast(this_macro_factor) = [1, previous_insample_forecast, this_other_obs(this_macro_factor,end-pos_vec) ]*...
+                ols_coef;
+        
+        
     end
     
     
     forecast_mat(pos_index-out_of_sample_start_pos+1,1:size(forecast,2)) = mean(forecast);
-    
+    insample_forecast_mat(pos_index-out_of_sample_start_pos+1) = mean(insample_forecast);
     
     if  end_sample_pos - pos_index + 1 >= forecast_horizon 
-        forecast_errors = yobs(1,pos_index:pos_index+forecast_horizon-1) - forecast(end,:);
+        forecast_errors = forecast(end,:)-yobs(1,pos_index:pos_index+forecast_horizon-1);
         forecast_errors_mat(pos_index-out_of_sample_start_pos+1,:) = forecast_errors;
     else
-        forecast_errors = yobs(1,pos_index:end_sample_pos) - forecast(1:end_sample_pos-pos_index+1);
+        forecast_errors = forecast(1:end_sample_pos-pos_index+1)-yobs(1,pos_index:end_sample_pos);
         forecast_errors_mat(pos_index-out_of_sample_start_pos+1,1:end_sample_pos-pos_index+1) = forecast_errors;
         
     end
-    
+    insample_forecast_errors_mat(pos_index-out_of_sample_start_pos+1) = insample_forecast_mat(pos_index-out_of_sample_start_pos+1)-this_yobs(end);
 end
 
 rmse_mat = (nansum((forecast_errors_mat.^2))./(size(forecast_errors_mat,1)-sum(isnan(forecast_errors_mat)))).^0.5;
