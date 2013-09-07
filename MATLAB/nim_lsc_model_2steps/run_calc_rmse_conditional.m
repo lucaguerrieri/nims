@@ -79,69 +79,110 @@ smoothed_factors = xi1tHistory(1:3,:);
 lag = 1;
 
 % Table 1 -- Shortened sample:
-[rmse_forecast_combination_mat1, forecast_combination_mat1, insample_forecast_combination_mat1,...
+[rmse_forecast_combination_mat1, forecast_combination_mat1,...
  forecast_combination_errors_mat1 insample_forecast_combination_errors_mat1] = calc_rmse_forecast_combination_conditional(nims(:,15:end),yields(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, 1,4);
 
+[rmse_forecast_combination_rolling_mat1, forecast_combination_rolling_mat1,...
+ forecast_combination_errors_mat1 insample_forecast_combination_errors_mat1] = calc_rmse_forecast_combination_conditional_rolling(nims(:,15:end),yields(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, 1,4);
 
 
 nims_change = nims(:,15:end)-nims(:,14:end-1);
 nims_change_out_of_sample = nims_change(out_of_sample_start_pos-14:end);
 nims_change_pre_out_of_sample = nims_change(out_of_sample_start_pos-15);
-
 [rmse_forecast_combination_change_mat1, forecast_combination_change_mat1] = calc_rmse_forecast_combination_conditional(nims_change,yields(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, 1,4);
-
 [rmse_forecast_combination_level_mat1, forecast_combination_level_mat1] = rmse_change2level(forecast_combination_change_mat1,nims_change_out_of_sample,nims_change_pre_out_of_sample); 
 
 
 [rmse_multivariate_mat1, forecast_multivariate_mat1] = calc_rmse_multivariate_conditional(nims(:,15:end), smoothed_factors(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, lag);
 
+[rmse_multivariate_rolling_mat1, forecast_multivariate_rolling_mat1 ...
+ multivariate_errors_mat1 insample_multivariate_errors_mat1] = calc_rmse_multivariate_conditional_rolling(nims(:,15:end), smoothed_factors(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, lag);
+
 
 [rmse_forecast_combination_mat2, forecast_combination_mat2] = calc_rmse_forecast_combination_conditional(nims(:,15:end),smoothed_factors(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, 1,4);
+[rmse_forecast_combination_rolling_mat2, forecast_combination_rolling_mat2...
+    forecast_combination_errors_mat2 insample_forecast_combination_errors_mat2] = calc_rmse_forecast_combination_conditional_rolling(nims(:,15:end),smoothed_factors(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, 1,4);
+
 
 npc = 3;
 [rmse_pc_mat1, forecast_pc_mat1] = calc_rmse_pc(nims(:,15:end), yields(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, npc);
+[rmse_pc_rolling_mat1, forecast_pc_rolling_mat1, pc_forecast_errors_mat, insample_pc_forecast_errors_mat] = calc_rmse_pc_rolling(nims(:,15:end), yields(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, npc);
 
 npls = 5;
 [rmse_pls_mat1, forecast_pls_mat1] = calc_rmse_pls_conditional(nims(:,15:end), yields(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, npls);
 
-
 [rmse_forecast_combination_mat3, forecast_combination_mat3] = calc_rmse_forecast_combination_conditional(nims(:,15:end),factors(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, 1,4);
+[rmse_forecast_combination_rolling_mat3, forecast_combination_rolling_mat3] = calc_rmse_forecast_combination_conditional_rolling(nims(:,15:end),factors(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, 1,4);
+
 
 varlag=4;
-[rmse_varmat1, forecast_var_mat1] = calc_rmse_var_conditional(nims(:,15:end), smoothed_factors(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, varlag);
-[rmse_varmat2, forecast_var_mat2] = calc_rmse_var_conditional(nims(:,15:end), factors(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, varlag);
-[rmse_nochangemat1, forecast_nochange_mat1, forecast_errors_nochange_mat, insample_forecast_errors_nochange_mat] = calc_rmse_nochange(nims(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon);
+[rmse_var_mat1, forecast_var_mat1] = calc_rmse_var_conditional(nims(:,15:end), smoothed_factors(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, varlag);
+[rmse_var_rolling_mat1, forecast_var_rolling_mat1 ...
+  var_forecast_errors_mat1 insample_var_forecast_errors_mat1] = calc_rmse_var_conditional_rolling(nims(:,15:end), smoothed_factors(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, varlag);
 
 
 
+[rmse_var_mat2, forecast_var_mat2] = calc_rmse_var_conditional(nims(:,15:end), factors(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, varlag);
+[rmse_var_rolling_mat2, forecast_var_rolling_mat2,...
+    var_forecast_errors_mat2 insample_var_forecast_errors_mat2] = calc_rmse_var_conditional_rolling(nims(:,15:end), factors(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, varlag);
+
+
+[rmse_nochange_mat1, forecast_nochange_mat1, forecast_errors_nochange_mat, insample_forecast_errors_nochange_mat] = calc_rmse_nochange(nims(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon);
+
+
+
+% Run the RS test on all models
 RLout = forecast_combination_errors_mat1(:,1).^2-forecast_errors_nochange_mat(:,1).^2;
 RLin = insample_forecast_combination_errors_mat1.^2 - insample_forecast_errors_nochange_mat.^2;
+qn = floor(size(forecast_combination_errors_mat1,1)^(1/4))+1;
+m = 4;
 
 
-ols_beta  = mldivide(RLin'*RLin,RLin'*RLout);
-ols_err = RLout - RLin*ols_beta;
+test_results = run_rs_tests(forecast_combination_errors_mat1(:,1),...
+                            forecast_errors_nochange_mat(:,1),...
+                            insample_forecast_combination_errors_mat1,...
+                            insample_forecast_errors_nochange_mat,...
+                            qn,m)
+test_table = [test_results];
 
-a1 = sum(RLout)/length(RLout);
-b1 = ols_beta*sum(RLin)/length(RLout);
-u1 = sum(ols_err)/length(RLout);
+test_results = run_rs_tests(multivariate_errors_mat1(:,1),...
+                            forecast_errors_nochange_mat(:,1),...
+                            insample_multivariate_errors_mat1,...
+                            insample_forecast_errors_nochange_mat,...
+                            qn,m)
 
+test_results = run_rs_tests(var_forecast_errors_mat2(:,1),...
+                            forecast_errors_nochange_mat(:,1),...
+                            insample_var_forecast_errors_mat1,...
+                            insample_forecast_errors_nochange_mat,...
+                            qn,m)
+                        
+                        
 
-figure
-subplot(3,1,1)
-plot(dates(out_of_sample_start_pos:end_sample_pos),RLout)
-hold on
-plot(dates(out_of_sample_start_pos:end_sample_pos),a1+0*RLout,'r--')
-title('out of sample')
-
-subplot(3,1,2)
-plot(dates(out_of_sample_start_pos:end_sample_pos),ols_beta*RLin); hold on
-plot(dates(out_of_sample_start_pos:end_sample_pos),b1+0*RLin,'r--')
-title('in sample')
-
-subplot(3,1,3)
-plot(dates(out_of_sample_start_pos:end_sample_pos),ols_err); hold on
-plot(dates(out_of_sample_start_pos:end_sample_pos),u1+0*ols_err,'r--')
-title('residual')
+% ols_beta  = mldivide(RLin'*RLin,RLin'*RLout);
+% ols_err = RLout - RLin*ols_beta;
+% 
+% a1 = sum(RLout)/length(RLout);
+% b1 = ols_beta*sum(RLin)/length(RLout);
+% u1 = sum(ols_err)/length(RLout);
+% 
+% 
+% figure
+% subplot(3,1,1)
+% plot(dates(out_of_sample_start_pos:end_sample_pos),RLout)
+% hold on
+% plot(dates(out_of_sample_start_pos:end_sample_pos),a1+0*RLout,'r--')
+% title('out of sample')
+% 
+% subplot(3,1,2)
+% plot(dates(out_of_sample_start_pos:end_sample_pos),ols_beta*RLin); hold on
+% plot(dates(out_of_sample_start_pos:end_sample_pos),b1+0*RLin,'r--')
+% title('in sample')
+% 
+% subplot(3,1,3)
+% plot(dates(out_of_sample_start_pos:end_sample_pos),ols_err); hold on
+% plot(dates(out_of_sample_start_pos:end_sample_pos),u1+0*ols_err,'r--')
+% title('residual')
 
 
 
@@ -155,10 +196,10 @@ rmse_forecast_combination_mat2
 rmse_pc_mat1
 rmse_pls_mat1
 rmse_forecast_combination_mat3
-rmse_varmat2
-rmse_nochangemat1]
+rmse_var_mat2
+rmse_nochange_mat1]
 
-rmse_pls_mat1
+
 
 
 columnlabels = char('Step 1','Step 2','Step 3','Step 4','Step 5','Step 6','Step 7','Step 8','Step 9','Step 10');
@@ -173,6 +214,35 @@ rowlabels = char('1. F. Combination - Yields',...
                  '8. No-Change Forecast');
 table1_tex = tablelatex(table1,columnlabels,rowlabels);
 char(table1_tex)
+
+
+%%% same as table 1 but with rolling sample
+
+
+table1_rolling = [
+rmse_forecast_combination_rolling_mat1
+rmse_multivariate_rolling_mat1
+rmse_forecast_combination_rolling_mat2
+rmse_pc_rolling_mat1
+rmse_forecast_combination_rolling_mat3
+rmse_var_rolling_mat2
+rmse_nochange_mat1]
+
+
+
+
+columnlabels = char('Step 1','Step 2','Step 3','Step 4','Step 5','Step 6','Step 7','Step 8','Step 9','Step 10');
+rowlabels = char('1. F. Combination - Yields',...
+                 '3a. DFM with 2nd Step Reg.',...
+                 '3b. DFM with F. Combination',...
+                 '4. PCR',...
+                 '6. F. Combination - Observed Factors',...
+                 '7. VAR on Observed Factors',...
+                 '8. No-Change Forecast');
+table1_tex = tablelatex(table1_rolling,columnlabels,rowlabels);
+char(table1_tex)
+
+
 
 
 % for i = [2, 4, 10]

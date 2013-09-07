@@ -1,4 +1,4 @@
-function [rmse_mat, forecast_mat,insample_forecast_mat, forecast_errors_mat, insample_forecast_errors_mat] = calc_rmse_forecast_combination_conditional(yobs, other_obs, out_of_sample_start_pos, end_sample_pos, forecast_horizon, firstlag,lastlag)
+function [rmse_mat, forecast_mat, forecast_errors_mat, insample_forecast_errors_mat] = calc_rmse_forecast_combination_conditional(yobs, other_obs, out_of_sample_start_pos, end_sample_pos, forecast_horizon, firstlag,lastlag)
 %This function computes rmse for a VAR forecast and also returns
 %forecast history over a pseudo-out of sample portion of the sample.
 %
