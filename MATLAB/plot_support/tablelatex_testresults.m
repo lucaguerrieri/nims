@@ -29,27 +29,36 @@ table = [table;cellstr(tabular);cellstr('\hline');cellstr(cellarray);cellstr('\h
 label_counter =0;
 for i=1:nrows
     if mod(i,4)==1
-    label_counter = label_counter+1;
-    line = [rowlabels(label_counter,:),'& DMW'];
+        label_counter = label_counter+1;
+        line = [rowlabels(label_counter,:),'& DMW'];
     elseif mod(i,4) == 2
-    line = '& $\Gamma_P^{(A)}$';    
+        line = '& $\Gamma_P^{(A)}$';
     elseif mod(i,4) == 3
-    line = '& $\Gamma_P^{(B)}$';
+        line = '& $\Gamma_P^{(B)}$';
     else
-    line = '& $\Gamma_P^{(U)}$';
+        line = '& $\Gamma_P^{(U)}$';
     end
     for j=1:ncols
-        if resultmat(i,(j-1)*2+2)
-            line = [line,'&',num2str(resultmat(i,(j-1)*2+1),'%5.3f'),'*'];   
-        
-        else 
-            line = [line,'&',num2str(resultmat(i,(j-1)*2+1),'%5.3f')];   
+        if mod(i,4)==1
+            if j ==1
+            line = [line,'&\multicolumn{',num2str(ncols),'}{|c|}{',...
+                num2str(resultmat(i,(j-1)*2+1),'%5.3f')];
+            if resultmat(i,(j-1)*2+2)
+                line = [line,'*'];
+            end
+            line = [line,'}'];
+            end
+        else
+            line = [line,'&',num2str(resultmat(i,(j-1)*2+1),'%5.3f')];
+            if resultmat(i,(j-1)*2+2)
+                line = [line,'*'];
+            end
         end
     end
     line = [line,'\\'];
     table = [table;cellstr(line)];
-    if mod(i,4) == 0
-    table = [table;cellstr('\hline')];
+    if (mod(i,4) == 0 | mod(i,4) == 1)
+        table = [table;cellstr('\hline')];
     end
 end
 footer = char('\end{tabular}','\end{table}');
