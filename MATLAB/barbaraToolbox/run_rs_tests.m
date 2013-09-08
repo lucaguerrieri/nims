@@ -11,7 +11,7 @@ function table = run_rs_tests(out_of_sample_errors_model1,out_of_sample_errors_m
 
     DMW  = sqrt(size(DeltaL_oos,1))*mean( DeltaL_oos)/sigma;
     GWp = 1-cdf('chi2',DMW^2,1);
-    if (GWp>0.1)
+    if (GWp>0.05)
         GWp = 0;
     else
         GWp = 1;
