@@ -353,7 +353,7 @@ Supervisory authorities that perform stress tests certainly have access to a wea
 {\normalsize \clearpage
 \begin{sidewaystable}
 \center
-\caption{RMSE for baseline specifications} \label{table_rmse_baseline}
+\caption{RMSE for baseline specifications -- Recursive Estimation Windows} \label{table_rmse_baseline}
 \begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|}
 \hline
 &Step 1 &Step 2 &Step 3 &Step 4 &Step 5 &Step 6 &Step 7 &Step 8 &Step 9 &Step 10\\
@@ -371,7 +371,30 @@ Supervisory authorities that perform stress tests certainly have access to a wea
 }
 
 
-\begin{table}                                                          
+\begin{sidewaystable}       
+\caption{RMSE for baseline specifications -- Rolling Estimation Windows} \label{table_rmse_baseline}                                                                              
+\center                                                                                           
+\begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|}                                                          
+\hline                                                                                            
+&Step 1 &Step 2 &Step 3 &Step 4 &Step 5 &Step 6 &Step 7 &Step 8 &Step 9 &Step 10\\                
+\hline                                                                                            
+1. F. Combination - Yields          &0.113&0.135&0.150&0.165&0.180&0.190&0.203&0.205&0.205&0.210\\
+3a. DFM with 2nd Step Reg.          &0.111&0.146&0.174&0.209&0.244&0.279&0.307&0.333&0.369&0.403\\
+3b. DFM with F. Combination         &0.113&0.168&0.211&0.263&0.324&0.372&0.419&0.461&0.508&0.547\\
+4. PCR                              &0.118&0.167&0.208&0.259&0.307&0.355&0.397&0.432&0.472&0.508\\
+5. PLS                              &0.111&0.147&0.173&0.195&0.215&0.234&0.251&0.268&0.300&0.333\\
+6. F. Combination - Observed Factors&0.113&0.155&0.189&0.235&0.293&0.347&0.398&0.452&0.510&0.564\\
+7. VAR on Observed Factors          &0.871&0.906&0.562&1.040&1.094&0.786&0.872&0.459&0.409&0.468\\
+8. No-Change Forecast               &0.107&0.138&0.154&0.181&0.206&0.228&0.244&0.248&0.271&0.293\\
+\hline                                                                                            
+\end{tabular}                                                                                     
+\end{sidewaystable}                                                                                       
+
+
+\normalsize \clearpage
+\renewcommand{\baselinestretch}{1} 
+\begin{table}  
+\caption{Decomposing the Relative Performance of 1-Step Ahead Forecasts}                                                        
 \center                                                                
 \begin{tabular}{|l|l|c|c|}                                             
 \hline                                                                 
@@ -401,6 +424,12 @@ Supervisory authorities that perform stress tests certainly have access to a wea
 & $\Gamma_P^{(B)}$&-0.059&-0.059\\                                     
 & $\Gamma_P^{(U)}$&1.445&1.445\\                                       
 \hline                                                                 
+5. PLS                              & DMW&\multicolumn{2}{|c|}{0.638}\\
+\hline                                                                 
+& $\Gamma_P^{(A)}$&7.105&3.710\\                                       
+& $\Gamma_P^{(B)}$&-0.630&-0.630\\                                     
+& $\Gamma_P^{(U)}$&1.209&1.209\\                                       
+\hline                                                                 
 6. F. Combination - Observed Factors& DMW&\multicolumn{2}{|c|}{0.855}\\
 \hline                                                                 
 & $\Gamma_P^{(A)}$&6.518&2.863\\                                       
@@ -414,14 +443,11 @@ Supervisory authorities that perform stress tests certainly have access to a wea
 & $\Gamma_P^{(U)}$&-1.249&-1.249\\                                     
 \hline                                                                 
 \end{tabular}                                                          
-\end{table}  
+\end{table}   
 
+\clearpage
+\renewcommand{\baselinestretch}{1.5} \normalsize 
 
-
-
-
-\newpage
-{\normalsize \clearpage
 \begin{sidewaystable}
 \caption{RMSEs for models that include the share of asset of the shadow banking sector. Estimation sample: 1989Q2-2008Q2} \label{table_rmse_competition}
 \center
@@ -438,9 +464,9 @@ Supervisory authorities that perform stress tests certainly have access to a wea
 \hline
 \end{tabular}
 \end{sidewaystable}
-}
 
-\newpage \clearpage
+
+\clearpage
 \begin{sidewaystable}
 \caption{RMSEs for variants of the simple forecast combination model} \label{table_rmse_combination}
 \center
@@ -487,6 +513,13 @@ Smoothed Factors        &0.112&0.159&0.199&0.247&0.300&0.351&0.399&0.438&0.489&0
 \caption{NIMs and Competition -- The Asset Share of the Shadow Banking Sector} \label{figure_nims_competition}
 
 \hspace{-2.5cm} \includegraphics[scale=0.85]{figure_nims_competition.ps}
+\end{figure}
+
+\clearpage
+\begin{figure}
+\flushleft
+\caption{Pseudo-Out-of-Sample Forecasts} \label{figure_forecasts}
+ \includegraphics[scale=0.85]{figure_forecasts.ps}
 \end{figure}
 
 \clearpage
