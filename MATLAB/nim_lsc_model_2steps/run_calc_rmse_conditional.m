@@ -108,7 +108,7 @@ npc = 3;
 [rmse_pc_mat1, forecast_pc_mat1] = calc_rmse_pc(nims(:,15:end), yields(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, npc);
 [rmse_pc_rolling_mat1, forecast_pc_rolling_mat1, pc_forecast_errors_mat, insample_pc_forecast_errors_mat] = calc_rmse_pc_rolling(nims(:,15:end), yields(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, npc);
 
-npls = 5;
+npls = 3;
 [rmse_pls_mat1, forecast_pls_mat1] = calc_rmse_pls_conditional(nims(:,15:end), yields(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, npls);
 
 [rmse_forecast_combination_mat3, forecast_combination_mat3] = calc_rmse_forecast_combination_conditional(nims(:,15:end),factors(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, 1,4);
@@ -331,27 +331,32 @@ table1_rolling_tex = tablelatex(table1_rolling,columnlabels,rowlabels_rolling);
 char(table1_rolling_tex)
 
 
-
-
-% for i = [2, 4, 10]
-%    figure
-%    plot(dates(15:end),nims(end,15:end),'k','lineWidth',2)
-%    hold on
-%    plot(dates(out_of_sample_start_pos+i-1:end),forecast_combination_mat1(1:end-i+1,i)','b--','lineWidth',2)
-%    plot(dates(out_of_sample_start_pos+i-1:end),forecast_nochange_mat1(1:end-i+1,i)','r:','lineWidth',2)
-%    
-%    for j = out_of_sample_start_pos+i-1:end_sample_pos
-%        if abs(forecast_combination_mat1(j-out_of_sample_start_pos-i+2,i)'-yobs(end,j))<=abs(forecast_nochange_mat1(j-out_of_sample_start_pos-i+2,i)'-nims(j))
-%            plot(dates(j),nims(j),'bo','lineWidth',2)
-%        else
-%            plot(dates(j),nims(j),'rx','lineWidth',2)
-%        end
-%    end
-%    legend('Data','Forecast Combination','No-change forecast')
-%    title(['Assessing the ',num2str(i),'-step-ahead forecast'])
-%    
-%    xlim([dates(15) dates(end)])
-% end
+figure
+subplot_index = 0;
+horizon_plot_list = [1, 4, 10];
+n_horizon_plot = length(horizon_plot_list);
+for i = horizon_plot_list
+   subplot_index = subplot_index+1;
+   subplot(n_horizon_plot,1,subplot_index)
+   plot(dates(15:end),nims(end,15:end),'k','lineWidth',2)
+   hold on
+   plot(dates(out_of_sample_start_pos+i-1:end),forecast_combination_mat1(1:end-i+1,i)','b--','lineWidth',2)
+   plot(dates(out_of_sample_start_pos+i-1:end),forecast_nochange_mat1(1:end-i+1,i)','r:','lineWidth',2)
+   
+   for j = out_of_sample_start_pos+i-1:end_sample_pos
+       if abs(forecast_combination_mat1(j-out_of_sample_start_pos-i+2,i)-nims(j))<=abs(forecast_nochange_mat1(j-out_of_sample_start_pos-i+2,i)-nims(j))
+           plot(dates(j),nims(j),'bo','lineWidth',2)
+       else
+           plot(dates(j),nims(j),'rx','lineWidth',2)
+       end
+   end
+   if subplot_index ==1
+   legend('Data','Forecast Combination','No-change forecast')
+   end
+   title(['Assessing the ',num2str(i),'-step-ahead forecast'])
+   
+   xlim([dates(15) dates(end)])
+end
 
 
 % 
