@@ -51,21 +51,42 @@ for pos_index = out_of_sample_start_pos:end_sample_pos
     % if yobs has more than one row, fold all the rows after the first in
     
     ylag = 1;
-
-
-    yreg = transpose(this_yobs(2:end));
-    xreg = [transpose(this_yobs(1:end-1)) , transpose(this_other_obs(:,1:end-1))];
-
-    [XL,YL,XS,YS,beta_pls] = plsregress(xreg,yreg,npls);
     
+    mean_this_yobs = mean(this_yobs);
+    this_yobs_demeaned = this_yobs-mean_this_yobs;
+    
+    mean_this_other_obs = mean(this_other_obs,2);
+    this_other_obs_demeaned = this_other_obs-kron(mean_this_other_obs,ones(1,size(this_other_obs,2)));
+
+    beta_y = regress(this_yobs_demeaned(2:end)',this_yobs_demeaned(1:end-1)');
+    u_y = this_yobs_demeaned(2:end)' - this_yobs_demeaned(1:end-1)'*beta_y;
+    
+    %u_x = zeros(n_other_obs,size(this_yobs_demeaned,2)-1);
+    beta_x = zeros(1,n_other_obs);  
+    for x_pos =1:n_other_obs
+        beta_x(x_pos) = regress(this_other_obs_demeaned(x_pos,2:end)',this_yobs_demeaned(1:end-1)');
+    end
+    u_x = this_other_obs_demeaned(:,2:end)'-kron(this_yobs_demeaned(1:end-1)',beta_x);
+
+
+    %[XL,YL,XS,YS,beta_pls] = plsregress(u_x,u_y,npls);
+    
+    % the PLS factors are in T
+    % u_x *R = T
+    [B,C,P,T,U,R,R2X,R2Y]=plssim(u_x,u_y,npls);
+    
+    beta_pls = regress(this_yobs_demeaned(2:end)',[this_yobs_demeaned(1:end-1)',T]);
     
     this_forecast_horizon = min(end_sample_pos-pos_index+1,10);
     forecast = zeros(1,this_forecast_horizon);
     previous_forecast = this_yobs(1,end);
     for this_step = 1:this_forecast_horizon
-        % figure out dimensions
-        forecast(this_step) = [1, previous_forecast, transpose(other_obs_out_of_sample(:,this_step)) ]*...
-                              beta_pls;
+        % to finish off -- 
+        % construct u_x
+        % apply 
+        this_u_x = (other_obs_out_of_sample(:,this_step)'-mean_this_other_obs')-(previous_forecast-mean_this_yobs)*beta_x;
+        forecast(this_step) = [previous_forecast-mean_this_yobs, this_u_x*R ]*...
+                              beta_pls+mean_this_yobs;
         previous_forecast = forecast(this_step);
     end
     
@@ -83,5 +104,11 @@ for pos_index = out_of_sample_start_pos:end_sample_pos
     end
     
 end
+
+% figure
+% plot(forecast_mat(:,1),'r--')
+% hold on
+% plot(yobs(out_of_sample_start_pos:end))
+
 
 rmse_mat = (nansum((forecast_errors_mat.^2))./(size(forecast_errors_mat,1)-sum(isnan(forecast_errors_mat)))).^0.5;
