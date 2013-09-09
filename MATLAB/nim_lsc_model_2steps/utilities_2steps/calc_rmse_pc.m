@@ -1,4 +1,4 @@
-function [rmse_mat, forecast_mat] = calc_rmse_pc(yobs, other_obs, out_of_sample_start_pos, end_sample_pos, forecast_horizon, npc )
+function [rmse_mat, forecast_mat, forecast_errors_mat] = calc_rmse_pc(yobs, other_obs, out_of_sample_start_pos, end_sample_pos, forecast_horizon, npc )
 
 % FOR NOW -- reglag does not affect anything. The regression is run with
 % only one lag of other_obs
