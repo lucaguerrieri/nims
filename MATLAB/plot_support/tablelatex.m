@@ -28,10 +28,10 @@ for i=1:nrows
     line = rowlabels(i,:);
     for j=1:ncols
         if (~isempty(strmatch('s.e.',rowlabels(i,:))))
-            line = [line,'& (',num2str(resultmat(i,j),'%5.3f'),')'];   
+            line = [line,'& (',num2str(resultmat(i,j),'%5.2f'),')'];   
         
         else 
-            line = [line,'&',num2str(resultmat(i,j),'%5.3f')];   
+            line = [line,'&',num2str(resultmat(i,j),'%5.2f')];   
         end
     end
     line = [line,'\\'];
