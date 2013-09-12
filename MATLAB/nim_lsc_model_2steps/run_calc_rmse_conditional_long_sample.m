@@ -1,3 +1,4 @@
+
 clear;
 
 setpath;
@@ -14,7 +15,7 @@ dataset_option = 1;
     total_interest_earning_assets,...
     assets_depository_inst, assets_securities_notrade,...
     assets_fedfunds, assets_all_loans, assets_trading_accnts, ... 
-    interest_income_to_ie_assets, interest_expense_to_ie_assets] = load_data_ml(dataset_option);
+    interest_income_to_ie_assets, interest_expense_to_ie_assets] = load_data_ml(dataset_option,2013);
  
 out_of_sample_start_pos = find(dates==2000.0);
 end_sample_pos = length(dates);
@@ -80,9 +81,6 @@ lag = 1;
 % Table 1 -- Shortened sample:
 [rmse_forecast_combination_mat1, forecast_combination_mat1,...
  forecast_combination_errors_mat1 insample_forecast_combination_errors_mat1] = calc_rmse_forecast_combination_conditional(nims(:,15:end),yields(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, 1,4);
-
-
-
 
 [rmse_forecast_combination_rolling_mat1, forecast_combination_rolling_mat1,...
  forecast_combination_errors_rolling_mat1 insample_forecast_combination_errors_rolling_mat1] = calc_rmse_forecast_combination_conditional_rolling(nims(:,15:end),yields(:,15:end), out_of_sample_start_pos-14, end_sample_pos-14, forecast_horizon, 1,4);
@@ -457,11 +455,11 @@ for i = horizon_plot_list
    end
    title(['Assessing the ',num2str(i),'-step-ahead forecast'])
    
-   xlim([dates(50) dates(end)])
+   xlim([dates(15) dates(end)])
 end
 
 
-
+% 
 
 % Table 2 -- full sample
 [rmse_forecast_combination_mat1, forecast_multivariate_mat1] = calc_rmse_forecast_combination_conditional(nims,yields, out_of_sample_start_pos, end_sample_pos, forecast_horizon, 1,4);

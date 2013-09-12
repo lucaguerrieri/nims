@@ -10,10 +10,22 @@ function [yobs, dates, yields, nims, nfactors, nothers, tau, factors,...
 % 2  -- BHCs are selected by quarter-average total assets
 % 3  -- BHCs are selected by quarter-end interest earning assets
 % 4  -- BHCs are selected by quarter-average interest earning assets
-if nargin == 0
+if nargin == 0 % default if no arguments are passed
     dataset_option = 1;
-else
+    end_yobs = 2008.25;
+    start_yobs= 1985.75;
+elseif nargin == 1  % first argument is dataset option
     dataset_option = varargin{1};
+    end_yobs = 2008.25;
+    start_yobs= 1985.75;
+elseif nargin == 2  % second argument is end date of desired data
+    dataset_option = varargin{1};
+    end_yobs = varargin{2};
+    start_yobs= 1985.75;
+elseif nargin == 3  % third argument is start date of desired data
+    dataset_option = varargin{1};
+    end_yobs = varargin{2};
+    start_yobs = varargin{3};
 end
 
 nim_dataset_titles = char('nims_assets_by_endperiod_total_assets.csv',...
@@ -35,8 +47,7 @@ end
 
 
 
-start_yobs = 1985.75;
-end_yobs = 2008.25;
+%start_yobs = 1985.75;
 dates = start_yobs:.25:end_yobs;
 %SVENY yields can be found in the 'yields' FAME db under the mnemonics in
 %yields_varlist.
@@ -46,8 +57,8 @@ else
     yields = csvread('..\data\yields_sveny_only_1985quarterly.csv', 1, 2);
 end
 dates_yields = 1985.75:.25:2013.0;
-start_pos = find(dates==start_yobs);
-end_pos = find(dates==end_yobs);
+start_pos = find(dates_yields==start_yobs);
+end_pos = find(dates_yields==end_yobs);
 yields = yields(start_pos:end_pos,:)';
 yields_varlist = char('SVENY0025','SVENY0050','SVENY0075','SVENY0100',...
     'SVENY0200','SVENY0300','SVENY0500', 'SVENY0700',...

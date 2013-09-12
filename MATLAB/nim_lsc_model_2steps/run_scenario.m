@@ -154,7 +154,7 @@ hold on
 plot(forecast_dates,severe_scen(1,1:10),'r--');
 title('3-Month Treasury Yields')
 legend('Baseline','Severely Adverse Scenario','Location','NorthWest')
-xlim([2012 2015])
+xlim([2012.75 2015])
 ylim([0 4])
 
 
@@ -165,7 +165,7 @@ plot(forecast_dates,adverse_scen(1,1:10),'r--');
 
 title('3-Month Treasury Yields')
 legend('Baseline','Adverse Scenario','Location','NorthWest')
-xlim([2012 2015])
+xlim([2012.75 2015])
 ylim([0 4])
 
 subplot(3,2,3)
@@ -174,7 +174,7 @@ hold on
 plot(forecast_dates,severe_scen(2,1:10),'r--');
 title('10-Year Treasury Yields')
 legend('Baseline','Severely Adverse Scenario','Location','NorthWest')
-xlim([2012 2015])
+xlim([2012.75 2015])
 ylim([0 5])
 
 
@@ -185,28 +185,28 @@ plot(forecast_dates,adverse_scen(2,1:10),'r--');
 
 title('10-Year Treasury Yields')
 legend('Baseline','Adverse Scenario','Location','NorthWest')
-xlim([2012 2015])
+xlim([2012.75 2015])
 ylim([0 5])
 
 
 subplot(3,2,5)
 plot(forecast_dates, forecast_baseline,'k'); hold on
 plot(forecast_dates, forecast_severe,'r--')
-plot(forecast_dates, forecast_severe+rmse_forecast_combination_mat4,'r-.')
+plot(forecast_dates, forecast_baseline+rmse_forecast_combination_mat4,'k-.')
 title('Forecast of NIMs')
 legend('Baseline','Severely Adverse','1-RMSE band','Location','SouthWest')
-
-plot(forecast_dates, forecast_severe-rmse_forecast_combination_mat4,'r-.')
+xlim([2012.75 2015])
+plot(forecast_dates, forecast_baseline-rmse_forecast_combination_mat4,'k-.')
 
 
 
 subplot(3,2,6)
 plot(forecast_dates, forecast_baseline,'k'); hold on
 plot(forecast_dates, forecast_adverse,'r--')
-plot(forecast_dates, forecast_adverse+rmse_forecast_combination_mat4,'r-.')
+plot(forecast_dates, forecast_baseline+rmse_forecast_combination_mat4,'k-.')
 legend('Baseline','Adverse','1-RMSE band','Location','SouthWest')
-plot(forecast_dates, forecast_adverse-rmse_forecast_combination_mat4,'r-.')
-
+plot(forecast_dates, forecast_baseline-rmse_forecast_combination_mat4,'k-.')
+xlim([2012.75 2015])
 
 title('Forecast of Nims')
 
