@@ -34,7 +34,7 @@ Federal Reserve Board \and
 \maketitle
 
 \begin{abstract}
-\noindent Regular bank stress testing (and the capital planning that it implies) is one of the three complementary reforms that has been made to U.S. capital regulation in response to the shortcomings of the pre-crisis regime. The form of stress testing currently undertaken by the Federal Reserve in implementing the stress testing requirement of the Dodd-Frank Act is based around a small number of scenarios.  This approach involves specifying macroeconomic and financial scenarios that represent stressful conditions over the time horizon of the stress test and then projecting, for each bank holding company in the stress test, its losses, income, and path of capital \textit{given that scenario}. In this paper, we focus on the path of income and consider the ability of empirical models to translate developments in interest rates into bank net interest margins (NIMs).
+\noindent Bank stress testing  is a central component of reforms to U.S. capital regulation promulgated by the Dodd-Frank Act in response to the shortcomings of the pre-crisis regime. The form of stress testing currently undertaken by the Federal Reserve is based around a small number of scenarios.  This approach involves specifying macroeconomic and financial scenarios that represent stressful conditions and then projecting, for each bank holding company in the stress test, its losses, income, and path of capital \textit{given that scenario}. In this paper, we focus on the path of income and consider the ability of empirical models to translate developments in interest rates into bank net interest margins. Our findings have bearing on the use of stress tests to boost confidence in banks in periods of crisis.
 \end{abstract}
 
 \vspace{.125in}
@@ -97,9 +97,9 @@ There are two strands in the literature on modeling NIMs.  The first strand emph
 
 Both \citeN{covas2012} and \citeN{hirtle2013} measure the slope of the yield curve in their respective NIM models with the 10-year to 3-month Treasury term spread and short-term market rates with the 3-month Treasury bill rate, as do \citeN{english2002} and \citeN{english2012}---two other papers in this tradition.  All of these papers estimate NIM models with slightly different purposes in mind but all use essentially the same interest rate variables to summarize the yield curve.  
 
-The NIM models estimated by \citeN{covas2012} and \citeN{hirtle2013} are developed for stress testing and are part of much larger aggregative models of a number of components of banks' financial statements. These models are both estimated on panel data with the most notable difference between these models being the estimation techniques they employ: Least squares regression in the case of \citeN{hirtle2013} and quantile regression in the case of \citeN{covas2012}. 
+The NIM models estimated by \citeN{covas2012} and by \citeN{hirtle2013} are developed for stress testing and are part of much larger aggregative models of a number of components of banks' financial statements. These models are both estimated on panel data with the most notable difference between these models being the estimation techniques they employ: Least squares regression in the case of \citeN{hirtle2013} and quantile regression in the case of \citeN{covas2012}. 
 
-Like our paper, \citeN{english2002} focuses exclusively on NIMs, although he does so for a number of countries (that is, all G-7 countries except for France, and for Australia, Norway, Sweden, and Switzerland).  Addditionally (and as we also do later), he considers asset yields and liability yields separately---the two measures that when differenced imply NIMs.  The main focus of \citeN{english2002} is understanding how well the aggregate banking sectors in the countries he studies appear to have managed the interest rate risk that they face on their earnings, as such he uses aggregate data (rather than firm-level data) and does not focus on the conditional forecasting performance of his model.
+Like our paper, \citeN{english2002} focuses exclusively on NIMs, although he does so for a number of countries (that is, all G-7 countries except for France, and for Australia, Norway, Sweden, and Switzerland).  Additionally (and as we also do later), he considers asset yields and liability yields separately---the two measures that when differenced imply NIMs.  The main focus of \citeN{english2002} is understanding how well the aggregate banking sectors in the countries he studies appear to have managed the interest rate risk that they face on their earnings, as such he uses aggregate data (rather than firm-level data) and does not focus on the conditional forecasting performance of his model.
 
 Finally, \citeN{english2012} consider the relationship between NIMs and the slope of the yield curve and short-term rates for a panel of banks, however, in contrast to the other studies they allow for the specific coefficients estimated for each bank to vary as linear functions of bank balance sheet ratios that one \textit{a priori} might think would be relevant to net interest income.  In particular, these ratios include the maturity gap between bank assets and liabilities, the deposit share of liabilities, and the loan share of assets. Again, since \citeN{english2012} are focussed on understanding the determinants of NIMs they do not consider conditional forecast performance.
 
@@ -332,11 +332,11 @@ The lower panels of figure~\ref{figure_scenario} also consider the uncertainty o
 
 \section{Conclusion}
 
-The unweighted forecast combination model for NIMs based on just two yields outperforms the other forecast models we considered. No other model comes close to outperforming a no-change forecast.  This is only a small victory as the variance of the forecast error is large even when compared to the observed variation of NIMs. Accordingly, even scenarios that have vastly different implications for the configuration of interest rates contain relatively little information to forecast NIMs.
+The forecast combination of yields outperforms the no change model in forecasting net interest margins. As the forecast horizon lengthens, forecast improvement from the forecast combination method become more sizable. None of the other model considered outperforms a no-change forecast.  This is only a small victory, as the variance of the forecast error is large even when compared to the observed variation of NIMs. Accordingly, even stress test scenarios that have vastly different implications for the configuration of interest rates contain relatively little information to forecast NIMs.
 
-Our findings have implications beyond the study of net interest margins. Scenario-based stress tests have been used across the world to boost confidence in the banking sector in periods of crises. Yet, they are predicated on the assumption that different scenarios for the evolution of the macroeconomy have sufficiently different implications for the evolution of key balance sheet items.  Yet, an array of time series methods found by others to be near the frontier of efficiency produces projections conditional on radically different scenarios for yields that statistically indistinguishable. 
+Our findings have implications beyond the study of net interest margins. Scenario-based stress tests have been used across the world to boost confidence in the banking sector in periods of crises. Yet, they are predicated on the assumption that different scenarios for the evolution of the macroeconomy have sufficiently different implications for the evolution of key balance sheet items.  An array of time series methods found by others to be near the frontier of efficiency produces projections conditional on radically different scenarios for yields that are statistically indistinguishable. 
 
-Supervisory authorities that perform stress tests certainly have access to a wealth of supervisory information beyond what  the publicly available data that we have used. Yet, if the conclusions of stress tests are mostly predicated on supervisory sources, as our study implies, communication with the public is even more challenging. In that case, the effects of confidence of stress tests rely squarely on the reputation of the supervising authority, one which might be tarnished exactly in a period of crisis.
+Supervisory authorities that perform stress tests have access to a wealth of supervisory information beyond what  the publicly available data that we have used. However, if the conclusions of stress tests gain precision from the use of supervisory sources, communication with the public is even more challenging. In that case, the effects of confidence of stress tests rely squarely on the reputation of the supervising authority, one which might be tarnished exactly in a period of crisis.
 
 \normalsize \clearpage
 \renewcommand{\baselinestretch}{1} 
@@ -347,32 +347,50 @@ Supervisory authorities that perform stress tests certainly have access to a wea
 
 
 
-\renewcommand{\baselinestretch}{1.5}
+\renewcommand{\baselinestretch}{1.5} \normalsize 
 
-\newpage
-{\normalsize \clearpage
+\clearpage
 \begin{sidewaystable}
 \center
-\caption{RMSE for baseline specifications -- Recursive Estimation Windows} \label{table_rmse_baseline}
+\caption{Out-of-Sample RMSE for baseline specifications -- Recursive Estimation Window} \label{table_rmse_baseline}
 \begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|}
 \hline
 &Step 1 &Step 2 &Step 3 &Step 4 &Step 5 &Step 6 &Step 7 &Step 8 &Step 9 &Step 10\\
 \hline
 1. Simple Forecast Combination             &0.107&0.133&0.148&0.168&0.187&0.202&0.213&0.209&0.216&0.223\\
 2. DFM                                                       &0.122&0.148&0.169&0.212&0.247&0.278&0.316&0.340&0.373&0.404\\
-3a. DFM with 2nd Step Regression           &0.118&0.167&0.209&0.260&0.308&0.356&0.398&0.433&0.474&0.511\\
-3b. DFM with Forecast Combination          &0.112&0.159&0.199&0.247&0.300&0.351&0.399&0.438&0.489&0.535\\
-4. Forecast Combination of Observed Factors&0.118&0.169&0.216&0.273&0.336&0.399&0.456&0.509&0.567&0.622\\
-5. VAR on Observed Factors                 &0.166&0.209&0.263&0.302&0.342&0.375&0.380&0.430&0.451&0.499\\
-6. No-Change Forecast                      &0.107&0.138&0.154&0.181&0.206&0.228&0.244&0.248&0.271&0.293\\
+3a. DFM with 2nd Step Reg.           &0.118&0.167&0.209&0.260&0.308&0.356&0.398&0.433&0.474&0.511\\
+3b. DFM with F. Combination          &0.112&0.159&0.199&0.247&0.300&0.351&0.399&0.438&0.489&0.535\\
+4. PCR                               &0.118&0.167&0.208&0.259&0.307&0.355&0.397&0.432&0.472&0.508\\
+5. PLS                               &0.115&0.158&0.192&0.234&0.278&0.323&0.365&0.400&0.443&0.482\\
+6. F. Combination - Observed Factors &0.118&0.169&0.216&0.273&0.336&0.399&0.456&0.509&0.567&0.622\\
+7. VAR on Observed Factors           &0.166&0.209&0.263&0.302&0.342&0.375&0.380&0.430&0.451&0.499\\
+8. No-Change Forecast                &0.107&0.138&0.154&0.181&0.206&0.228&0.244&0.248&0.271&0.293\\
 \hline
 \end{tabular}
 \end{sidewaystable}
-}
 
 
+\begin{sidewaystable}
+\caption{Diebold-Mariano-West Statistics Relative to the No-Change Forecast -- Recursive Estimation Window}     
+\center                                                                                                     
+\begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|}                                                                    
+\hline                                                                                                      
+&Step 1 &Step 2 &Step 3 &Step 4 &Step 5 &Step 6 &Step 7 &Step 8 &Step 9 &Step 10\\                          
+\hline                                                                                                      
+1. F. Combination - Yields          &0.102&-0.821&-0.788&-1.153&-1.445&-1.521&-1.433&-1.380&-1.775&-2.016*\\
+3a. DFM with 2nd Step Reg.          &1.049&1.010&1.142&1.320&1.430&1.566&1.675&1.811&1.902&1.913\\          
+3b. DFM with F. Combination         &0.879&1.434&1.660&1.603&1.723&1.858&2.009*&2.220*&2.587*&3.015*\\      
+4. PCR                              &1.056&1.010&1.123&1.281&1.384&1.512&1.622&1.754&1.847&1.862\\          
+5. PLS                              &0.983&0.922&1.042&1.170&1.329&1.534&1.728&1.903&1.964*&1.960\\         
+6. F. Combination - Observed Factors&1.256&1.211&1.365&1.440&1.610&1.799&1.955&2.263*&2.629*&3.055*\\       
+7. VAR on Observed Factors          &2.653*&3.596*&2.512*&2.321*&2.094*&2.242*&2.040*&2.145*&1.955&1.674\\  
+\hline                                                                                                      
+\end{tabular}                                                                                               
+\end{sidewaystable}               
+                                                                                   
 \begin{sidewaystable}       
-\caption{RMSE for baseline specifications -- Rolling Estimation Windows} \label{table_rmse_baseline}                                                                              
+\caption{Out-of-Sample RMSE for baseline specifications -- Rolling Estimation Window} \label{table_rmse_baseline}                                                                              
 \center                                                                                           
 \begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|}                                                          
 \hline                                                                                            
@@ -391,7 +409,7 @@ Supervisory authorities that perform stress tests certainly have access to a wea
 \end{sidewaystable}                                                                                       
 
 \clearpage
-\begin{sidewaystable}   \caption{Diebold-Mariano-West Statistics Relative to the No-Change Forecast}                                                                                             
+\begin{sidewaystable}   \caption{Diebold-Mariano-West Statistics Relative to the No-Change Forecast -- Rolling Estimation Window}                                                                                             
 \center                                                                                                     
 \begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|}                                                                    
 \hline                                                                                                      
@@ -406,88 +424,93 @@ Supervisory authorities that perform stress tests certainly have access to a wea
 7. VAR on Observed Factors          &1.328&1.288&1.542&1.402&1.307&1.786&1.556&2.792*&0.940&1.251\\         
 \hline                                                                                                      
 \end{tabular}
-\footnotesize A '*' denotes that the statistic is significant at the 95\% level.                                                                                               
+\footnotesize A '*' denotes significance at the 95\% level.                                                                                               
 \end{sidewaystable}  
 
 
 \normalsize \clearpage
 \renewcommand{\baselinestretch}{1} 
-\begin{table}  
-\caption{Decomposing the Relative Performance of 1-Step Ahead Forecasts}                                                        
+\begin{table} 
+\caption{Decomposition of Forecast Performance Relative to the No-Change Forecast}                                                         
 \center                                                                
 \begin{tabular}{|l|l|c|c|}                                             
 \hline                                                                 
 &&m = 4&m=12 \\                                                        
 \hline                                                                 
-1. F. Combination - Yields          & DMW&\multicolumn{2}{|c|}{1.170}\\
+1. F. Combination - Yields          & DMW&\multicolumn{2}{|c|}{1.037}\\
 \hline                                                                 
-& $\Gamma_P^{(A)}$&11.153*&2.477\\                                     
-& $\Gamma_P^{(B)}$&3.056*&3.056*\\                                     
-& $\Gamma_P^{(U)}$&0.490&0.490\\                                       
+& $\Gamma_P^{(A)}$&9.885*&2.196\\                                      
+& $\Gamma_P^{(B)}$&2.817*&2.817*\\                                     
+& $\Gamma_P^{(U)}$&0.434&0.434\\                                       
 \hline                                                                 
-3a. DFM with 2nd Step Reg.          & DMW&\multicolumn{2}{|c|}{0.478}\\
+3a. DFM with 2nd Step Reg.          & DMW&\multicolumn{2}{|c|}{0.473}\\
 \hline                                                                 
-& $\Gamma_P^{(A)}$&7.684&3.727\\                                       
-& $\Gamma_P^{(B)}$&-0.806&-0.806\\                                     
-& $\Gamma_P^{(U)}$&1.146&1.146\\                                       
+& $\Gamma_P^{(A)}$&7.600&3.686\\                                       
+& $\Gamma_P^{(B)}$&-0.845&-0.845\\                                     
+& $\Gamma_P^{(U)}$&1.104&1.104\\                                       
 \hline                                                                 
-3b. DFM with F. Combination         & DMW&\multicolumn{2}{|c|}{0.773}\\
+3b. DFM with F. Combination         & DMW&\multicolumn{2}{|c|}{0.796}\\
 \hline                                                                 
-& $\Gamma_P^{(A)}$&6.841&2.441\\                                       
-& $\Gamma_P^{(B)}$&2.923*&2.923*\\                                     
-& $\Gamma_P^{(U)}$&0.769&0.769\\                                       
+& $\Gamma_P^{(A)}$&7.052&2.516\\                                       
+& $\Gamma_P^{(B)}$&2.713*&2.713*\\                                     
+& $\Gamma_P^{(U)}$&0.792&0.792\\                                       
 \hline                                                                 
-4. PCR                              & DMW&\multicolumn{2}{|c|}{1.040}\\
+4. PCR                              & DMW&\multicolumn{2}{|c|}{1.056}\\
 \hline                                                                 
-& $\Gamma_P^{(A)}$&8.324&3.873\\                                       
-& $\Gamma_P^{(B)}$&-0.059&-0.059\\                                     
-& $\Gamma_P^{(U)}$&1.445&1.445\\                                       
+& $\Gamma_P^{(A)}$&8.455&3.934\\                                       
+& $\Gamma_P^{(B)}$&-0.062&-0.062\\                                     
+& $\Gamma_P^{(U)}$&1.442&1.442\\                                       
 \hline                                                                 
-5. PLS                              & DMW&\multicolumn{2}{|c|}{0.638}\\
+5. PLS                              & DMW&\multicolumn{2}{|c|}{0.630}\\
 \hline                                                                 
-& $\Gamma_P^{(A)}$&7.105&3.710\\                                       
-& $\Gamma_P^{(B)}$&-0.630&-0.630\\                                     
-& $\Gamma_P^{(U)}$&1.209&1.209\\                                       
+& $\Gamma_P^{(A)}$&7.007&3.659\\                                       
+& $\Gamma_P^{(B)}$&-0.681&-0.681\\                                     
+& $\Gamma_P^{(U)}$&1.147&1.147\\                                       
 \hline                                                                 
-6. F. Combination - Observed Factors& DMW&\multicolumn{2}{|c|}{0.855}\\
+6. F. Combination - Observed Factors& DMW&\multicolumn{2}{|c|}{0.844}\\
 \hline                                                                 
-& $\Gamma_P^{(A)}$&6.518&2.863\\                                       
-& $\Gamma_P^{(B)}$&-2.711*&-2.711*\\                                   
-& $\Gamma_P^{(U)}$&2.025*&2.025*\\                                     
+& $\Gamma_P^{(A)}$&6.433&2.826\\                                       
+& $\Gamma_P^{(B)}$&-2.537*&-2.537*\\                                   
+& $\Gamma_P^{(U)}$&2.018*&2.018*\\                                     
 \hline                                                                 
-7. VAR on Observed Factors          & DMW&\multicolumn{2}{|c|}{1.250}\\
+7. VAR on Observed Factors          & DMW&\multicolumn{2}{|c|}{1.328}\\
 \hline                                                                 
-& $\Gamma_P^{(A)}$&9.040&2.208\\                                       
-& $\Gamma_P^{(B)}$&1.836&1.836\\                                       
-& $\Gamma_P^{(U)}$&-1.249&-1.249\\                                     
+& $\Gamma_P^{(A)}$&9.599&2.345\\                                       
+& $\Gamma_P^{(B)}$&1.309&1.309\\                                       
+& $\Gamma_P^{(U)}$&0.226&0.226\\                                       
 \hline                                                                 
-\end{tabular}                                                          
-\end{table}   
+\end{tabular} 
+
+\footnotesize \flushleft \noindent
+[Insert footnote on interpretation of table here]                                                        
+\end{table}                                                            
 
 \clearpage
 \renewcommand{\baselinestretch}{1.5} \normalsize 
 
 \begin{sidewaystable}
-\caption{RMSEs for models that include the share of asset of the shadow banking sector. Estimation sample: 1989Q2-2008Q2} \label{table_rmse_competition}
+\caption{Out-of-Sample RMSEs (recursive estimation window) for models that include the share of asset of the shadow banking sector} \label{table_rmse_competition}
 \center
 \begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|}
 \hline
 &Step 1 &Step 2 &Step 3 &Step 4 &Step 5 &Step 6 &Step 7 &Step 8 &Step 9 &Step 10\\
 \hline
-1. Simple Forecast Combination             &0.110&0.143&0.165&0.192&0.222&0.248&0.267&0.274&0.287&0.300\\
-3a. DFM with 2nd Step Regression           &0.121&0.170&0.212&0.262&0.312&0.360&0.403&0.436&0.478&0.515\\
-3b. DFM with Forecast Combination          &0.106&0.140&0.165&0.193&0.222&0.248&0.267&0.274&0.287&0.300\\
-4. Forecast Combination of Observed Factors&0.109&0.141&0.165&0.193&0.222&0.249&0.267&0.274&0.288&0.300\\
-5. VAR on Observed Factors                 &0.344&0.396&0.476&0.494&0.521&0.569&0.631&0.670&0.699&0.718\\
-6. No-Change Forecast                      &0.107&0.138&0.154&0.181&0.206&0.228&0.244&0.248&0.271&0.293\\
-\hline
+1. F. Combination - Yields           &0.107&0.133&0.148&0.168&0.187&0.202&0.213&0.209&0.216&0.223\\
+1b. F. Combination of change - Yields&0.163&0.173&0.186&0.217&0.251&0.294&0.327&0.346&0.396&0.434\\
+3a. DFM with 2nd Step Reg.           &0.118&0.167&0.209&0.260&0.308&0.356&0.398&0.433&0.474&0.511\\
+3b. DFM with F. Combination          &0.112&0.159&0.199&0.247&0.300&0.351&0.399&0.438&0.489&0.535\\
+4. PCR                               &0.118&0.167&0.208&0.259&0.307&0.355&0.397&0.432&0.472&0.508\\
+5. PLS                               &0.115&0.158&0.192&0.234&0.278&0.323&0.365&0.400&0.443&0.482\\
+6. F. Combination - Observed Factors &0.118&0.169&0.216&0.273&0.336&0.399&0.456&0.509&0.567&0.622\\
+7. VAR on Observed Factors           &0.166&0.209&0.263&0.302&0.342&0.375&0.380&0.430&0.451&0.499\\
+8. No-Change Forecast                &0.107&0.138&0.154&0.181&0.206&0.228&0.244&0.248&0.271&0.293\\\hline
 \end{tabular}
 \end{sidewaystable}
 
 
 \clearpage
 \begin{sidewaystable}
-\caption{RMSEs for variants of the simple forecast combination model} \label{table_rmse_combination}
+\caption{Out-of-Sample RMSEs for variants of the simple forecast combination model (recursive estimation window)} \label{table_rmse_combination}
 \center
 \begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|}
 \hline
@@ -502,12 +525,125 @@ Smoothed Factors        &0.112&0.159&0.199&0.247&0.300&0.351&0.399&0.438&0.489&0
 \end{tabular}
 \end{sidewaystable}
 
-\newpage \clearpage
-\newpage \clearpage
+
+\begin{sidewaystable}     
+\caption{Out-of-Sample RMSE (rolling estimation window) -- Extended Assessment Sample Through 2013q1}                                                                  
+\center                                                                                            
+\begin{tabular}{|l|c|c|c|c|c|c|c|c|c|c|}                                                
+\hline                                                                                  
+&Step 1 &Step 2 &Step 3 &Step 4 &Step 5 &Step 6 &Step 7 &Step 8 &Step 9 &Step 10\\      
+\hline                                                                                  
+1. F. Combination - Yields          &0.12&0.16&0.20&0.23&0.26&0.29&0.30&0.30&0.30&0.30\\
+3a. DFM with 2nd Step Reg.          &0.12&0.15&0.17&0.20&0.23&0.26&0.28&0.29&0.32&0.34\\
+3b. DFM with F. Combination         &0.12&0.16&0.20&0.25&0.30&0.34&0.37&0.41&0.44&0.47\\
+4. PCR                              &0.12&0.15&0.19&0.23&0.26&0.30&0.33&0.36&0.39&0.41\\
+5. PLS                              &0.12&0.14&0.17&0.19&0.21&0.23&0.24&0.26&0.28&0.31\\
+6. F. Combination - Observed Factors&0.12&0.16&0.19&0.23&0.27&0.32&0.35&0.39&0.43&0.46\\
+7. VAR on Observed Factors          &0.71&0.73&0.47&0.83&0.87&0.63&0.69&0.39&0.37&0.40\\
+8. No-Change Forecast               &0.11&0.15&0.17&0.20&0.22&0.25&0.28&0.28&0.30&0.32\\
+\hline                                                                                  
+\end{tabular}                                                                               
+\end{sidewaystable}                                                                                        
+
+\clearpage
+\renewcommand{\baselinestretch}{1} \normalsize 
+\begin{table} 
+\caption{Decomposition of Forecast Performance Relative to the No-Change Forecast --  Extended Assessment Window Through 2013q1 }                                                                                                                  
+\center                                                                
+\begin{tabular}{|l|l|c|c|}                                             
+\hline                                                                 
+&&m = 4&m=12 \\                                                        
+\hline                                                                 
+1. F. Combination - Yields          & DMW&\multicolumn{2}{|c|}{0.673}\\
+\hline                                                                 
+& $\Gamma_P^{(A)}$&15.190*&3.890\\                                     
+& $\Gamma_P^{(B)}$&3.634*&3.634*\\                                     
+& $\Gamma_P^{(U)}$&-0.458&-0.458\\                                     
+\hline                                                                 
+3a. DFM with 2nd Step Reg.          & DMW&\multicolumn{2}{|c|}{0.425}\\
+\hline                                                                 
+& $\Gamma_P^{(A)}$&9.933&5.123\\                                       
+& $\Gamma_P^{(B)}$&-1.910&-1.910\\                                     
+& $\Gamma_P^{(U)}$&1.098&1.098\\                                       
+\hline                                                                 
+3b. DFM with F. Combination         & DMW&\multicolumn{2}{|c|}{0.753}\\
+\hline                                                                 
+& $\Gamma_P^{(A)}$&11.879*&3.923\\                                     
+& $\Gamma_P^{(B)}$&-3.581*&-3.581*\\                                   
+& $\Gamma_P^{(U)}$&0.964&0.964\\                                       
+\hline                                                                 
+4. PCR                              & DMW&\multicolumn{2}{|c|}{0.465}\\
+\hline                                                                 
+& $\Gamma_P^{(A)}$&13.470*&6.846*\\                                    
+& $\Gamma_P^{(B)}$&-0.916&-0.916\\                                     
+& $\Gamma_P^{(U)}$&1.261&1.261\\                                       
+\hline                                                                 
+5. PLS                              & DMW&\multicolumn{2}{|c|}{0.598}\\
+\hline                                                                 
+& $\Gamma_P^{(A)}$&8.607&4.789\\                                       
+& $\Gamma_P^{(B)}$&-1.746&-1.746\\                                     
+& $\Gamma_P^{(U)}$&0.817&0.817\\                                       
+\hline                                                                 
+6. F. Combination - Observed Factors& DMW&\multicolumn{2}{|c|}{0.896}\\
+\hline                                                                 
+& $\Gamma_P^{(A)}$&10.675*&3.858\\                                     
+& $\Gamma_P^{(B)}$&-3.444*&-3.444*\\                                   
+& $\Gamma_P^{(U)}$&1.179&1.179\\                                       
+\hline                                                                 
+7. VAR on Observed Factors          & DMW&\multicolumn{2}{|c|}{1.343}\\
+\hline                                                                 
+& $\Gamma_P^{(A)}$&15.481*&4.311\\                                     
+& $\Gamma_P^{(B)}$&1.307&1.307\\                                       
+& $\Gamma_P^{(U)}$&0.313&0.313\\                                       
+\hline                                                                 
+\end{tabular}                                                          
+\end{table}  
+
+
+\begin{sidewaystable}  
+\caption{Out-of-Sample RMSE for the 1-Step Ahead Forecast -- Bank-Specific Models} 
+\center                                                        
+\begin{tabular}{|l|c|c|c|c|c|c|c|c|}                                                                      
+\hline 
+&\multicolumn{3}{|c|}{Recursive}&\multicolumn{3}{|c|}{Rolling}    & & \\                                                                                               
+                                                                                                   
+&1. F. Comb  &4. PCR      &5. PLS      &1. F. Comb  &4. PCR      &5. PLS      &8. No Change&SNL         \\
+\hline                                                                                                    
+JPMORGAN CHASE \& CO  &0.17&0.18&0.18&0.18&0.18&0.17&0.15&0.00\\                                          
+BANK OF AMER CORP     &0.24&0.24&0.25&0.25&0.24&0.30&0.26&0.00\\                                          
+CITIGROUP             &0.22&0.24&0.23&0.29&0.24&0.30&0.21&0.00\\                                          
+WELLS FARGO \& CO     &0.14&0.14&0.16&0.15&0.14&0.12&0.12&0.00\\                                          
+U S BC                &0.10&0.13&0.12&0.11&0.13&0.12&0.10&0.00\\                                          
+PNC FNCL SVC GROUP    &0.21&0.22&0.22&0.21&0.22&0.20&0.18&0.00\\                                          
+BANK OF NY MELLON CORP&0.32&0.31&0.32&0.33&0.31&0.29&0.37&0.00\\                                          
+STATE STREET CORP     &0.22&0.26&0.25&0.22&0.26&0.26&0.20&0.00\\                                          
+BB\&T CORP            &0.14&0.18&0.16&0.14&0.18&0.12&0.13&0.00\\                                          
+SUNTRUST BK           &0.25&0.21&0.16&0.14&0.21&0.13&0.10&0.00\\                                          
+CAPITAL ONE FC        &1.06&0.90&0.91&1.13&0.90&1.08&0.53&0.00\\                                          
+REGIONS FC            &0.16&0.19&0.14&0.16&0.19&0.14&0.12&0.00\\                                          
+RBS CITIZENS FNCL GRP &0.12&0.21&0.13&0.10&0.21&0.12&0.12&0.00\\                                          
+FIFTH THIRD BC        &0.30&0.32&0.32&0.30&0.32&0.29&0.34&0.00\\                                          
+BMO FNCL CORP         &1.05&1.04&1.02&1.04&1.04&1.06&1.17&0.00\\                                          
+UNIONBANCAL CORP      &0.36&0.36&0.33&0.35&0.36&0.35&0.35&0.00\\                                          
+NORTHERN TR CORP      &0.11&0.10&0.12&0.11&0.10&0.13&0.12&0.00\\                                          
+KEYCORP               &0.47&0.44&0.45&0.50&0.44&0.48&0.49&0.00\\                                          
+M\&T BK CORP          &0.11&0.14&0.15&0.12&0.14&0.13&0.12&0.00\\                                          
+BBVA USA BSHRS        &0.79&1.10&1.19&0.90&1.10&1.26&1.50&0.00\\                                          
+COMERICA              &0.16&0.20&0.17&0.17&0.20&0.19&0.17&0.00\\                                          
+HUNTINGTON BSHRS      &0.23&0.13&0.10&0.27&0.13&0.18&0.11&0.00\\                                          
+ZIONS BC              &0.23&0.19&0.22&0.22&0.19&0.21&0.20&0.00\\                                          
+\hline                                                                                                    
+\end{tabular}                                                        
+\end{sidewaystable}
+
+
+\renewcommand{\baselinestretch}{1.5} \normalsize 
+
+\clearpage
 \begin{figure}
 \caption{Interest Income, Interest Expenses and Short-term Treasury Rates} \label{figure_nims_components}
 \center
-\includegraphics[scale=0.85]{figure_nims_components.ps}
+\hspace{-1.5cm}\includegraphics[scale=0.8]{figure_nims_components.ps}
 \end{figure}
 
 
@@ -515,42 +651,510 @@ Smoothed Factors        &0.112&0.159&0.199&0.247&0.300&0.351&0.399&0.438&0.489&0
 %[tbp]
 \caption{NIMs and Treasury Yields} \label{figure_nims_rates}
 \center
-\includegraphics[scale=0.85]{figure_nims_rates.ps}
+\includegraphics[scale=0.8]{figure_nims_rates.ps}
 \end{figure}
 
 \newpage \clearpage
 \begin{figure}
-%[tbp]
 \caption{NIMs and Observed Yield Factors} \label{figure_nims_factors}
 \center
-\includegraphics[scale=0.85]{figure_nims_factors.ps}
+\includegraphics[scale=0.8]{figure_nims_factors.ps}
 \end{figure}
 
 \clearpage
 \begin{figure}
-\flushleft
+
 \caption{NIMs and Competition -- The Asset Share of the Shadow Banking Sector} \label{figure_nims_competition}
-
-\hspace{-2.5cm} \includegraphics[scale=0.85]{figure_nims_competition.ps}
+\center
+\noindent
+\hspace{-1.5cm}\includegraphics[scale=0.8]{figure_nims_competition.ps}
 \end{figure}
 
 \clearpage
-\begin{figure}
-\flushleft
+\begin{figure} 
 \caption{Pseudo-Out-of-Sample Forecasts} \label{figure_forecasts}
- \includegraphics[scale=0.85]{figure_forecasts.ps}
+\center \includegraphics[scale=0.75]{figure_forecasts.ps}
+\flushleft 
+\renewcommand{\baselinestretch}{1} \normalsize 
+\footnotesize \noindent Observations for which the forecast combination of yields (our Model 1) beats the no change forecast (our Model 8) are marked with with an 'o;' observations for which the no change forecast beats the forecast combination of yields are marked with an 'x.'
 \end{figure}
 
 \clearpage
 \begin{figure}
-\flushleft
+\center
 \caption{Forecast for NIMs Conditional on CCAR 2012 Scenarios} \label{figure_scenario}
 
- \includegraphics[scale=0.85]{figure_scenario.ps}
+ \includegraphics[scale=0.8]{figure_scenario.ps}
 \end{figure}
 
+\clearpage
+\appendix
+
+\section{Additional Bank-Specific Results}
 
 
+\begin{table}                                               
+\caption{Model 1, Forecast Combination, Out-of-Sample RMSEs (recursive window) in deviation from RMSEs for no-change forecast}
+\center                                                     
+\begin{tabular}{|l|c|c|c|c|c|c|}                            
+\hline                                                      
+&Step 1 &Step 2 &Step 4 &Step 6 &Step 8 &Step 10\\          
+\hline                                                      
+JPMORGAN CHASE \& CO  &0.02&0.04&0.04&0.05&0.02&-0.00\\     
+BANK OF AMER CORP     &-0.01&-0.04&-0.12&-0.14&-0.13&-0.12\\
+CITIGROUP             &0.01&0.02&0.05&0.04&0.05&0.01\\      
+WELLS FARGO \& CO     &0.02&0.05&0.04&0.01&-0.03&-0.07\\    
+U S BC                &-0.01&-0.02&0.00&0.02&0.04&0.02\\    
+PNC FNCL SVC GROUP    &0.03&0.07&0.10&0.10&0.09&0.11\\      
+BANK OF NY MELLON CORP&-0.05&-0.07&0.05&0.00&-0.08&-0.21\\  
+STATE STREET CORP     &0.02&0.04&0.11&0.11&0.27&0.52\\      
+BB\&T CORP            &0.01&0.01&0.03&0.01&0.06&0.05\\      
+SUNTRUST BK           &0.15&0.17&0.16&0.14&0.20&0.27\\      
+CAPITAL ONE FC        &0.53&0.57&0.39&0.30&0.17&0.13\\      
+REGIONS FC            &0.04&0.04&0.01&-0.04&-0.02&-0.06\\   
+RBS CITIZENS FNCL GRP &-0.00&-0.04&-0.10&-0.11&0.07&0.25\\  
+FIFTH THIRD BC        &-0.04&-0.07&0.02&0.02&0.10&0.12\\    
+BMO FNCL CORP         &-0.12&-0.26&-0.38&-0.47&-0.42&-0.53\\
+UNIONBANCAL CORP      &0.01&-0.01&0.00&-0.05&0.03&0.05\\    
+NORTHERN TR CORP      &-0.01&-0.01&0.02&-0.01&-0.04&-0.08\\ 
+KEYCORP               &-0.02&-0.04&-0.07&-0.10&-0.12&-0.02\\
+M\&T BK CORP          &-0.02&-0.02&0.01&-0.03&-0.01&-0.00\\ 
+BBVA USA BSHRS        &-0.71&-0.73&-0.72&-0.75&-0.70&-1.03\\
+COMERICA              &-0.00&-0.02&0.01&0.02&0.09&0.18\\    
+HUNTINGTON BSHRS      &0.12&0.08&0.09&0.11&0.18&0.24\\      
+ZIONS BC              &0.03&0.07&0.10&0.10&0.16&0.12\\      
+\hline                                                      
+\end{tabular}                                               
+\end{table}                                                 
+
+
+
+\begin{table} 
+\caption{Model 1, Forecast Combination (recursive window), Diebold-Mariano-West Statistics relative to a no-change forecast}
+                                                      
+\center                                                             
+\begin{tabular}{|l|c|c|c|c|c|c|}                                    
+\hline                                                              
+&Step 1 &Step 2 &Step 4 &Step 6 &Step 8 &Step 10\\                  
+\hline                                                              
+JPMORGAN CHASE \& CO  &1.246&1.071&0.813&0.789&0.391&-0.007\\       
+BANK OF AMER CORP     &-0.565&-0.838&-1.269&-1.472&-2.067*&-2.469*\\
+CITIGROUP             &0.403&0.451&0.676&0.629&0.484&0.300\\        
+WELLS FARGO \& CO     &0.852&1.166&1.085&0.189&-0.854&-1.724\\      
+U S BC                &-0.769&-1.162&0.397&0.425&0.457&0.245\\      
+PNC FNCL SVC GROUP    &2.021*&1.964*&1.812&3.445*&5.785*&2.819*\\   
+BANK OF NY MELLON CORP&-1.052&-0.817&1.019&0.092&-1.703&-5.676*\\   
+STATE STREET CORP     &0.778&1.058&1.349&1.837&2.224*&2.712*\\      
+BB\&T CORP            &0.594&0.354&0.940&0.866&2.505*&2.115*\\      
+SUNTRUST BK           &2.102*&1.838&1.960&2.583*&3.923*&3.554*\\    
+CAPITAL ONE FC        &3.072*&2.251*&1.917&3.005*&2.844*&1.148\\    
+REGIONS FC            &1.307&1.159&0.185&-0.929&-1.419&-1.081\\     
+RBS CITIZENS FNCL GRP &-0.059&-1.039&-2.538*&-1.799&0.584&1.226\\   
+FIFTH THIRD BC        &-0.729&-0.644&0.442&0.498&2.747*&2.152*\\    
+BMO FNCL CORP         &-0.718&-0.775&-0.985&-1.155&-1.143&-1.468\\  
+UNIONBANCAL CORP      &0.217&-0.157&0.017&-2.286*&0.633&1.116\\     
+NORTHERN TR CORP      &-0.683&-0.526&0.484&-0.180&-0.845&-4.202*\\  
+KEYCORP               &-0.558&-0.979&-1.873&-1.422&-1.078&-0.153\\  
+M\&T BK CORP          &-0.779&-0.631&0.210&-1.194&-0.255&-0.057\\   
+BBVA USA BSHRS        &-0.787&-0.756&-0.744&-0.862&-0.886&-1.064\\  
+COMERICA              &-0.178&-0.559&0.122&0.272&1.273&2.655*\\     
+HUNTINGTON BSHRS      &2.000*&1.600&2.067*&2.989*&5.065*&4.791*\\   
+ZIONS BC              &1.841&2.451*&1.914&1.747&9.565*&2.198*\\     
+\hline                                                              
+\end{tabular} 
+
+\flushleft
+\footnotesize \noindent A star denotes significance at the 95\% level                                                      
+\end{table}                                                         
+
+
+
+
+\begin{table}
+\caption{Model 1, Forecast Combination, Out-of-Sample RMSEs (rolling window) in deviation from RMSEs for no-change forecast}                                               
+\center                                                     
+\begin{tabular}{|l|c|c|c|c|c|c|}                            
+\hline                                                      
+&Step 1 &Step 2 &Step 4 &Step 6 &Step 8 &Step 10\\          
+\hline                                                      
+JPMORGAN CHASE \& CO  &0.03&0.05&0.06&0.08&0.04&0.01\\      
+BANK OF AMER CORP     &-0.01&-0.03&-0.11&-0.12&-0.10&-0.11\\
+CITIGROUP             &0.09&0.16&0.17&0.10&0.10&0.07\\      
+WELLS FARGO \& CO     &0.03&0.07&0.07&0.02&-0.03&-0.06\\    
+U S BC                &0.00&0.01&0.07&0.09&0.09&0.08\\      
+PNC FNCL SVC GROUP    &0.03&0.08&0.12&0.13&0.12&0.15\\      
+BANK OF NY MELLON CORP&-0.04&-0.05&0.06&0.02&-0.07&-0.22\\  
+STATE STREET CORP     &0.01&0.03&0.09&0.07&0.22&0.49\\      
+BB\&T CORP            &0.01&0.00&0.03&0.01&0.05&0.04\\      
+SUNTRUST BK           &0.04&0.08&0.17&0.14&0.19&0.23\\      
+CAPITAL ONE FC        &0.60&0.62&0.38&0.27&0.10&0.04\\      
+REGIONS FC            &0.04&0.05&0.02&-0.05&0.01&-0.01\\    
+RBS CITIZENS FNCL GRP &-0.02&-0.06&-0.10&-0.10&-0.01&0.13\\ 
+FIFTH THIRD BC        &-0.04&-0.05&0.05&0.06&0.14&0.16\\    
+BMO FNCL CORP         &-0.13&-0.28&-0.38&-0.45&-0.41&-0.50\\
+UNIONBANCAL CORP      &-0.01&-0.04&-0.08&-0.12&-0.03&0.03\\ 
+NORTHERN TR CORP      &-0.01&-0.00&0.02&-0.01&-0.03&-0.09\\ 
+KEYCORP               &0.01&-0.00&0.02&-0.03&-0.04&0.05\\   
+M\&T BK CORP          &-0.01&-0.00&0.05&0.01&0.04&0.04\\    
+BBVA USA BSHRS        &-0.60&-0.57&-0.58&-0.67&-0.63&-0.96\\
+COMERICA              &-0.00&-0.02&-0.00&0.01&0.06&0.13\\   
+HUNTINGTON BSHRS      &0.15&0.10&0.07&0.09&0.18&0.17\\      
+ZIONS BC              &0.02&0.04&0.06&0.06&0.11&0.03\\      
+\hline                                                      
+\end{tabular}                                               
+\end{table}                                                 
+
+
+
+
+\begin{table} 
+\caption{Model 1, Forecast Combination (rolling window), Diebold-Mariano-West Statistics relative to a no-change forecast}                                                     
+\center                                                            
+\begin{tabular}{|l|c|c|c|c|c|c|}                                   
+\hline                                                             
+&Step 1 &Step 2 &Step 4 &Step 6 &Step 8 &Step 10\\                 
+\hline                                                             
+JPMORGAN CHASE \& CO  &1.270&1.084&1.059&1.082&0.681&0.152\\       
+BANK OF AMER CORP     &-0.287&-0.687&-1.187&-1.272&-1.598&-2.469*\\
+CITIGROUP             &1.297&1.408&1.254&1.076&1.029&1.834\\       
+WELLS FARGO \& CO     &1.184&1.510&1.366&0.426&-0.835&-1.721\\     
+U S BC                &0.156&0.184&1.360&1.079&1.002&0.867\\       
+PNC FNCL SVC GROUP    &1.920&1.976*&1.844&3.517*&5.693*&2.910*\\   
+BANK OF NY MELLON CORP&-0.783&-0.623&1.333&0.574&-1.660&-5.544*\\  
+STATE STREET CORP     &0.739&0.877&0.990&0.873&1.598&2.212*\\      
+BB\&T CORP            &0.957&0.131&1.335&1.215&2.626*&1.962*\\     
+SUNTRUST BK           &1.192&1.449&1.479&1.962*&2.958*&4.175*\\    
+CAPITAL ONE FC        &3.432*&2.578*&2.000*&2.828*&1.316&0.339\\   
+REGIONS FC            &1.359&1.487&0.707&-0.889&0.365&-0.113\\     
+RBS CITIZENS FNCL GRP &-1.336&-1.546&-2.309*&-2.264*&-0.148&0.994\\
+FIFTH THIRD BC        &-0.610&-0.420&1.078&1.779&3.947*&2.614*\\   
+BMO FNCL CORP         &-0.755&-0.833&-1.007&-1.141&-1.110&-1.347\\ 
+UNIONBANCAL CORP      &-0.192&-0.499&-1.114&-2.623*&-0.852&1.130\\ 
+NORTHERN TR CORP      &-0.397&-0.070&0.774&-0.183&-0.726&-4.868*\\ 
+KEYCORP               &0.387&-0.142&0.397&-1.128&-0.780&0.700\\    
+M\&T BK CORP          &-0.260&-0.007&1.257&0.362&1.777&1.449\\     
+BBVA USA BSHRS        &-0.687&-0.622&-0.623&-0.798&-0.803&-1.017\\ 
+COMERICA              &-0.033&-0.542&-0.028&0.089&0.963&2.357*\\   
+HUNTINGTON BSHRS      &1.606&1.244&1.104&1.889&3.549*&3.242*\\     
+ZIONS BC              &1.802&2.002*&1.403&0.976&5.704*&0.930\\     
+\hline                                                             
+\end{tabular} 
+
+\flushleft
+\footnotesize \noindent A star denotes significance at the 95\% level                                                                                                           
+\end{table}                                                        
+
+
+
+
+\begin{table} 
+\caption{Model 4, Principal Component Regression, Out-of-Sample RMSEs (recursive window) in deviation from RMSEs for no-change forecast}                                              
+\center                                                     
+\begin{tabular}{|l|c|c|c|c|c|c|}                            
+\hline                                                      
+&Step 1 &Step 2 &Step 4 &Step 6 &Step 8 &Step 10\\          
+\hline                                                      
+JPMORGAN CHASE \& CO  &0.03&0.06&0.08&0.06&-0.02&-0.10\\    
+BANK OF AMER CORP     &-0.01&-0.03&-0.08&-0.09&-0.08&-0.06\\
+CITIGROUP             &0.03&0.05&0.10&0.10&0.12&0.05\\      
+WELLS FARGO \& CO     &0.02&0.01&-0.04&-0.10&-0.19&-0.23\\  
+U S BC                &0.02&0.05&0.10&0.14&0.13&0.12\\      
+PNC FNCL SVC GROUP    &0.04&0.08&0.14&0.14&0.16&0.18\\      
+BANK OF NY MELLON CORP&-0.06&-0.07&0.07&0.02&-0.05&-0.13\\  
+STATE STREET CORP     &0.06&0.13&0.22&0.30&0.30&0.24\\      
+BB\&T CORP            &0.05&0.10&0.17&0.19&0.23&0.25\\      
+SUNTRUST BK           &0.11&0.19&0.29&0.33&0.41&0.47\\      
+CAPITAL ONE FC        &0.37&0.47&0.37&0.26&0.11&0.10\\      
+REGIONS FC            &0.07&0.10&0.12&0.10&0.13&0.15\\      
+RBS CITIZENS FNCL GRP &0.09&0.17&0.29&0.32&0.41&0.48\\      
+FIFTH THIRD BC        &-0.02&-0.04&0.04&0.08&0.16&0.18\\    
+BMO FNCL CORP         &-0.13&-0.19&-0.23&-0.30&-0.33&-0.45\\
+UNIONBANCAL CORP      &0.01&0.03&0.08&0.03&0.10&0.12\\      
+NORTHERN TR CORP      &-0.02&-0.03&-0.03&-0.09&-0.18&-0.25\\
+KEYCORP               &-0.05&-0.01&0.09&0.09&0.13&0.17\\    
+M\&T BK CORP          &0.01&0.03&0.08&0.06&0.11&0.13\\      
+BBVA USA BSHRS        &-0.40&-0.64&-0.99&-1.16&-1.30&-1.51\\
+COMERICA              &0.03&0.05&0.09&0.11&0.18&0.28\\      
+HUNTINGTON BSHRS      &0.01&0.01&0.01&-0.01&0.00&0.00\\     
+ZIONS BC              &-0.01&0.01&0.03&0.01&0.03&-0.04\\    
+\hline                                                      
+\end{tabular}                                               
+\end{table}                                                 
+
+
+
+\begin{table}
+\caption{Model 4, Principal Component Regression (recursive window), Diebold-Mariano-West Statistics relative to a no-change forecast}                                                       
+\center                                                             
+\begin{tabular}{|l|c|c|c|c|c|c|}                                    
+\hline                                                              
+&Step 1 &Step 2 &Step 4 &Step 6 &Step 8 &Step 10\\                  
+\hline                                                              
+JPMORGAN CHASE \& CO  &1.585&1.431&0.940&0.484&-0.161&-0.777\\      
+BANK OF AMER CORP     &-0.324&-0.376&-0.851&-0.946&-0.900&-0.718\\  
+CITIGROUP             &1.113&0.840&0.861&0.720&1.082&0.332\\        
+WELLS FARGO \& CO     &0.548&0.292&-1.096&-2.949*&-3.555*&-2.542*\\ 
+U S BC                &0.645&0.621&0.717&0.867&0.924&0.964\\        
+PNC FNCL SVC GROUP    &1.464&1.451&1.395&1.027&0.904&1.134\\        
+BANK OF NY MELLON CORP&-1.140&-0.717&0.624&0.121&-0.370&-1.180\\    
+STATE STREET CORP     &1.469&1.510&1.190&1.042&0.897&0.767\\        
+BB\&T CORP            &1.785&1.577&1.251&1.089&1.270&1.521\\        
+SUNTRUST BK           &2.681*&2.349*&2.136*&2.030*&2.672*&3.587*\\  
+CAPITAL ONE FC        &2.284*&1.898&1.292&1.365&1.733&1.214\\       
+REGIONS FC            &2.534*&2.030*&1.124&0.661&0.796&0.818\\      
+RBS CITIZENS FNCL GRP &1.523&1.310&1.169&1.079&1.241&1.543\\        
+FIFTH THIRD BC        &-0.735&-0.487&0.535&0.788&1.630&1.922\\      
+BMO FNCL CORP         &-0.818&-0.644&-0.708&-0.927&-1.067&-1.521\\  
+UNIONBANCAL CORP      &0.238&0.706&1.434&0.587&1.784&1.429\\        
+NORTHERN TR CORP      &-1.112&-1.347&-0.685&-1.913&-3.124*&-5.452*\\
+KEYCORP               &-0.693&-0.158&0.564&0.386&0.508&0.659\\      
+M\&T BK CORP          &0.776&0.673&0.771&0.429&0.704&0.981\\        
+BBVA USA BSHRS        &-0.982&-0.983&-1.045&-1.129&-1.169&-1.230\\  
+COMERICA              &1.267&0.980&0.805&0.659&1.020&1.589\\        
+HUNTINGTON BSHRS      &0.800&0.278&0.215&-0.093&0.037&0.061\\       
+ZIONS BC              &-0.809&0.284&0.549&0.242&0.731&-2.058*\\     
+\hline                                                              
+\end{tabular}
+
+\flushleft
+\footnotesize \noindent A star denotes significance at the 95\% level                                                      
+                                                       
+\end{table}                                                         
+
+
+
+
+\begin{table} 
+\caption{Model 4, Principal Component Regression, Out-of-Sample RMSEs (rolling window) in deviation from RMSEs for no-change forecast}                                                  
+\center                                                     
+\begin{tabular}{|l|c|c|c|c|c|c|}                            
+\hline                                                      
+&Step 1 &Step 2 &Step 4 &Step 6 &Step 8 &Step 10\\          
+\hline                                                      
+JPMORGAN CHASE \& CO  &0.03&0.06&0.08&0.06&-0.02&-0.10\\    
+BANK OF AMER CORP     &-0.01&-0.03&-0.08&-0.09&-0.08&-0.06\\
+CITIGROUP             &0.03&0.05&0.10&0.10&0.12&0.05\\      
+WELLS FARGO \& CO     &0.02&0.01&-0.04&-0.10&-0.19&-0.23\\  
+U S BC                &0.02&0.05&0.10&0.14&0.13&0.12\\      
+PNC FNCL SVC GROUP    &0.04&0.08&0.14&0.14&0.16&0.18\\      
+BANK OF NY MELLON CORP&-0.06&-0.07&0.07&0.02&-0.05&-0.13\\  
+STATE STREET CORP     &0.06&0.13&0.22&0.30&0.30&0.24\\      
+BB\&T CORP            &0.05&0.10&0.17&0.19&0.23&0.25\\      
+SUNTRUST BK           &0.11&0.19&0.29&0.33&0.41&0.47\\      
+CAPITAL ONE FC        &0.37&0.47&0.37&0.26&0.11&0.10\\      
+REGIONS FC            &0.07&0.10&0.12&0.10&0.13&0.15\\      
+RBS CITIZENS FNCL GRP &0.09&0.17&0.29&0.32&0.41&0.48\\      
+FIFTH THIRD BC        &-0.02&-0.04&0.04&0.08&0.16&0.18\\    
+BMO FNCL CORP         &-0.13&-0.19&-0.23&-0.30&-0.33&-0.45\\
+UNIONBANCAL CORP      &0.01&0.03&0.08&0.03&0.10&0.12\\      
+NORTHERN TR CORP      &-0.02&-0.03&-0.03&-0.09&-0.18&-0.25\\
+KEYCORP               &-0.05&-0.01&0.09&0.09&0.13&0.17\\    
+M\&T BK CORP          &0.01&0.03&0.08&0.06&0.11&0.13\\      
+BBVA USA BSHRS        &-0.40&-0.64&-0.99&-1.16&-1.30&-1.51\\
+COMERICA              &0.03&0.05&0.09&0.11&0.18&0.28\\      
+HUNTINGTON BSHRS      &0.01&0.01&0.01&-0.01&0.00&0.00\\     
+ZIONS BC              &-0.01&0.01&0.03&0.01&0.03&-0.04\\    
+\hline                                                      
+\end{tabular}                                               
+\end{table}                                                 
+
+
+
+\begin{table} 
+\caption{Model 4, Principal Component Regression (rolling window), Diebold-Mariano-West Statistics relative to a no-change forecast}                                                       
+                                                      
+\center                                                             
+\begin{tabular}{|l|c|c|c|c|c|c|}                                    
+\hline                                                              
+&Step 1 &Step 2 &Step 4 &Step 6 &Step 8 &Step 10\\                  
+\hline                                                              
+JPMORGAN CHASE \& CO  &1.585&1.431&0.940&0.484&-0.161&-0.777\\      
+BANK OF AMER CORP     &-0.324&-0.376&-0.851&-0.946&-0.900&-0.718\\  
+CITIGROUP             &1.113&0.840&0.861&0.720&1.082&0.332\\        
+WELLS FARGO \& CO     &0.548&0.292&-1.096&-2.949*&-3.555*&-2.542*\\ 
+U S BC                &0.645&0.621&0.717&0.867&0.924&0.964\\        
+PNC FNCL SVC GROUP    &1.464&1.451&1.395&1.027&0.904&1.134\\        
+BANK OF NY MELLON CORP&-1.140&-0.717&0.624&0.121&-0.370&-1.180\\    
+STATE STREET CORP     &1.469&1.510&1.190&1.042&0.897&0.767\\        
+BB\&T CORP            &1.785&1.577&1.251&1.089&1.270&1.521\\        
+SUNTRUST BK           &2.681*&2.349*&2.136*&2.030*&2.672*&3.587*\\  
+CAPITAL ONE FC        &2.284*&1.898&1.292&1.365&1.733&1.214\\       
+REGIONS FC            &2.534*&2.030*&1.124&0.661&0.796&0.818\\      
+RBS CITIZENS FNCL GRP &1.523&1.310&1.169&1.079&1.241&1.543\\        
+FIFTH THIRD BC        &-0.735&-0.487&0.535&0.788&1.630&1.922\\      
+BMO FNCL CORP         &-0.818&-0.644&-0.708&-0.927&-1.067&-1.521\\  
+UNIONBANCAL CORP      &0.238&0.706&1.434&0.587&1.784&1.429\\        
+NORTHERN TR CORP      &-1.112&-1.347&-0.685&-1.913&-3.124*&-5.452*\\
+KEYCORP               &-0.693&-0.158&0.564&0.386&0.508&0.659\\      
+M\&T BK CORP          &0.776&0.673&0.771&0.429&0.704&0.981\\        
+BBVA USA BSHRS        &-0.982&-0.983&-1.045&-1.129&-1.169&-1.230\\  
+COMERICA              &1.267&0.980&0.805&0.659&1.020&1.589\\        
+HUNTINGTON BSHRS      &0.800&0.278&0.215&-0.093&0.037&0.061\\       
+ZIONS BC              &-0.809&0.284&0.549&0.242&0.731&-2.058*\\     
+\hline                                                              
+\end{tabular} 
+
+\flushleft
+\footnotesize \noindent A star denotes significance at the 95\% level                                                      
+                                                      
+\end{table}                                                         
+
+
+
+
+\begin{table}  
+\caption{Model 5, Partial Least Squares, Out-of-Sample RMSEs (recursive window) in deviation from RMSEs for no-change forecast}                                                 
+\center                                                     
+\begin{tabular}{|l|c|c|c|c|c|c|}                            
+\hline                                                      
+&Step 1 &Step 2 &Step 4 &Step 6 &Step 8 &Step 10\\          
+\hline                                                      
+JPMORGAN CHASE \& CO  &0.03&0.06&0.08&0.05&-0.03&-0.13\\    
+BANK OF AMER CORP     &-0.01&-0.03&-0.09&-0.08&-0.06&-0.03\\
+CITIGROUP             &0.02&0.05&0.13&0.14&0.18&0.10\\      
+WELLS FARGO \& CO     &0.04&0.06&0.05&-0.01&-0.10&-0.21\\   
+U S BC                &0.02&0.03&0.05&0.07&0.02&-0.03\\     
+PNC FNCL SVC GROUP    &0.05&0.08&0.13&0.10&0.07&0.00\\      
+BANK OF NY MELLON CORP&-0.05&-0.06&0.05&0.03&-0.06&-0.22\\  
+STATE STREET CORP     &0.05&0.12&0.22&0.29&0.30&0.25\\      
+BB\&T CORP            &0.03&0.05&0.06&0.04&0.02&-0.02\\     
+SUNTRUST BK           &0.05&0.08&0.07&0.04&0.03&-0.04\\     
+CAPITAL ONE FC        &0.38&0.49&0.49&0.42&0.19&0.06\\      
+REGIONS FC            &0.02&0.01&-0.07&-0.11&-0.09&-0.02\\  
+RBS CITIZENS FNCL GRP &0.01&0.02&0.07&0.09&0.15&0.20\\      
+FIFTH THIRD BC        &-0.02&-0.03&0.02&0.01&0.02&-0.01\\   
+BMO FNCL CORP         &-0.16&-0.15&-0.11&-0.08&-0.04&-0.22\\
+UNIONBANCAL CORP      &-0.03&-0.06&-0.09&-0.16&-0.09&-0.06\\
+NORTHERN TR CORP      &-0.00&-0.01&-0.00&-0.03&-0.10&-0.15\\
+KEYCORP               &-0.03&-0.03&-0.07&-0.13&-0.16&-0.21\\
+M\&T BK CORP          &0.02&0.04&0.04&-0.02&-0.07&-0.13\\   
+BBVA USA BSHRS        &-0.31&-0.49&-0.83&-0.74&-0.95&-1.29\\
+COMERICA              &0.01&0.00&-0.07&-0.13&-0.19&-0.23\\  
+HUNTINGTON BSHRS      &-0.01&-0.03&-0.03&-0.04&-0.01&-0.01\\
+ZIONS BC              &0.02&0.09&0.14&0.21&0.31&0.36\\      
+\hline                                                      
+\end{tabular}                                               
+\end{table}                                                 
+
+
+
+
+\begin{table}
+\caption{Model 5, Partial Least Squares (recursive window), Diebold-Mariano-West Statistics relative to a no-change forecast}                                                       
+                                                        
+\center                                                              
+\begin{tabular}{|l|c|c|c|c|c|c|}                                     
+\hline                                                               
+&Step 1 &Step 2 &Step 4 &Step 6 &Step 8 &Step 10\\                   
+\hline                                                               
+JPMORGAN CHASE \& CO  &1.518&1.467&0.947&0.455&-0.233&-1.007\\       
+BANK OF AMER CORP     &-0.364&-0.485&-0.800&-0.789&-0.764&-0.764\\   
+CITIGROUP             &0.733&0.716&1.169&0.885&1.849&0.893\\         
+WELLS FARGO \& CO     &1.470&1.184&0.623&-0.093&-1.013&-1.813\\      
+U S BC                &1.083&0.960&0.938&1.832&0.680&-0.565\\        
+PNC FNCL SVC GROUP    &1.603&1.868&2.709*&3.598*&1.807&0.010\\       
+BANK OF NY MELLON CORP&-1.215&-1.028&1.167&1.168&-1.523&-8.018*\\    
+STATE STREET CORP     &1.357&1.604&1.393&1.114&0.921&0.854\\         
+BB\&T CORP            &2.067*&1.906&4.353*&1.461&0.537&-0.651\\      
+SUNTRUST BK           &1.802&1.820&1.183&0.479&0.304&-0.397\\        
+CAPITAL ONE FC        &2.417*&3.182*&2.805*&2.031*&1.127&0.643\\     
+REGIONS FC            &0.954&0.260&-0.826&-0.806&-0.594&-0.233\\     
+RBS CITIZENS FNCL GRP &0.273&0.286&0.543&0.514&0.804&1.239\\         
+FIFTH THIRD BC        &-0.607&-0.451&0.348&0.133&0.385&-0.177\\      
+BMO FNCL CORP         &-0.917&-0.541&-0.367&-0.257&-0.144&-0.841\\   
+UNIONBANCAL CORP      &-1.146&-1.464&-1.541&-4.153*&-4.278*&-2.349*\\
+NORTHERN TR CORP      &-0.177&-0.425&-0.026&-0.714&-2.317*&-5.474*\\ 
+KEYCORP               &-0.740&-0.526&-0.722&-0.948&-1.040&-1.539\\   
+M\&T BK CORP          &1.599&2.549*&2.572*&-0.562&-1.446&-2.908*\\   
+BBVA USA BSHRS        &-0.990&-0.997&-1.084&-1.235&-1.265&-1.290\\   
+COMERICA              &0.444&0.016&-2.252*&-2.291*&-3.623*&-5.810*\\ 
+HUNTINGTON BSHRS      &-0.550&-0.907&-0.460&-0.567&-0.196&-0.159\\   
+ZIONS BC              &0.984&2.038*&1.901&1.854&1.886&2.110*\\       
+\hline                                                               
+\end{tabular}   
+
+\flushleft
+\footnotesize \noindent A star denotes significance at the 95\% level                                                      
+                                                     
+\end{table}                                                          
+
+
+
+
+\begin{table}  
+\caption{Model 5, Partial Least Squares, Out-of-Sample RMSEs (rolling window) in deviation from RMSEs for no-change forecast}                                                                 
+\center                                                     
+\begin{tabular}{|l|c|c|c|c|c|c|}                            
+\hline                                                      
+&Step 1 &Step 2 &Step 4 &Step 6 &Step 8 &Step 10\\          
+\hline                                                      
+JPMORGAN CHASE \& CO  &0.02&0.02&0.03&0.01&-0.06&-0.13\\    
+BANK OF AMER CORP     &0.05&0.07&0.05&0.05&0.04&0.06\\      
+CITIGROUP             &0.09&0.17&0.35&0.35&0.31&0.21\\      
+WELLS FARGO \& CO     &-0.00&-0.02&-0.06&-0.13&-0.20&-0.28\\
+U S BC                &0.02&0.02&0.02&0.04&-0.02&-0.01\\    
+PNC FNCL SVC GROUP    &0.02&0.04&0.06&0.05&-0.02&-0.08\\    
+BANK OF NY MELLON CORP&-0.08&-0.08&0.11&0.07&-0.04&-0.18\\  
+STATE STREET CORP     &0.06&0.05&0.10&0.16&0.22&0.19\\      
+BB\&T CORP            &-0.01&-0.02&-0.03&-0.08&-0.04&-0.02\\
+SUNTRUST BK           &0.03&0.07&0.08&0.07&0.15&0.20\\      
+CAPITAL ONE FC        &0.55&0.57&0.58&0.52&0.25&0.13\\      
+REGIONS FC            &0.02&0.02&-0.04&-0.07&-0.00&0.06\\   
+RBS CITIZENS FNCL GRP &-0.01&-0.02&0.01&-0.01&0.16&0.23\\   
+FIFTH THIRD BC        &-0.05&-0.04&0.09&0.15&0.23&0.26\\    
+BMO FNCL CORP         &-0.12&-0.14&-0.08&-0.16&-0.20&-0.36\\
+UNIONBANCAL CORP      &-0.01&0.00&0.04&-0.04&0.03&0.03\\    
+NORTHERN TR CORP      &0.01&0.01&0.04&0.00&-0.07&-0.14\\    
+KEYCORP               &-0.01&-0.01&-0.03&-0.07&-0.10&-0.12\\
+M\&T BK CORP          &0.01&-0.00&-0.02&-0.08&-0.13&-0.15\\ 
+BBVA USA BSHRS        &-0.23&-0.36&-0.64&-0.63&-0.78&-1.08\\
+COMERICA              &0.02&0.01&-0.07&-0.10&-0.09&-0.02\\  
+HUNTINGTON BSHRS      &0.07&0.17&0.18&-0.01&0.02&-0.01\\    
+ZIONS BC              &0.01&0.06&0.11&0.18&0.31&0.35\\      
+\hline                                                      
+\end{tabular}                                               
+\end{table}                                                 
+
+
+
+
+\begin{table} 
+\caption{Model 5, Partial Least Squares (rolling window), Diebold-Mariano-West Statistics relative to a no-change forecast}                                                                  
+\center                                                              
+\begin{tabular}{|l|c|c|c|c|c|c|}                                     
+\hline                                                               
+&Step 1 &Step 2 &Step 4 &Step 6 &Step 8 &Step 10\\                   
+\hline                                                               
+JPMORGAN CHASE \& CO  &1.355&0.782&0.526&0.067&-0.711&-1.291\\       
+BANK OF AMER CORP     &1.790&2.203*&1.655&0.985&0.869&1.631\\        
+CITIGROUP             &2.033*&1.957&1.769&1.437&2.155*&1.572\\       
+WELLS FARGO \& CO     &-0.387&-0.806&-1.751&-3.691*&-3.336*&-2.820*\\
+U S BC                &1.397&1.066&0.476&0.863&-0.750&-0.372\\       
+PNC FNCL SVC GROUP    &1.943&1.615&1.374&1.376&-0.400&-1.324\\       
+BANK OF NY MELLON CORP&-1.360&-0.960&2.300*&2.188*&-1.044&-7.728*\\  
+STATE STREET CORP     &1.248&0.863&0.723&0.644&0.701&0.618\\         
+BB\&T CORP            &-0.572&-1.010&-0.433&-1.130&-0.546&-0.381\\   
+SUNTRUST BK           &1.175&2.246*&1.433&1.423&2.215*&2.221*\\      
+CAPITAL ONE FC        &2.560*&3.280*&2.337*&2.148*&2.098*&1.171\\    
+REGIONS FC            &0.741&0.790&-0.535&-0.623&-0.016&0.480\\      
+RBS CITIZENS FNCL GRP &-0.204&-0.832&0.182&-0.069&0.839&1.279\\      
+FIFTH THIRD BC        &-0.703&-0.311&0.693&0.723&1.056&1.257\\       
+BMO FNCL CORP         &-0.524&-0.420&-0.275&-0.508&-0.687&-1.379\\   
+UNIONBANCAL CORP      &-0.230&0.069&0.631&-1.155&0.658&0.765\\       
+NORTHERN TR CORP      &0.726&0.760&2.672*&0.111&-1.804&-6.260*\\     
+KEYCORP               &-0.370&-0.238&-0.340&-0.573&-0.678&-0.945\\   
+M\&T BK CORP          &0.584&-0.045&-0.373&-1.438&-1.830&-2.488*\\   
+BBVA USA BSHRS        &-0.762&-0.743&-0.928&-1.070&-1.092&-1.148\\   
+COMERICA              &0.853&0.277&-3.670*&-2.282*&-1.594&-0.300\\   
+HUNTINGTON BSHRS      &1.288&1.006&0.933&-0.136&0.547&-0.364\\       
+ZIONS BC              &0.767&1.509&1.454&2.120*&2.761*&2.658*\\      
+\hline                                                               
+\end{tabular}   
+
+\flushleft
+\footnotesize \noindent A star denotes significance at the 95\% level                                                      
+                                                     
+\end{table}                                                          
 
 
 \end{document}
